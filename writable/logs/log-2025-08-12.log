@@ -1,0 +1,10 @@
+CRITICAL - 2025-08-12 18:17:31 --> CodeIgniter\Exceptions\BadMethodCallException: Call to undefined method App\Models\Locations_model::get_statistics
+[Method: GET, Route: locations]
+in SYSTEMPATH/Model.php on line 930.
+ 1 APPPATH/Controllers/Locations.php(36): CodeIgniter\Model->__call('get_statistics', [])
+ 2 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Locations->index()
+ 3 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Locations))
+ 4 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

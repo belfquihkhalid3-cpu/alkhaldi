@@ -1,0 +1,36 @@
+CRITICAL - 2025-08-14 21:05:05 --> ErrorException: Declaration of App\Models\MiseADispo_model::delete($id, $undo = false) must be compatible with CodeIgniter\BaseModel::delete($id = null, bool $purge = false)
+[Method: GET, Route: mise_a_dispo]
+in APPPATH/Models/MiseADispo_model.php on line 390.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2025-08-14 21:14:09 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "mise_a_dispo/modal_change_statut.php"
+[Method: POST, Route: mise_a_dispo/modal_annuler]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('mise_a_dispo/modal_change_statut.php')
+ 2 SYSTEMPATH/Common.php(1173): CodeIgniter\View\View->render('mise_a_dispo/modal_change_statut', [], true)
+ 3 APPPATH/Libraries/Template.php(38): view('mise_a_dispo/modal_change_statut', [...])
+ 4 APPPATH/Controllers/Mise_a_dispo.php(590): App\Libraries\Template->view('mise_a_dispo/modal_change_statut', [...])
+ 5 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Mise_a_dispo->modal_annuler()
+ 6 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mise_a_dispo))
+ 7 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH/index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+WARNING - 2025-08-14 21:15:26 --> ⚠️ DELETE: Suppression refusée - Statut: facture
+WARNING - 2025-08-14 21:34:02 --> ⚠️ DELETE: Suppression refusée - Statut: facture
+CRITICAL - 2025-08-14 21:43:57 --> ErrorException: Cannot redeclare App\Models\MiseADispo_model::$useTimestamps
+[Method: GET, Route: mise_a_dispo]
+in APPPATH/Models/MiseADispo_model.php on line 53.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2025-08-14 21:46:12 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "mise_a_dispo/modal_form.php"
+[Method: POST, Route: mise_a_dispo/modal_form]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('mise_a_dispo/modal_form.php')
+ 2 SYSTEMPATH/Common.php(1173): CodeIgniter\View\View->render('mise_a_dispo/modal_form', [], true)
+ 3 APPPATH/Libraries/Template.php(38): view('mise_a_dispo/modal_form', [...])
+ 4 APPPATH/Controllers/Mise_a_dispo.php(82): App\Libraries\Template->view('mise_a_dispo/modal_form', [...])
+ 5 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Mise_a_dispo->modal_form()
+ 6 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mise_a_dispo))
+ 7 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH/index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
