@@ -59,6 +59,13 @@ class Left_menu {
              if ($this->ci->login_user->is_admin ) {
                 $sidebar_menu["chauffeurs"] = array("name" => "chauffeurs", "url" => "chauffeurs", "class" => "briefcase");
             }
+            if ($this->ci->login_user->is_admin) {
+    $sidebar_menu["dashboard_location"] = array(
+        "name" => "dashboard_location",
+        "url" => "dashboard/location", 
+        "class" => "bar-chart-2"
+    );
+}
             
             
          // Si le module Clients Contrat est actif

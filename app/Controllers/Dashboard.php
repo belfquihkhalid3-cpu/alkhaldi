@@ -1423,6 +1423,281 @@ class Dashboard extends Security_Controller {
         $this->Settings_model->save_setting("staff_default_dashboard", $id);
         echo json_encode(array("success" => true, 'message' => app_lang('record_saved')));
     }
+
+
+
+
+public function location() 
+{
+    // Vérifier les permissions
+    $this->access_only_admin_or_settings_admin();
+    
+    $view_data = [];
+    
+    // Récupérer les statistiques principales
+    $view_data['stats'] = $this->getLocationMainStats();
+    $view_data['revenue_data'] = $this->getLocationRevenueData();
+    $view_data['vehicle_stats'] = $this->getLocationVehicleStats();
+    $view_data['chauffeur_stats'] = $this->getLocationChauffeurStats();
+    $view_data['recent_locations'] = $this->getRecentLocations();
+    $view_data['service_distribution'] = $this->getServiceDistribution();
+    
+    return $this->template->rander("dashboards/location_dashboard", $view_data);
+}
+private function getLocationMainStats()
+{
+    // Initialiser la connexion DB
+    $db = \Config\Database::connect();
+    
+    $sql = "SELECT 
+        (SELECT COUNT(*) FROM rise_locations WHERE statut IN ('confirmee', 'en_cours') AND deleted = 0) as locations_actives,
+        (SELECT COUNT(*) FROM rise_vehicules WHERE statut = 'disponible' AND deleted = 0) as vehicules_disponibles,
+        (SELECT COUNT(*) FROM rise_chauffeurs WHERE statut = 'actif' AND deleted = 0) as chauffeurs_actifs,
+        (SELECT COALESCE(SUM(prix_total), 0) FROM rise_locations 
+         WHERE MONTH(created_at) = MONTH(CURRENT_DATE) 
+         AND YEAR(created_at) = YEAR(CURRENT_DATE)
+         AND statut IN ('confirmee', 'terminee') AND deleted = 0) as revenus_mois_actuel,
+        (SELECT COALESCE(SUM(prix_total), 0) FROM rise_locations 
+         WHERE MONTH(created_at) = MONTH(DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH))
+         AND YEAR(created_at) = YEAR(DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH))
+         AND statut IN ('confirmee', 'terminee') AND deleted = 0) as revenus_mois_precedent,
+        ROUND((SELECT COUNT(*) FROM rise_vehicules WHERE statut = 'en_service' AND deleted = 0) * 100.0 / 
+              NULLIF((SELECT COUNT(*) FROM rise_vehicules WHERE deleted = 0), 0), 2) as taux_occupation";
+    
+    $query = $db->query($sql);
+    $result = $query->getRow();
+    
+    if (!$result) {
+        return [
+            'locations_actives' => 0,
+            'vehicules_disponibles' => 0,
+            'chauffeurs_actifs' => 0,
+            'revenus_mois_actuel' => 0,
+            'revenus_mois_precedent' => 0,
+            'taux_occupation' => 0,
+            'evolution_revenus' => 0
+        ];
+    }
+    
+    $stats = [
+        'locations_actives' => intval($result->locations_actives ?? 0),
+        'vehicules_disponibles' => intval($result->vehicules_disponibles ?? 0),
+        'chauffeurs_actifs' => intval($result->chauffeurs_actifs ?? 0),
+        'revenus_mois_actuel' => floatval($result->revenus_mois_actuel ?? 0),
+        'revenus_mois_precedent' => floatval($result->revenus_mois_precedent ?? 0),
+        'taux_occupation' => floatval($result->taux_occupation ?? 0)
+    ];
+    
+    // Calcul évolution revenus
+    if ($stats['revenus_mois_precedent'] > 0) {
+        $stats['evolution_revenus'] = round(
+            (($stats['revenus_mois_actuel'] - $stats['revenus_mois_precedent']) / $stats['revenus_mois_precedent']) * 100, 
+            2
+        );
+    } else {
+        $stats['evolution_revenus'] = $stats['revenus_mois_actuel'] > 0 ? 100 : 0;
+    }
+    
+    return $stats;
+}
+
+private function getLocationRevenueData()
+{
+    $db = \Config\Database::connect();
+    
+    $sql = "SELECT 
+        DATE_FORMAT(created_at, '%Y-%m') as mois,
+        MONTHNAME(created_at) as nom_mois,
+        COALESCE(SUM(prix_total), 0) as revenus,
+        COUNT(*) as nombre_locations
+    FROM rise_locations 
+    WHERE created_at >= DATE_SUB(CURRENT_DATE, INTERVAL 6 MONTH)
+        AND statut IN ('confirmee', 'terminee')
+        AND deleted = 0
+    GROUP BY DATE_FORMAT(created_at, '%Y-%m'), MONTHNAME(created_at)
+    ORDER BY mois ASC";
+    
+    $query = $db->query($sql);
+    $results = $query->getResult();
+    
+    if (!$results) {
+        return [
+            'labels' => ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin'],
+            'data' => [0, 0, 0, 0, 0, 0]
+        ];
+    }
+    
+    $labels = [];
+    $data = [];
+    
+    foreach ($results as $row) {
+        $labels[] = $row->nom_mois;
+        $data[] = floatval($row->revenus);
+    }
+    
+    return [
+        'labels' => $labels,
+        'data' => $data
+    ];
+}
+
+private function getServiceDistribution()
+{
+    $db = \Config\Database::connect();
+    
+    $sql = "SELECT 
+        type_service,
+        COUNT(*) as nombre,
+        ROUND(COUNT(*) * 100.0 / NULLIF((SELECT COUNT(*) FROM rise_locations WHERE deleted = 0 AND statut IN ('confirmee', 'terminee')), 0), 2) as pourcentage
+    FROM rise_locations 
+    WHERE deleted = 0 AND statut IN ('confirmee', 'terminee')
+    GROUP BY type_service
+    ORDER BY nombre DESC";
+    
+    $query = $db->query($sql);
+    $results = $query->getResult();
+    
+    if (!$results) {
+        return [
+            'labels' => ['Transfert', 'Location Journée', 'Événement', 'Location Longue'],
+            'data' => [45, 30, 15, 10]
+        ];
+    }
+    
+    $labels = [];
+    $data = [];
+    
+    foreach ($results as $row) {
+        $labels[] = ucfirst(str_replace('_', ' ', $row->type_service));
+        $data[] = intval($row->nombre);
+    }
+    
+    return [
+        'labels' => $labels,
+        'data' => $data
+    ];
+}
+
+private function getLocationVehicleStats()
+{
+    $db = \Config\Database::connect();
+    
+    $sql = "SELECT 
+        v.id,
+        CONCAT(v.marque, ' ', v.modele) as vehicule,
+        v.numero_matricule,
+        v.statut,
+        v.km_actuel,
+        COUNT(l.id) as nombre_locations,
+        COALESCE(SUM(l.prix_total), 0) as revenus_generes
+    FROM rise_vehicules v
+    LEFT JOIN rise_locations l ON v.id = l.vehicle_id AND l.deleted = 0
+    WHERE v.deleted = 0
+    GROUP BY v.id, v.marque, v.modele, v.numero_matricule, v.statut, v.km_actuel
+    ORDER BY nombre_locations DESC
+    LIMIT 10";
+    
+    $query = $db->query($sql);
+    $results = $query->getResult();
+    
+    if (!$results) {
+        return [
+            (object)[
+                'vehicule' => 'Aucun véhicule',
+                'numero_matricule' => '-',
+                'statut' => 'disponible',
+                'nombre_locations' => 0,
+                'revenus_generes' => 0
+            ]
+        ];
+    }
+    
+    return $results;
+}
+
+private function getLocationChauffeurStats()
+{
+    $db = \Config\Database::connect();
+    
+    $sql = "SELECT 
+        c.id,
+        CONCAT(c.prenom, ' ', c.nom) as chauffeur,
+        c.telephone,
+        c.statut,
+        COUNT(l.id) as nombre_courses,
+        COALESCE(SUM(l.prix_total), 0) as revenus_generes,
+        ROUND(AVG(COALESCE(cr.note, 0)), 1) as note_moyenne
+    FROM rise_chauffeurs c
+    LEFT JOIN rise_locations l ON c.id = l.chauffeur_id AND l.deleted = 0
+    LEFT JOIN rise_chauffeur_ratings cr ON c.id = cr.chauffeur_id AND cr.deleted = 0
+    WHERE c.deleted = 0
+    GROUP BY c.id, c.prenom, c.nom, c.telephone, c.statut
+    ORDER BY nombre_courses DESC
+    LIMIT 10";
+    
+    $query = $db->query($sql);
+    $results = $query->getResult();
+    
+    if (!$results) {
+        return [
+            (object)[
+                'chauffeur' => 'Aucun chauffeur',
+                'telephone' => '-',
+                'statut' => 'actif',
+                'nombre_courses' => 0,
+                'note_moyenne' => 0
+            ]
+        ];
+    }
+    
+    return $results;
+}
+
+private function getRecentLocations($limit = 10)
+{
+    $db = \Config\Database::connect();
+    
+    $sql = "SELECT 
+        l.id,
+        COALESCE(c.company_name, 'Client inconnu') as client,
+        CONCAT(COALESCE(v.marque, ''), ' ', COALESCE(v.modele, '')) as vehicule,
+        v.numero_matricule,
+        CONCAT(COALESCE(ch.prenom, ''), ' ', COALESCE(ch.nom, '')) as chauffeur,
+        l.date_debut,
+        l.date_fin,
+        l.type_service,
+        l.statut,
+        l.prix_total,
+        l.created_at
+    FROM rise_locations l
+    LEFT JOIN rise_clients c ON l.client_id = c.id
+    LEFT JOIN rise_vehicules v ON l.vehicle_id = v.id
+    LEFT JOIN rise_chauffeurs ch ON l.chauffeur_id = ch.id
+    WHERE l.deleted = 0
+    ORDER BY l.created_at DESC
+    LIMIT ?";
+    
+    $query = $db->query($sql, [$limit]);
+    $results = $query->getResult();
+    
+    if (!$results) {
+        return [
+            (object)[
+                'client' => 'Aucune location',
+                'vehicule' => '-',
+                'chauffeur' => '-',
+                'date_debut' => date('Y-m-d'),
+                'type_service' => 'transfert',
+                'statut' => 'en_attente',
+                'prix_total' => 0
+            ]
+        ];
+    }
+    
+    return $results;
+}
+
+
 }
 
 /* End of file dashboard.php */

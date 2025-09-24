@@ -94,10 +94,10 @@ class Signin extends App_Controller {
             if ($allowed_host === $redirect_host) {
                 return redirect()->to($redirect);
             } else {
-                app_redirect('dashboard/view');
+                app_redirect('dashboard/location');
             }
         } else {
-            app_redirect('dashboard/view');
+            app_redirect('dashboard/location');
         }
     }
 

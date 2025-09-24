@@ -1,6 +1,11 @@
-CRITICAL - 2025-09-03 22:49:36 --> Error: Class "Locale" not found
-[Method: GET, Route: /]
-in SYSTEMPATH\CodeIgniter.php on line 189.
- 1 SYSTEMPATH\Boot.php(321): CodeIgniter\CodeIgniter->initialize()
- 2 SYSTEMPATH\Boot.php(66): CodeIgniter\Boot::initializeCodeIgniter()
- 3 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-03 23:28:33 --> ErrorException: Undefined property: App\Controllers\Dashboard::$db
+[Method: GET, Route: dashboard/location]
+in APPPATH\Controllers\Dashboard.php on line 1466.
+ 1 APPPATH\Controllers\Dashboard.php(1466): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Dashboard::$db', 'I:\\xamp\\htdocs\\khalidi\\app\\Controllers\\Dashboard.php', 1466)
+ 2 APPPATH\Controllers\Dashboard.php(1438): App\Controllers\Dashboard->getLocationMainStats()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Dashboard->location()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

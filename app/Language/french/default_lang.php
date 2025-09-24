@@ -3021,6 +3021,39 @@ $lang['nouveau_transfert'] = 'Nouveau Transfert';
 $lang['liste_transferts'] = 'Liste des Transferts';
 $lang['details_transfert'] = 'Détails du Transfert';
 $lang['miseADispo'] = 'miseADispo';
+$lang["dashboard_location"] = "Dashboard Location";
+$lang["vue_generale"] = "Vue Générale";
+$lang["statistiques_vehicules"] = "Statistiques Véhicules";
+$lang["statistiques_chauffeurs"] = "Statistiques Chauffeurs";
+$lang["revenus_locations"] = "Revenus Locations";
+$lang["rapports_mensuel"] = "Rapports Mensuel";
+
+// Statistiques
+$lang["locations_actives"] = "Locations Actives";
+$lang["vehicules_disponibles"] = "Véhicules Disponibles";
+$lang["chauffeurs_actifs"] = "Chauffeurs Actifs";
+$lang["revenus_mois"] = "Revenus du Mois";
+$lang["taux_occupation"] = "Taux d'Occupation";
+$lang["maintenances_dues"] = "Maintenances Dues";
+
+// Status
+$lang["disponible"] = "Disponible";
+$lang["en_service"] = "En Service";
+$lang["maintenance"] = "Maintenance";
+$lang["actif"] = "Actif";
+$lang["inactif"] = "Inactif";
+$lang["confirmee"] = "Confirmée";
+$lang["en_cours"] = "En Cours";
+$lang["terminee"] = "Terminée";
+$lang["annulee"] = "Annulée";
+
+// Types de service
+$lang["transfert"] = "Transfert";
+$lang["location_journee"] = "Location Journée";
+$lang["location_longue"] = "Location Longue";
+$lang["evenement"] = "Événement";
+
+// ====================================================================
 
 
 return $lang;
