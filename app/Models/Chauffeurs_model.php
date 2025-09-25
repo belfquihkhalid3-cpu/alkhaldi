@@ -421,27 +421,22 @@ class Chauffeurs_model extends Model
      * @param array $options Peut contenir des filtres comme 'id', 'statut', etc.
      * @return \CodeIgniter\Database\ResultInterface Résultat de la requête
      */
-    public function get_details($options = [])
-    {
-        $builder = $this->select('*'); // Sélectionne toutes les colonnes
-
-        // Exclut les enregistrements supprimés (soft delete)
-        $builder->where($this->deletedField, 0);
-
-        // Filtre optionnel par ID de chauffeur
+    function get_details($options = array()) {
+        $chauffeurs_table = $this->table;
+        
+        $where = "";
+        
         $id = get_array_value($options, "id");
         if ($id) {
-            $builder->where('id', $id);
+            $where .= " AND $chauffeurs_table.id=$id";
         }
 
-        // Filtre optionnel par statut
-        $statut = get_array_value($options, "statut");
-        if ($statut) {
-            $builder->where('statut', $statut);
-        }
+        $sql = "SELECT $chauffeurs_table.*
+                FROM $chauffeurs_table
+                WHERE $chauffeurs_table.deleted=0 $where
+                ORDER BY $chauffeurs_table.prenom ASC";
 
-        // Retourne l'objet de requête, comme défini dans notre convention
-        return $builder->get();
+        return $this->db->query($sql);
     }
     /**
      * Mettre à jour le statut d'un chauffeur

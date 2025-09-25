@@ -58,6 +58,28 @@ $routes->get('locations/edit/(:segment)', 'Locations::edit/$1');
 // Route générale (la plus générale à la fin)
 $routes->get('locations', 'Locations::index');
 $routes->get('locations/(:any)', 'Locations::$1');
+
+
+
+// Routes spécifiques pour chauffeurs (avant les routes génériques)
+$routes->get('chauffeurs/list_data', 'Chauffeurs::list_data');
+$routes->post('chauffeurs/list_data', 'Chauffeurs::list_data');
+$routes->get('chauffeurs/modal_form', 'Chauffeurs::modal_form');
+$routes->post('chauffeurs/modal_form', 'Chauffeurs::modal_form');
+$routes->get('chauffeurs/modal_form/(:segment)', 'Chauffeurs::modal_form/$1');
+$routes->post('chauffeurs/save', 'Chauffeurs::save');
+$routes->post('chauffeurs/delete', 'Chauffeurs::delete');
+$routes->post('chauffeurs/change_status', 'Chauffeurs::change_status');
+$routes->get('chauffeurs/view/(:segment)', 'Chauffeurs::view/$1');
+$routes->get('chauffeurs/search_api', 'Chauffeurs::search_api');
+$routes->get('chauffeurs/available_api', 'Chauffeurs::available_api');
+$routes->get('chauffeurs/statistics', 'Chauffeurs::statistics');
+$routes->get('chauffeurs/expiring_licenses', 'Chauffeurs::expiring_licenses');
+$routes->get('chauffeurs/export_csv', 'Chauffeurs::export_csv');
+
+// Route générale chauffeurs (à la fin)
+$routes->get('chauffeurs', 'Chauffeurs::index');
+$routes->get('chauffeurs/(:any)', 'Chauffeurs::$1');
 // =================================================================
 // FIN DE LA CORRECTION
 // =================================================================
