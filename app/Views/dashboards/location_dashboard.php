@@ -1,17 +1,17 @@
+
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Location de Voitures</title>
-
+    
     <!-- Chart.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-
+    
     <!-- Feather Icons -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
-
+    
     <style>
         /* ===============================================
            RESET ET BASE
@@ -74,7 +74,7 @@
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 8px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .header-subtitle {
@@ -89,8 +89,8 @@
         }
 
         .btn-header {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
             color: white;
             padding: 10px 20px;
             border-radius: 12px;
@@ -106,9 +106,9 @@
         }
 
         .btn-header:hover {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255,255,255,0.25);
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             color: white;
         }
 
@@ -151,29 +151,12 @@
             background: var(--accent-gradient);
         }
 
-        .revenue-card::before {
-            --accent-gradient: linear-gradient(90deg, #10b981, #059669);
-        }
-
-        .locations-card::before {
-            --accent-gradient: linear-gradient(90deg, #3b82f6, #2563eb);
-        }
-
-        .vehicles-card::before {
-            --accent-gradient: linear-gradient(90deg, #f59e0b, #d97706);
-        }
-
-        .drivers-card::before {
-            --accent-gradient: linear-gradient(90deg, #8b5cf6, #7c3aed);
-        }
-
-        .maintenance-card::before {
-            --accent-gradient: linear-gradient(90deg, #ef4444, #dc2626);
-        }
-
-        .fuel-card::before {
-            --accent-gradient: linear-gradient(90deg, #06b6d4, #0891b2);
-        }
+        .revenue-card::before { --accent-gradient: linear-gradient(90deg, #10b981, #059669); }
+        .locations-card::before { --accent-gradient: linear-gradient(90deg, #3b82f6, #2563eb); }
+        .vehicles-card::before { --accent-gradient: linear-gradient(90deg, #f59e0b, #d97706); }
+        .drivers-card::before { --accent-gradient: linear-gradient(90deg, #8b5cf6, #7c3aed); }
+        .maintenance-card::before { --accent-gradient: linear-gradient(90deg, #ef4444, #dc2626); }
+        .fuel-card::before { --accent-gradient: linear-gradient(90deg, #06b6d4, #0891b2); }
 
         .stat-header {
             display: flex;
@@ -195,35 +178,12 @@
             box-shadow: 0 4px 12px var(--icon-shadow);
         }
 
-        .revenue-card .stat-icon {
-            --icon-gradient: linear-gradient(135deg, #10b981, #059669);
-            --icon-shadow: rgba(16, 185, 129, 0.3);
-        }
-
-        .locations-card .stat-icon {
-            --icon-gradient: linear-gradient(135deg, #3b82f6, #2563eb);
-            --icon-shadow: rgba(59, 130, 246, 0.3);
-        }
-
-        .vehicles-card .stat-icon {
-            --icon-gradient: linear-gradient(135deg, #f59e0b, #d97706);
-            --icon-shadow: rgba(245, 158, 11, 0.3);
-        }
-
-        .drivers-card .stat-icon {
-            --icon-gradient: linear-gradient(135deg, #8b5cf6, #7c3aed);
-            --icon-shadow: rgba(139, 92, 246, 0.3);
-        }
-
-        .maintenance-card .stat-icon {
-            --icon-gradient: linear-gradient(135deg, #ef4444, #dc2626);
-            --icon-shadow: rgba(239, 68, 68, 0.3);
-        }
-
-        .fuel-card .stat-icon {
-            --icon-gradient: linear-gradient(135deg, #06b6d4, #0891b2);
-            --icon-shadow: rgba(6, 182, 212, 0.3);
-        }
+        .revenue-card .stat-icon { --icon-gradient: linear-gradient(135deg, #10b981, #059669); --icon-shadow: rgba(16, 185, 129, 0.3); }
+        .locations-card .stat-icon { --icon-gradient: linear-gradient(135deg, #3b82f6, #2563eb); --icon-shadow: rgba(59, 130, 246, 0.3); }
+        .vehicles-card .stat-icon { --icon-gradient: linear-gradient(135deg, #f59e0b, #d97706); --icon-shadow: rgba(245, 158, 11, 0.3); }
+        .drivers-card .stat-icon { --icon-gradient: linear-gradient(135deg, #8b5cf6, #7c3aed); --icon-shadow: rgba(139, 92, 246, 0.3); }
+        .maintenance-card .stat-icon { --icon-gradient: linear-gradient(135deg, #ef4444, #dc2626); --icon-shadow: rgba(239, 68, 68, 0.3); }
+        .fuel-card .stat-icon { --icon-gradient: linear-gradient(135deg, #06b6d4, #0891b2); --icon-shadow: rgba(6, 182, 212, 0.3); }
 
         .stat-content {
             flex: 1;
@@ -476,45 +436,14 @@
             letter-spacing: 0.3px;
         }
 
-        .status-disponible {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .status-en-service {
-            background: #dbeafe;
-            color: #1d4ed8;
-        }
-
-        .status-maintenance {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .status-actif {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .status-inactif {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .status-confirmee {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .status-en-cours {
-            background: #dbeafe;
-            color: #1d4ed8;
-        }
-
-        .status-terminee {
-            background: #ede9fe;
-            color: #6b21a8;
-        }
+        .status-disponible { background: #dcfce7; color: #166534; }
+        .status-en-service { background: #dbeafe; color: #1d4ed8; }
+        .status-maintenance { background: #fef3c7; color: #92400e; }
+        .status-actif { background: #dcfce7; color: #166534; }
+        .status-inactif { background: #fee2e2; color: #991b1b; }
+        .status-confirmee { background: #dcfce7; color: #166534; }
+        .status-en-cours { background: #dbeafe; color: #1d4ed8; }
+        .status-terminee { background: #ede9fe; color: #6b21a8; }
 
         .metric-value {
             font-weight: 700;
@@ -591,20 +520,9 @@
         /* ===============================================
            ICÔNES
         =============================================== */
-        .icon-16 {
-            width: 16px;
-            height: 16px;
-        }
-
-        .icon-20 {
-            width: 20px;
-            height: 20px;
-        }
-
-        .icon-24 {
-            width: 24px;
-            height: 24px;
-        }
+        .icon-16 { width: 16px; height: 16px; }
+        .icon-20 { width: 20px; height: 20px; }
+        .icon-24 { width: 24px; height: 24px; }
 
         /* ===============================================
            RESPONSIVE
@@ -613,7 +531,7 @@
             .charts-row-2 {
                 grid-template-columns: 1fr;
             }
-
+            
             .tables-row {
                 grid-template-columns: 1fr;
             }
@@ -623,39 +541,39 @@
             .dashboard-container {
                 padding: 16px;
             }
-
+            
             .dashboard-header {
                 padding: 24px 20px;
                 text-align: center;
             }
-
+            
             .header-content {
                 flex-direction: column;
                 gap: 16px;
             }
-
+            
             .header-title {
                 font-size: 1.5rem;
             }
-
+            
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-
+            
             .stat-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 12px;
             }
-
+            
             .stat-value {
                 font-size: 2rem;
             }
-
+            
             .charts-row-3 {
                 grid-template-columns: 1fr;
             }
-
+            
             .table-body {
                 overflow-x: auto;
             }
@@ -669,7 +587,6 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -681,7 +598,6 @@
                 opacity: 0;
                 transform: translateX(-20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -719,432 +635,547 @@
         }
     </style>
 </head>
-
 <body>
-   <div class="dashboard-container">
-    <!-- En-tête du Dashboard -->
-    <div class="dashboard-header fade-in">
-        <div class="header-content">
-            <div>
-                <h1 class="header-title">
-                    <i data-feather="bar-chart-2"></i>
-                    Dashboard Location de Voitures
-                </h1>
-                <p class="header-subtitle">Tableau de bord avec statistiques en temps réel</p>
-            </div>
-            <div class="header-actions">
-                <button class="btn-header" onclick="refreshDashboard()">
-                    <i data-feather="refresh-cw"></i>
-                    Actualiser
-                </button>
-                <button class="btn-header" onclick="exportReport()">
-                    <i data-feather="download"></i>
-                    Exporter
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Section Statistiques -->
-    <div class="stats-section">
-        <div class="stats-grid">
-            <!-- Revenus -->
-            <div class="stat-card revenue-card slide-in">
-                <div class="stat-header">
-                    <div class="stat-content">
-                        <div class="stat-value" id="revenueValue"><?= number_format($stats['revenus_mois_actuel'] ?? 125350, 0, ',', ' ') ?></div>
-                        <div class="stat-label">Revenus Mensuels (MAD)</div>
-                        <div class="stat-trend trend-positive">
-                            <i data-feather="trending-up"></i>
-                            <span><?= ($stats['evolution_revenus'] ?? 0) > 0 ? '+' : '' ?><?= $stats['evolution_revenus'] ?? 12.5 ?>%</span>
-                        </div>
-                    </div>
-                    <div class="stat-icon">
-                        <i data-feather="dollar-sign"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Locations -->
-            <div class="stat-card locations-card slide-in">
-                <div class="stat-header">
-                    <div class="stat-content">
-                        <div class="stat-value" id="locationsValue"><?= $stats['locations_actives'] ?? 147 ?></div>
-                        <div class="stat-label">Locations Actives</div>
-                        <div class="stat-trend trend-positive">
-                            <i data-feather="arrow-up"></i>
-                            <span>+8.3%</span>
-                        </div>
-                    </div>
-                    <div class="stat-icon">
-                        <i data-feather="map-pin"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Véhicules -->
-            <div class="stat-card vehicles-card slide-in">
-                <div class="stat-header">
-                    <div class="stat-content">
-                        <div class="stat-value" id="vehiclesValue"><?= $stats['vehicules_disponibles'] ?? 28 ?></div>
-                        <div class="stat-label">Véhicules Disponibles</div>
-                        <div class="stat-trend trend-neutral">
-                            <i data-feather="truck"></i>
-                            <span>Taux: <?= round($stats['taux_occupation'] ?? 78, 0) ?>%</span>
-                        </div>
-                    </div>
-                    <div class="stat-icon">
-                        <i data-feather="truck"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Chauffeurs -->
-            <div class="stat-card drivers-card slide-in">
-                <div class="stat-header">
-                    <div class="stat-content">
-                        <div class="stat-value" id="driversValue"><?= $stats['chauffeurs_actifs'] ?? 15 ?></div>
-                        <div class="stat-label">Chauffeurs Actifs</div>
-                        <div class="stat-trend trend-positive">
-                            <i data-feather="users"></i>
-                            <span>Disponibles</span>
-                        </div>
-                    </div>
-                    <div class="stat-icon">
-                        <i data-feather="users"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Section Graphiques -->
-    <div class="charts-section">
-        <!-- Première ligne -->
-        <div class="charts-row charts-row-2">
-            <div class="chart-container slide-in">
-                <div class="chart-header">
-                    <h3 class="chart-title">
-                        <i data-feather="trending-up"></i>
-                        Évolution des Revenus
-                    </h3>
-                </div>
-                <div class="chart-body">
-                    <canvas id="revenueChart"></canvas>
-                </div>
-            </div>
-
-            <div class="chart-container slide-in">
-                <div class="chart-header">
-                    <h3 class="chart-title">
-                        <i data-feather="pie-chart"></i>
-                        Types de Services
-                    </h3>
-                </div>
-                <div class="chart-body">
-                    <canvas id="servicesChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- Deuxième ligne -->
-        <div class="charts-row charts-row-3">
-            <div class="chart-container fade-in">
-                <div class="chart-header">
-                    <h3 class="chart-title">
+    <div class="dashboard-container">
+        <!-- En-tête du Dashboard -->
+        <div class="dashboard-header fade-in">
+            <div class="header-content">
+                <div>
+                    <h1 class="header-title">
                         <i data-feather="bar-chart-2"></i>
-                        Top Véhicules
-                    </h3>
+                        Dashboard Location de Voitures
+                    </h1>
+                    <p class="header-subtitle">Tableau de bord avec statistiques en temps réel</p>
                 </div>
-                <div class="chart-body small">
-                    <canvas id="vehiclesChart"></canvas>
-                </div>
-            </div>
-
-            <div class="chart-container fade-in">
-                <div class="chart-header">
-                    <h3 class="chart-title">
-                        <i data-feather="calendar"></i>
-                        Occupation Hebdo
-                    </h3>
-                </div>
-                <div class="chart-body small">
-                    <canvas id="weeklyChart"></canvas>
-                </div>
-            </div>
-
-            <div class="chart-container fade-in">
-                <div class="chart-header">
-                    <h3 class="chart-title">
-                        <i data-feather="clock"></i>
-                        Tendances Horaires
-                    </h3>
-                </div>
-                <div class="chart-body small">
-                    <canvas id="hourlyChart"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Section Tableaux -->
-    <div class="tables-section">
-        <!-- Première ligne de tableaux -->
-        <div class="tables-row">
-            <!-- Tableau Véhicules -->
-            <div class="table-container fade-in">
-                <div class="table-header">
-                    <h3 class="table-title">
-                        <i data-feather="truck"></i>
-                        Performance Véhicules
-                    </h3>
-                    <button class="btn btn-outline btn-sm">
+                <div class="header-actions">
+                    <button class="btn-header" onclick="refreshDashboard()">
+                        <i data-feather="refresh-cw"></i>
+                        Actualiser
+                    </button>
+                    <button class="btn-header" onclick="exportReport()">
                         <i data-feather="download"></i>
-                        Export
+                        Exporter
                     </button>
                 </div>
-                <div class="table-body">
-                    <table class="modern-table">
-                        <thead>
-                            <tr>
-                                <th>Véhicule</th>
-                                <th>Immatriculation</th>
-                                <th>Statut</th>
-                                <th>Locations</th>
-                                <th>Revenus</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if (!empty($vehicle_stats)): ?>
-                                <?php foreach (array_slice($vehicle_stats, 0, 5) as $vehicle): ?>
-                                    <tr>
-                                        <td>
-                                            <div class="item-info">
-                                                <div class="item-avatar vehicle-avatar">
-                                                    <?= strtoupper(substr($vehicle->vehicule, 0, 2)) ?>
-                                                </div>
-                                                <div class="item-details">
-                                                    <div class="item-name"><?= $vehicle->vehicule ?></div>
-                                                    <div class="item-meta">Véhicule</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge badge-info"><?= $vehicle->numero_matricule ?></span></td>
-                                        <td><span class="status-badge status-<?= $vehicle->statut ?>"><?= ucfirst($vehicle->statut) ?></span></td>
-                                        <td><strong><?= $vehicle->nombre_locations ?></strong> courses</td>
-                                        <td><span class="price-value"><?= number_format($vehicle->revenus_generes, 0) ?> MAD</span></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <tr>
-                                    <td colspan="5" class="text-center">
-                                        <div class="no-data">
-                                            <i data-feather="truck"></i>
-                                            <p>Aucune donnée véhicule disponible</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
-                </div>
             </div>
+        </div>
 
-            <!-- Tableau Chauffeurs -->
-            <div class="table-container fade-in">
-                <div class="table-header">
-                    <h3 class="table-title">
-                        <i data-feather="users"></i>
-                        Top Chauffeurs
-                    </h3>
-                    <button class="btn btn-outline btn-sm">
-                        <i data-feather="download"></i>
-                        Export
-                    </button>
+        <!-- Section Statistiques -->
+        <div class="stats-section">
+            <div class="stats-grid">
+                <!-- Revenus -->
+                <div class="stat-card revenue-card slide-in">
+                    <div class="stat-header">
+                        <div class="stat-content">
+                            <div class="stat-value" id="revenueValue">125,350</div>
+                            <div class="stat-label">Revenus Mensuels (MAD)</div>
+                            <div class="stat-trend trend-positive">
+                                <i data-feather="trending-up"></i>
+                                <span>+12.5%</span>
+                            </div>
+                        </div>
+                        <div class="stat-icon">
+                            <i data-feather="dollar-sign"></i>
+                        </div>
+                    </div>
                 </div>
-                <div class="table-body">
-                    <table class="modern-table">
-                        <thead>
-                            <tr>
-                                <th>Chauffeur</th>
-                                <th>Téléphone</th>
-                                <th>Courses</th>
-                                <th>Note</th>
-                                <th>Revenus</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if (!empty($chauffeur_stats)): ?>
-                                <?php foreach (array_slice($chauffeur_stats, 0, 5) as $chauffeur): ?>
-                                    <tr>
-                                        <td>
-                                            <div class="item-info">
-                                                <div class="item-avatar chauffeur-avatar">
-                                                    <?= strtoupper(substr($chauffeur->chauffeur, 0, 2)) ?>
-                                                </div>
-                                                <div class="item-details">
-                                                    <div class="item-name"><?= $chauffeur->chauffeur ?></div>
-                                                    <div class="item-meta">Chauffeur</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td><?= $chauffeur->telephone ?></td>
-                                        <td><strong><?= $chauffeur->nombre_courses ?></strong> courses</td>
-                                        <td>
-                                            <div class="rating">
-                                                <span class="stars">★</span>
-                                                <span class="rating-value"><?= $chauffeur->note_moyenne ?></span>
-                                            </div>
-                                        </td>
-                                        <td><span class="price-value"><?= number_format($chauffeur->revenus_generes, 0) ?> MAD</span></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <tr>
-                                    <td colspan="5" class="text-center">
-                                        <div class="no-data">
-                                            <i data-feather="users"></i>
-                                            <p>Aucune donnée chauffeur disponible</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
+
+                <!-- Locations -->
+                <div class="stat-card locations-card slide-in">
+                    <div class="stat-header">
+                        <div class="stat-content">
+                            <div class="stat-value" id="locationsValue">147</div>
+                            <div class="stat-label">Locations Actives</div>
+                            <div class="stat-trend trend-positive">
+                                <i data-feather="arrow-up"></i>
+                                <span>+8.3%</span>
+                            </div>
+                        </div>
+                        <div class="stat-icon">
+                            <i data-feather="map-pin"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Véhicules -->
+                <div class="stat-card vehicles-card slide-in">
+                    <div class="stat-header">
+                        <div class="stat-content">
+                            <div class="stat-value" id="vehiclesValue">28</div>
+                            <div class="stat-label">Véhicules Disponibles</div>
+                            <div class="stat-trend trend-neutral">
+                                <i data-feather="truck"></i>
+                                <span>Taux: 78%</span>
+                            </div>
+                        </div>
+                        <div class="stat-icon">
+                            <i data-feather="truck"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chauffeurs -->
+                <div class="stat-card drivers-card slide-in">
+                    <div class="stat-header">
+                        <div class="stat-content">
+                            <div class="stat-value" id="driversValue">15</div>
+                            <div class="stat-label">Chauffeurs Actifs</div>
+                            <div class="stat-trend trend-positive">
+                                <i data-feather="users"></i>
+                                <span>Disponibles</span>
+                            </div>
+                        </div>
+                        <div class="stat-icon">
+                            <i data-feather="users"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Maintenance -->
+                <div class="stat-card maintenance-card slide-in">
+                    <div class="stat-header">
+                        <div class="stat-content">
+                            <div class="stat-value" id="maintenanceValue">5</div>
+                            <div class="stat-label">Maintenances Dues</div>
+                            <div class="stat-trend trend-negative">
+                                <i data-feather="alert-triangle"></i>
+                                <span>À planifier</span>
+                            </div>
+                        </div>
+                        <div class="stat-icon">
+                            <i data-feather="tool"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carburant -->
+                <div class="stat-card fuel-card slide-in">
+                    <div class="stat-header">
+                        <div class="stat-content">
+                            <div class="stat-value" id="fuelValue">9,240</div>
+                            <div class="stat-label">Coûts Carburant (MAD)</div>
+                            <div class="stat-trend trend-positive">
+                                <i data-feather="trending-down"></i>
+                                <span>-3.2%</span>
+                            </div>
+                        </div>
+                        <div class="stat-icon">
+                            <i data-feather="zap"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Tableau des Locations Récentes - Pleine largeur -->
-    <div class="table-container fade-in">
-        <div class="table-header">
-            <h3 class="table-title">
-                <i data-feather="clock"></i>
-                Locations Récentes
-            </h3>
-            <div style="display: flex; gap: 8px;">
-                <button class="btn btn-outline btn-sm" onclick="filterLocations('today')">Aujourd'hui</button>
-                <button class="btn btn-outline btn-sm" onclick="filterLocations('week')">Cette semaine</button>
-                <button class="btn btn-primary btn-sm">
-                    <i data-feather="plus"></i>
-                    Nouvelle Location
-                </button>
+        <!-- Section Graphiques -->
+        <div class="charts-section">
+            <!-- Première ligne -->
+            <div class="charts-row charts-row-2">
+                <div class="chart-container fade-in">
+                    <div class="chart-header">
+                        <h3 class="chart-title">
+                            <i data-feather="trending-up"></i>
+                            Évolution des Revenus
+                        </h3>
+                    </div>
+                    <div class="chart-body large">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container fade-in">
+                    <div class="chart-header">
+                        <h3 class="chart-title">
+                            <i data-feather="pie-chart"></i>
+                            Types de Services
+                        </h3>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="servicesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deuxième ligne -->
+            <div class="charts-row charts-row-3">
+                <div class="chart-container fade-in">
+                    <div class="chart-header">
+                        <h3 class="chart-title">
+                            <i data-feather="bar-chart-2"></i>
+                            Top Véhicules
+                        </h3>
+                    </div>
+                    <div class="chart-body small">
+                        <canvas id="vehiclesChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container fade-in">
+                    <div class="chart-header">
+                        <h3 class="chart-title">
+                            <i data-feather="calendar"></i>
+                            Occupation Hebdo
+                        </h3>
+                    </div>
+                    <div class="chart-body small">
+                        <canvas id="weeklyChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container fade-in">
+                    <div class="chart-header">
+                        <h3 class="chart-title">
+                            <i data-feather="clock"></i>
+                            Tendances Horaires
+                        </h3>
+                    </div>
+                    <div class="chart-body small">
+                        <canvas id="hourlyChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="table-body">
-            <table class="modern-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Client</th>
-                        <th>Véhicule</th>
-                        <th>Chauffeur</th>
-                        <th>Date</th>
-                        <th>Type</th>
-                        <th>Status</th>
-                        <th>Montant</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="locationsTableBody">
-                    <?php if (!empty($recent_locations)): ?>
-                        <?php foreach ($recent_locations as $location): ?>
-                            <tr>
-                                <td><strong>#<?= $location->id ?></strong></td>
-                                <td>
-                                    <div class="item-info">
-                                        <div class="item-avatar client-avatar">
-                                            <?= strtoupper(substr($location->client, 0, 2)) ?>
-                                        </div>
-                                        <div class="item-details">
-                                            <div class="item-name"><?= $location->client ?></div>
-                                            <div class="item-meta">Client</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="item-info">
-                                        <div class="item-avatar vehicle-avatar">
-                                            <?= strtoupper(substr($location->vehicule, 0, 2)) ?>
-                                        </div>
-                                        <div class="item-details">
-                                            <div class="item-name"><?= $location->vehicule ?></div>
-                                            <div class="item-meta"><?= $location->numero_matricule ?></div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <?php if (!empty($location->chauffeur)): ?>
+
+        <!-- Section Tableaux -->
+        <div class="tables-section">
+            <!-- Première ligne de tableaux -->
+            <div class="tables-row">
+                <!-- Tableau Véhicules -->
+                <div class="table-container fade-in">
+                    <div class="table-header">
+                        <h3 class="table-title">
+                            <i data-feather="truck"></i>
+                            Performance Véhicules
+                        </h3>
+                        <button class="btn btn-outline btn-sm">
+                            <i data-feather="download"></i>
+                            Export
+                        </button>
+                    </div>
+                    <div class="table-body">
+                        <table class="modern-table">
+                            <thead>
+                                <tr>
+                                    <th>Véhicule</th>
+                                    <th>Status</th>
+                                    <th>Locations</th>
+                                    <th>Revenus</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vehiclesTableBody">
+                                <tr>
+                                    <td>
                                         <div class="item-info">
-                                            <div class="item-avatar chauffeur-avatar">
-                                                <?= strtoupper(substr($location->chauffeur, 0, 2)) ?>
-                                            </div>
+                                            <div class="item-avatar vehicle-avatar">MC</div>
                                             <div class="item-details">
-                                                <div class="item-name"><?= $location->chauffeur ?></div>
-                                                <div class="item-meta">Chauffeur</div>
+                                                <div class="item-name">Mercedes C200</div>
+                                                <div class="item-meta">54321-C-89</div>
                                             </div>
                                         </div>
-                                    <?php else: ?>
-                                        <span class="no-chauffeur">Sans chauffeur</span>
-                                    <?php endif; ?>
-                                </td>
+                                    </td>
+                                    <td><span class="status-badge status-maintenance">Maintenance</span></td>
+                                    <td><span class="metric-value">18</span></td>
+                                    <td><span class="revenue-amount">38,900 MAD</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="item-info">
+                                            <div class="item-avatar vehicle-avatar">DL</div>
+                                            <div class="item-details">
+                                                <div class="item-name">Dacia Logan</div>
+                                                <div class="item-meta">98765-D-12</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge status-disponible">Disponible</span></td>
+                                    <td><span class="metric-value">15</span></td>
+                                    <td><span class="revenue-amount">22,840 MAD</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tableau Chauffeurs -->
+                <div class="table-container fade-in">
+                    <div class="table-header">
+                        <h3 class="table-title">
+                            <i data-feather="users"></i>
+                            Performance Chauffeurs
+                        </h3>
+                        <button class="btn btn-outline btn-sm">
+                            <i data-feather="download"></i>
+                            Export
+                        </button>
+                    </div>
+                    <div class="table-body">
+                        <table class="modern-table">
+                            <thead>
+                                <tr>
+                                    <th>Chauffeur</th>
+                                    <th>Status</th>
+                                    <th>Courses</th>
+                                    <th>Évaluation</th>
+                                </tr>
+                            </thead>
+                            <tbody id="driversTableBody">
+                                <tr>
+                                    <td>
+                                        <div class="item-info">
+                                            <div class="item-avatar driver-avatar">AB</div>
+                                            <div class="item-details">
+                                                <div class="item-name">Ahmed Bennani</div>
+                                                <div class="item-meta">06 12 34 56 78</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge status-actif">Actif</span></td>
+                                    <td><span class="metric-value">42</span></td>
+                                    <td>
+                                        <div class="rating-stars">
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span style="margin-left: 6px; font-weight: 600;">4.8</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="item-info">
+                                            <div class="item-avatar driver-avatar">YA</div>
+                                            <div class="item-details">
+                                                <div class="item-name">Youssef Alami</div>
+                                                <div class="item-meta">06 23 45 67 89</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge status-actif">Actif</span></td>
+                                    <td><span class="metric-value">38</span></td>
+                                    <td>
+                                        <div class="rating-stars">
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span style="margin-left: 6px; font-weight: 600;">4.9</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="item-info">
+                                            <div class="item-avatar driver-avatar">MT</div>
+                                            <div class="item-details">
+                                                <div class="item-name">Mohamed Tazi</div>
+                                                <div class="item-meta">06 34 56 78 90</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge status-inactif">Congé</span></td>
+                                    <td><span class="metric-value">29</span></td>
+                                    <td>
+                                        <div class="rating-stars">
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star empty">★</span>
+                                            <span style="margin-left: 6px; font-weight: 600;">4.2</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tableau des Locations Récentes - Pleine largeur -->
+            <div class="table-container fade-in">
+                <div class="table-header">
+                    <h3 class="table-title">
+                        <i data-feather="clock"></i>
+                        Locations Récentes
+                    </h3>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-outline btn-sm" onclick="filterLocations('today')">Aujourd'hui</button>
+                        <button class="btn btn-outline btn-sm" onclick="filterLocations('week')">Cette semaine</button>
+                        <button class="btn btn-primary btn-sm">
+                            <i data-feather="plus"></i>
+                            Nouvelle Location
+                        </button>
+                    </div>
+                </div>
+                <div class="table-body">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Client</th>
+                                <th>Véhicule</th>
+                                <th>Chauffeur</th>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Montant</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="locationsTableBody">
+                            <tr>
+                                <td><strong>#1247</strong></td>
                                 <td>
-                                    <div class="date-info">
-                                        <div class="date-value"><?= date('d/m/Y', strtotime($location->date_debut)) ?></div>
-                                        <div class="date-time"><?= date('H:i', strtotime($location->date_debut)) ?></div>
+                                    <div class="item-info">
+                                        <div class="item-avatar client-avatar">HA</div>
+                                        <div class="item-details">
+                                            <div class="item-name">Hotel Atlas</div>
+                                            <div class="item-meta">Client Premium</div>
+                                        </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="service-badge service-<?= strtolower(str_replace(' ', '_', $location->type_service)) ?>">
-                                        <?= ucfirst(str_replace('_', ' ', $location->type_service)) ?>
-                                    </span>
-                                </td>
-                                <td>
-                                    <span class="status-badge status-<?= $location->statut ?>">
-                                        <?= ucfirst(str_replace('_', ' ', $location->statut)) ?>
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="price-info">
-                                        <span class="price-value"><?= number_format($location->prix_total, 0) ?> MAD</span>
+                                    <div class="item-info">
+                                        <div class="item-avatar vehicle-avatar">BS</div>
+                                        <div class="item-details">
+                                            <div class="item-name">BMW Série 3</div>
+                                            <div class="item-meta">67890-B-33</div>
+                                        </div>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="item-info">
+                                        <div class="item-avatar driver-avatar">AB</div>
+                                        <div class="item-details">
+                                            <div class="item-name">Ahmed Bennani</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <div style="font-weight: 600;">03/09/2024</div>
+                                        <div style="font-size: 12px; color: #64748b;">14:30</div>
+                                    </div>
+                                </td>
+                                <td><span style="background: #e0f2fe; color: #006064; padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;">Transfert</span></td>
+                                <td><span class="status-badge status-confirmee">Confirmée</span></td>
+                                <td><span class="revenue-amount">450 MAD</span></td>
                                 <td>
                                     <div class="action-buttons">
-                                        <button class="btn-action btn-view" onclick="viewLocation(<?= $location->id ?>)" title="Voir">
+                                        <button class="btn btn-outline btn-sm" title="Voir">
                                             <i data-feather="eye"></i>
                                         </button>
-                                        <button class="btn-action btn-edit" onclick="editLocation(<?= $location->id ?>)" title="Modifier">
+                                        <button class="btn btn-outline btn-sm" title="Modifier">
                                             <i data-feather="edit-2"></i>
-                                        </button>
-                                        <button class="btn-action btn-print" onclick="printLocation(<?= $location->id ?>)" title="Imprimer">
-                                            <i data-feather="printer"></i>
                                         </button>
                                     </div>
                                 </td>
                             </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="9" class="text-center">
-                                <div class="no-data">
-                                    <i data-feather="calendar"></i>
-                                    <h4>Aucune location récente</h4>
-                                    <p>Les nouvelles locations apparaîtront ici</p>
-                                    <button class="btn btn-primary" style="margin-top: 16px;">
-                                        <i data-feather="plus"></i>
-                                        Créer une location
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
+                            <tr>
+                                <td><strong>#1246</strong></td>
+                                <td>
+                                    <div class="item-info">
+                                        <div class="item-avatar client-avatar">SS</div>
+                                        <div class="item-details">
+                                            <div class="item-name">Société SAHAM</div>
+                                            <div class="item-meta">Client Corporate</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-info">
+                                        <div class="item-avatar vehicle-avatar">MC</div>
+                                        <div class="item-details">
+                                            <div class="item-name">Mercedes C200</div>
+                                            <div class="item-meta">54321-C-89</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-info">
+                                        <div class="item-avatar driver-avatar">YA</div>
+                                        <div class="item-details">
+                                            <div class="item-name">Youssef Alami</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <div style="font-weight: 600;">02/09/2024</div>
+                                        <div style="font-size: 12px; color: #64748b;">09:00</div>
+                                    </div>
+                                </td>
+                                <td><span style="background: #f3e5f5; color: #6b21a8; padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;">Location Journée</span></td>
+                                <td><span class="status-badge status-en-cours">En Cours</span></td>
+                                <td><span class="revenue-amount">800 MAD</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-outline btn-sm" title="Voir">
+                                            <i data-feather="eye"></i>
+                                        </button>
+                                        <button class="btn btn-outline btn-sm" title="Modifier">
+                                            <i data-feather="edit-2"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#1245</strong></td>
+                                <td>
+                                    <div class="item-info">
+                                        <div class="item-avatar client-avatar">MA</div>
+                                        <div class="item-details">
+                                            <div class="item-name">M. Alaoui</div>
+                                            <div class="item-meta">Client Particulier</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-info">
+                                        <div class="item-avatar vehicle-avatar">TC</div>
+                                        <div class="item-details">
+                                            <div class="item-name">Toyota Corolla</div>
+                                            <div class="item-meta">12345-A-67</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-info">
+                                        <div class="item-avatar driver-avatar">MT</div>
+                                        <div class="item-details">
+                                            <div class="item-name">Mohamed Tazi</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <div style="font-weight: 600;">01/09/2024</div>
+                                        <div style="font-size: 12px; color: #64748b;">16:15</div>
+                                    </div>
+                                </td>
+                                <td><span style="background: #fef3c7; color: #92400e; padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;">Événement</span></td>
+                                <td><span class="status-badge status-terminee">Terminée</span></td>
+                                <td><span class="revenue-amount">650 MAD</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-outline btn-sm" title="Voir">
+                                            <i data-feather="eye"></i>
+                                        </button>
+                                        <button class="btn btn-outline btn-sm" title="Modifier">
+                                            <i data-feather="edit-2"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
     <script>
         // ===============================================
@@ -1204,32 +1235,24 @@
                     x: {
                         ticks: {
                             color: '#64748b',
-                            font: {
-                                size: 11
-                            }
+                            font: { size: 11 }
                         },
                         grid: {
                             color: '#f1f5f9',
                             drawBorder: false
                         },
-                        border: {
-                            display: false
-                        }
+                        border: { display: false }
                     },
                     y: {
                         ticks: {
                             color: '#64748b',
-                            font: {
-                                size: 11
-                            }
+                            font: { size: 11 }
                         },
                         grid: {
                             color: '#f1f5f9',
                             drawBorder: false
                         },
-                        border: {
-                            display: false
-                        }
+                        border: { display: false }
                     }
                 }
             };
@@ -1304,9 +1327,7 @@
                             labels: {
                                 usePointStyle: true,
                                 padding: 15,
-                                font: {
-                                    size: 12
-                                }
+                                font: { size: 12 }
                             }
                         },
                         tooltip: {
@@ -1358,9 +1379,7 @@
                         },
                         y: {
                             ...chartDefaults.scales.y,
-                            grid: {
-                                display: false
-                            }
+                            grid: { display: false }
                         }
                     }
                 }
@@ -1390,34 +1409,24 @@
                     scales: {
                         r: {
                             beginAtZero: true,
-                            angleLines: {
-                                color: '#f1f5f9'
-                            },
-                            grid: {
-                                color: '#f1f5f9'
-                            },
+                            angleLines: { color: '#f1f5f9' },
+                            grid: { color: '#f1f5f9' },
                             pointLabels: {
                                 color: '#64748b',
-                                font: {
-                                    size: 11
-                                }
+                                font: { size: 11 }
                             },
                             ticks: {
                                 color: '#64748b',
                                 backdropColor: 'transparent',
-                                font: {
-                                    size: 10
-                                }
+                                font: { size: 10 }
                             }
                         }
                     },
                     plugins: {
                         legend: {
-                            labels: {
+                            labels: { 
                                 color: '#64748b',
-                                font: {
-                                    size: 12
-                                }
+                                font: { size: 12 }
                             }
                         },
                         tooltip: chartDefaults.plugins.tooltip
@@ -1446,7 +1455,7 @@
                     ...chartDefaults,
                     scales: {
                         ...chartDefaults.scales,
-                        y: {
+                        y: { 
                             ...chartDefaults.scales.y,
                             beginAtZero: true
                         }
@@ -1457,22 +1466,22 @@
             // ===============================================
             // ANIMATIONS
             // ===============================================
-
+            
             // Animation des compteurs
             function animateCounter(id, target, duration = 2000, suffix = '') {
                 const element = document.getElementById(id);
                 if (!element) return;
-
+                
                 let current = 0;
                 const increment = target / (duration / 16);
-
+                
                 const timer = setInterval(() => {
                     current += increment;
                     if (current >= target) {
                         current = target;
                         clearInterval(timer);
                     }
-
+                    
                     if (suffix === 'MAD') {
                         element.textContent = Math.floor(current).toLocaleString('fr-FR');
                     } else {
@@ -1523,9 +1532,9 @@
             window.refreshDashboard = function() {
                 const btn = document.querySelector('[onclick="refreshDashboard()"]');
                 const icon = btn.querySelector('i');
-
+                
                 icon.style.animation = 'spin 1s linear infinite';
-
+                
                 setTimeout(() => {
                     location.reload();
                 }, 1000);
