@@ -1,0 +1,28 @@
+CRITICAL - 2025-08-03 21:15:49 --> CodeIgniter\Validation\Exceptions\ValidationException: "date_range" is not a valid rule.
+[Method: POST, Route: chauffeurs/add]
+in SYSTEMPATH/Validation/Validation.php on line 345.
+ 1 SYSTEMPATH/Validation/Validation.php(345): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('date_range')
+ 2 SYSTEMPATH/Validation/Validation.php(201): CodeIgniter\Validation\Validation->processRules('date_naissance', 'date_naissance', '2002-06-13', [...], [...], 'date_naissance')
+ 3 APPPATH/Models/Chauffeurs_model.php(130): CodeIgniter\Validation\Validation->run([...])
+ 4 APPPATH/Controllers/Chauffeurs.php(134): App\Models\Chauffeurs_model->validateData([...])
+ 5 APPPATH/Controllers/Chauffeurs.php(77): App\Controllers\Chauffeurs->_process_chauffeur_form()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Chauffeurs->add()
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Chauffeurs))
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-03 21:19:43 --> CodeIgniter\Validation\Exceptions\ValidationException: "date_range" is not a valid rule.
+[Method: POST, Route: chauffeurs/add]
+in SYSTEMPATH/Validation/Validation.php on line 345.
+ 1 SYSTEMPATH/Validation/Validation.php(345): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('date_range')
+ 2 SYSTEMPATH/Validation/Validation.php(201): CodeIgniter\Validation\Validation->processRules('date_naissance', 'date_naissance', '1983-01-03', [...], [...], 'date_naissance')
+ 3 APPPATH/Models/Chauffeurs_model.php(130): CodeIgniter\Validation\Validation->run([...])
+ 4 APPPATH/Controllers/Chauffeurs.php(134): App\Models\Chauffeurs_model->validateData([...])
+ 5 APPPATH/Controllers/Chauffeurs.php(77): App\Controllers\Chauffeurs->_process_chauffeur_form()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Chauffeurs->add()
+ 7 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Chauffeurs))
+ 8 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
