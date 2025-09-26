@@ -3,9 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\Security_Controller;
-use App\Models\Chauffeurs_model;
 use Exception;
-use DateTime;
 
 class Chauffeurs extends Security_Controller
 {
@@ -15,41 +13,31 @@ class Chauffeurs extends Security_Controller
     {
         parent::__construct();
         $this->init_permission_checker("chauffeur");
-        $this->Chauffeurs_model = new Chauffeurs_model();
+        
+        // Charger le modèle
+        $this->Chauffeurs_model = model('App\Models\Chauffeurs_model');
     }
 
     /**
-     * Page principale - Liste des chauffeurs (style direct)
+     * Page principale - Liste des chauffeurs
      */
     public function index()
     {
         $this->access_only_allowed_members();
 
-        // Charger directement les chauffeurs
-        $view_data['chauffeurs'] = $this->Chauffeurs_model->get_details()->getResult();
-        
-        // Statistiques
-        $view_data['statistics'] = $this->get_statistics();
+        try {
+            // Charger directement les chauffeurs
+            $view_data['chauffeurs'] = $this->Chauffeurs_model->get_details()->getResult();
+            
+            // Statistiques
+            $view_data['statistics'] = $this->Chauffeurs_model->get_statistics();
 
-        return $this->template->rander("chauffeurs/index", $view_data);
-    }
-
-    /**
-     * Récupérer les statistiques
-     */
-    private function get_statistics()
-    {
-        $db = \Config\Database::connect();
-        
-        return $db->query("
-            SELECT 
-                COUNT(*) as total,
-                COUNT(CASE WHEN statut = 'actif' THEN 1 END) as actifs,
-                COUNT(CASE WHEN statut = 'inactif' THEN 1 END) as inactifs,
-                COUNT(CASE WHEN statut = 'suspendu' THEN 1 END) as suspendus
-            FROM rise_chauffeurs 
-            WHERE deleted = 0
-        ")->getRow();
+            return $this->template->rander("chauffeurs/index", $view_data);
+            
+        } catch (Exception $e) {
+            log_message('error', 'Chauffeurs index error: ' . $e->getMessage());
+            
+        }
     }
 
     /**
@@ -59,7 +47,6 @@ class Chauffeurs extends Security_Controller
     {
         $this->access_only_allowed_members();
         
-        $view_data = $this->_prepare_form_data();
         $view_data['model_info'] = $this->_get_empty_model();
         
         return $this->template->view('chauffeurs/modal_form', $view_data);
@@ -72,23 +59,179 @@ class Chauffeurs extends Security_Controller
     {
         $this->access_only_allowed_members();
         
-        $this->validate_submitted_data(["id" => "required|numeric"]);
         $id = $this->request->getPost('id');
-        
-        $chauffeur = $this->Chauffeurs_model->get_details(['id' => $id])->getRow();
-        if (!$chauffeur) {
-            echo json_encode(["success" => false, 'message' => 'Chauffeur non trouvé']);
+        if (!$id) {
+            echo json_encode(["success" => false, 'message' => 'ID manquant']);
             return;
         }
         
-        $view_data = $this->_prepare_form_data();
-        $view_data['model_info'] = $chauffeur;
-        
-        return $this->template->view('chauffeurs/modal_form', $view_data);
+        try {
+            $chauffeur = $this->Chauffeurs_model->get_chauffeur_details($id);
+            if (!$chauffeur) {
+                echo json_encode(["success" => false, 'message' => 'Chauffeur non trouvé']);
+                return;
+            }
+            
+            $view_data['model_info'] = $chauffeur;
+            
+            return $this->template->view('chauffeurs/modal_form', $view_data);
+            
+        } catch (Exception $e) {
+            echo json_encode(["success" => false, 'message' => $e->getMessage()]);
+        }
     }
 
     /**
-     * Vue détaillée d'un chauffeur
+     * Sauvegarde (ajout/modification)
+     */
+ public function save()
+{
+    $this->access_only_allowed_members();
+    
+    try {
+        $id = $this->request->getPost('id');
+        
+        $data = array(
+            'nom' => trim($this->request->getPost('nom')),
+            'prenom' => trim($this->request->getPost('prenom')),
+            'cnie' => trim($this->request->getPost('cnie')),
+            'telephone' => trim($this->request->getPost('telephone')),
+            'telephone_urgence' => trim($this->request->getPost('telephone_urgence')),
+            'email' => trim($this->request->getPost('email')),
+            'adresse' => trim($this->request->getPost('adresse')),
+            'date_naissance' => $this->request->getPost('date_naissance') ?: null,
+            'date_embauche' => $this->request->getPost('date_embauche') ?: date('Y-m-d'),
+            'numero_permis' => trim($this->request->getPost('numero_permis')),
+            'date_expiration_permis' => $this->request->getPost('date_expiration_permis') ?: null,
+            'categorie_permis' => $this->request->getPost('categorie_permis'),
+            'salaire_base' => $this->request->getPost('salaire_base') ?: null,
+            'statut' => $this->request->getPost('statut') ?: 'actif',
+            'observations' => trim($this->request->getPost('observations'))
+        );
+
+        // Nettoyer les chaînes vides
+        foreach ($data as $key => $value) {
+            if ($value === '' || $value === null) {
+                $data[$key] = null;
+            }
+        }
+
+        // Validation
+        if (empty($data['nom']) || empty($data['prenom']) || empty($data['telephone'])) {
+            throw new Exception('Nom, prénom et téléphone sont obligatoires');
+        }
+
+        // DEBUG - Log les données avant sauvegarde
+        log_message('debug', 'Data to insert: ' . json_encode($data));
+
+        if ($id && !empty($id)) {
+            // Modification
+            $result = $this->Chauffeurs_model->update($id, $data);
+            $actual_id = $id;
+        } else {
+            // Ajout - avec debug détaillé
+            try {
+                $actual_id = $this->Chauffeurs_model->insert($data);
+                log_message('debug', 'Insert result: ' . ($actual_id ?: 'FAILED'));
+                
+                if (!$actual_id) {
+                    // Si l'insert échoue, récupérer l'erreur DB
+                    $db = \Config\Database::connect();
+                    $error = $db->error();
+                    log_message('error', 'DB Error: ' . json_encode($error));
+                    throw new Exception('Erreur DB: ' . $error['message']);
+                }
+            } catch (\Exception $e) {
+                log_message('error', 'Insert exception: ' . $e->getMessage());
+                throw new Exception('Erreur lors de l\'ajout: ' . $e->getMessage());
+            }
+        }
+
+        echo json_encode(array(
+            "success" => true, 
+            "id" => (int)$actual_id,
+            "message" => $id ? 'Chauffeur modifié avec succès' : 'Chauffeur ajouté avec succès'
+        ));
+        
+    } catch (Exception $e) {
+        log_message('error', 'Chauffeurs save error: ' . $e->getMessage());
+        echo json_encode(array("success" => false, "message" => $e->getMessage()));
+    }
+}
+
+    /**
+     * Suppression
+     */
+    public function delete()
+    {
+        $this->access_only_allowed_members();
+        
+        try {
+            $id = $this->request->getPost('id');
+            
+            if (!$id) {
+                throw new Exception('ID manquant');
+            }
+
+            // Vérifier si le chauffeur peut être supprimé
+            if (!$this->Chauffeurs_model->can_delete($id)) {
+                throw new Exception('Impossible de supprimer ce chauffeur. Il a des locations actives.');
+            }
+
+            if ($this->request->getPost('undo')) {
+                // Restaurer
+                $result = $this->Chauffeurs_model->update($id, ['deleted' => 0]);
+                $message = 'Chauffeur restauré';
+            } else {
+                // Supprimer (soft delete)
+                $result = $this->Chauffeurs_model->update($id, ['deleted' => 1]);
+                $message = 'Chauffeur supprimé';
+            }
+            
+            if ($result) {
+                echo json_encode(array("success" => true, "message" => $message));
+            } else {
+                throw new Exception('Erreur lors de la suppression');
+            }
+            
+        } catch (Exception $e) {
+            echo json_encode(array("success" => false, "message" => $e->getMessage()));
+        }
+    }
+
+    /**
+     * Changer le statut
+     */
+    public function change_status()
+    {
+        $this->access_only_allowed_members();
+
+        try {
+            $id = $this->request->getPost('id');
+            $new_status = $this->request->getPost('statut');
+            
+            if (!$id || !$new_status) {
+                throw new Exception('Paramètres manquants');
+            }
+            
+            if (!in_array($new_status, ['actif', 'inactif', 'suspendu'])) {
+                throw new Exception('Statut invalide');
+            }
+            
+            $result = $this->Chauffeurs_model->update_status($id, $new_status);
+            
+            if ($result) {
+                echo json_encode(array("success" => true, "message" => 'Statut mis à jour'));
+            } else {
+                throw new Exception('Erreur lors de la mise à jour');
+            }
+        } catch (Exception $e) {
+            echo json_encode(array("success" => false, "message" => $e->getMessage()));
+        }
+    }
+
+    /**
+     * Vue détaillée
      */
     public function view($id = null)
     {
@@ -98,305 +241,31 @@ class Chauffeurs extends Security_Controller
 
         $this->access_only_allowed_members();
 
-        $chauffeur = $this->Chauffeurs_model->get_details(['id' => $id])->getRow();
-        if (!$chauffeur) {
-            show_404();
-        }
-
-        // Récupérer les statistiques du chauffeur
-        $db = \Config\Database::connect();
-        
-        $stats = $db->query("
-            SELECT 
-                COUNT(*) as total_locations,
-                COUNT(CASE WHEN statut = 'terminee' THEN 1 END) as locations_terminees,
-                COUNT(CASE WHEN statut IN ('confirmee', 'en_cours') THEN 1 END) as locations_actives,
-                COALESCE(SUM(prix_total), 0) as revenus_generes
-            FROM rise_locations 
-            WHERE chauffeur_id = ? AND deleted = 0
-        ", [$id])->getRow();
-
-        // Récupérer les dernières locations
-        $recent_locations = $db->query("
-            SELECT l.*, c.company_name, c.first_name, v.marque, v.modele, v.immatriculation
-            FROM rise_locations l
-            LEFT JOIN rise_clients c ON l.client_id = c.id
-            LEFT JOIN rise_vehicules v ON l.vehicule_id = v.id
-            WHERE l.chauffeur_id = ? AND l.deleted = 0
-            ORDER BY l.created_at DESC
-            LIMIT 10
-        ", [$id])->getResult();
-
-        $view_data = [
-            'chauffeur' => $chauffeur,
-            'stats' => $stats,
-            'recent_locations' => $recent_locations,
-            'page_title' => $chauffeur->prenom . ' ' . $chauffeur->nom,
-        ];
-
-        return $this->template->rander("chauffeurs/view", $view_data);
-    }
-
-    /**
-     * Sauvegarde (ajout/modification)
-     */
-   
-public function save()
-{
-    $this->access_only_allowed_members();
-    
-    // DEBUG - Ajoute ceci temporairement
-    log_message('debug', 'Chauffeurs::save() appelée');
-    log_message('debug', 'POST data: ' . json_encode($this->request->getPost()));
-    
-    try {
-        // Validation des données
-        $this->validate_submitted_data(array(
-            "nom" => "required",
-            "prenom" => "required",
-            "telephone" => "required"
-        ));
-
-        $id = $this->request->getPost('id');
-        
-        $data = array(
-            'nom' => $this->request->getPost('nom'),
-            'prenom' => $this->request->getPost('prenom'),
-            // ... reste des données
-        );
-
-        log_message('debug', 'Data to save: ' . json_encode($data));
-        
-        if ($id) {
-            $result = $this->Chauffeurs_model->update($id, $data);
-            log_message('debug', 'Update result: ' . ($result ? 'success' : 'failed'));
-        } else {
-            $id = $this->Chauffeurs_model->insert($data);
-            log_message('debug', 'Insert result: ' . $id);
-        }
-
-        echo json_encode(array(
-            "success" => true, 
-            "id" => (int)$id,
-            "message" => app_lang('record_saved')
-        ));
-        
-    } catch (Exception $e) {
-        log_message('error', 'Chauffeurs::save() error: ' . $e->getMessage());
-        echo json_encode(array("success" => false, "message" => $e->getMessage()));
-    }
-}
-    /**
-     * Suppression (soft delete)
-     */
-    public function delete()
-    {
-        $this->access_only_allowed_members();
-        $id = $this->request->getPost('id');
-        
-        if ($this->request->getPost('undo')) {
-            // Restaurer un enregistrement supprimé
-            $result = $this->Chauffeurs_model->db->table('rise_chauffeurs')
-                        ->where('id', $id)
-                        ->update(['deleted' => 0]);
-            
-            if ($result) {
-                echo json_encode(array("success" => true, "message" => app_lang('record_undone')));
-            } else {
-                echo json_encode(array("success" => false, "message" => app_lang('error_occurred')));
-            }
-        } else {
-            // Vérifier s'il a des locations actives
-            $db = \Config\Database::connect();
-            $activeLocations = $db->query("SELECT COUNT(*) as count FROM rise_locations WHERE chauffeur_id = ? AND statut IN ('confirmee', 'en_cours') AND deleted = 0", [$id])->getRow();
-            
-            if ($activeLocations->count > 0) {
-                echo json_encode(array("success" => false, "message" => "Impossible de supprimer ce chauffeur. Il a des locations actives."));
-                return;
-            }
-
-            // Supprimer (soft delete)
-            $result = $this->Chauffeurs_model->db->table('rise_chauffeurs')
-                        ->where('id', $id)
-                        ->update(['deleted' => 1]);
-            
-            if ($result) {
-                echo json_encode(array("success" => true, "message" => app_lang('record_deleted')));
-            } else {
-                echo json_encode(array("success" => false, "message" => app_lang('record_cannot_be_deleted')));
-            }
-        }
-    }
-
-    /**
-     * Changer le statut d'un chauffeur
-     */
-    public function change_status()
-    {
-        $this->access_only_allowed_members();
-
-        $id = $this->request->getPost('id');
-        $new_status = $this->request->getPost('statut');
-        
         try {
-            $result = $this->Chauffeurs_model->update($id, ['statut' => $new_status]);
-            
-            if ($result) {
-                echo json_encode(array("success" => true, "message" => app_lang('record_saved')));
-            } else {
-                echo json_encode(array("success" => false, "message" => app_lang('error_occurred')));
+            $chauffeur = $this->Chauffeurs_model->get_chauffeur_details($id);
+            if (!$chauffeur) {
+                show_404();
             }
+
+            // Récupérer les performances
+            $performance = $this->Chauffeurs_model->get_performance($id);
+
+            $view_data = [
+                'chauffeur' => $chauffeur,
+                'performance' => $performance,
+                'page_title' => $chauffeur->prenom . ' ' . $chauffeur->nom,
+            ];
+
+            return $this->template->rander("chauffeurs/view", $view_data);
+            
         } catch (Exception $e) {
-            echo json_encode(array("success" => false, "message" => $e->getMessage()));
+            log_message('error', 'Chauffeurs view error: ' . $e->getMessage());
+          
         }
     }
 
     /**
-     * API pour la recherche AJAX
-     */
-    public function search_api()
-    {
-        $this->access_only_allowed_members();
-
-        $keyword = $this->request->getGet('q');
-        $options = array('search' => $keyword);
-        
-        $chauffeurs = $this->Chauffeurs_model->get_details($options)->getResult();
-        
-        return $this->response->setJSON([
-            'success' => true,
-            'data' => $chauffeurs
-        ]);
-    }
-
-    /**
-     * API pour récupérer les chauffeurs disponibles
-     */
-    public function available_api()
-    {
-        $this->access_only_allowed_members();
-
-        $options = array('statut' => 'actif');
-        $chauffeurs = $this->Chauffeurs_model->get_details($options)->getResult();
-        
-        return $this->response->setJSON([
-            'success' => true,
-            'data' => $chauffeurs
-        ]);
-    }
-
-    /**
-     * Statistiques pour le dashboard
-     */
-    public function statistics()
-    {
-        $this->access_only_allowed_members();
-
-        $stats = $this->get_statistics();
-        
-        return $this->response->setJSON([
-            'success' => true,
-            'data' => $stats
-        ]);
-    }
-
-    /**
-     * Rapport des permis expirant bientôt
-     */
-    public function expiring_licenses()
-    {
-        $this->access_only_allowed_members();
-
-        $days = $this->request->getGet('days') ?? 30;
-        
-        $db = \Config\Database::connect();
-        $chauffeurs = $db->query("
-            SELECT *
-            FROM rise_chauffeurs 
-            WHERE deleted = 0 
-            AND date_expiration_permis IS NOT NULL 
-            AND date_expiration_permis BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL ? DAY)
-            ORDER BY date_expiration_permis ASC
-        ", [$days])->getResult();
-        
-        $view_data = [
-            'chauffeurs' => $chauffeurs,
-            'days' => $days,
-            'page_title' => 'Permis Expirant - Prochains ' . $days . ' jours',
-        ];
-
-        return $this->template->rander("chauffeurs/expiring_licenses", $view_data);
-    }
-
-    /**
-     * Export CSV
-     */
-    public function export_csv()
-    {
-        $this->access_only_allowed_members();
-
-        $chauffeurs = $this->Chauffeurs_model->get_details()->getResult();
-        
-        $filename = 'chauffeurs_' . date('Y-m-d_H-i-s') . '.csv';
-        
-        header('Content-Type: text/csv; charset=utf-8');
-        header('Content-Disposition: attachment; filename="' . $filename . '"');
-        
-        $output = fopen('php://output', 'w');
-        
-        // En-têtes CSV
-        fputcsv($output, [
-            'ID', 'Nom', 'Prénom', 'CNIE', 'Téléphone', 'Email', 
-            'Adresse', 'Date Naissance', 'Date Embauche', 'N° Permis', 
-            'Expiration Permis', 'Catégorie', 'Salaire Base', 'Statut'
-        ]);
-        
-        // Données
-        foreach ($chauffeurs as $chauffeur) {
-            fputcsv($output, [
-                $chauffeur->id,
-                $chauffeur->nom,
-                $chauffeur->prenom,
-                $chauffeur->cnie,
-                $chauffeur->telephone,
-                $chauffeur->email,
-                $chauffeur->adresse,
-                $chauffeur->date_naissance,
-                $chauffeur->date_embauche,
-                $chauffeur->numero_permis,
-                $chauffeur->date_expiration_permis,
-                $chauffeur->categorie_permis,
-                $chauffeur->salaire_base,
-                $chauffeur->statut
-            ]);
-        }
-        
-        fclose($output);
-        exit;
-    }
-
-    /**
-     * Prépare les données pour les formulaires
-     */
-    private function _prepare_form_data()
-    {
-        return array(
-            'categories_permis' => array(
-                'D' => 'D - Transport de personnes',
-                'B' => 'B - Véhicules légers', 
-                'C' => 'C - Poids lourds',
-                'E' => 'E - Avec remorque'
-            ),
-            'statuts' => array(
-                'actif' => 'Actif',
-                'inactif' => 'Inactif',
-                'suspendu' => 'Suspendu'
-            )
-        );
-    }
-
-    /**
-     * Retourne un modèle vide pour les nouveaux chauffeurs
+     * Retourne un modèle vide
      */
     private function _get_empty_model()
     {
@@ -419,24 +288,5 @@ public function save()
         $model_info->observations = "";
         
         return $model_info;
-    }
-
-    /**
-     * Formatage des dates
-     */
-    private function _format_dates($data)
-    {
-        $date_fields = ['date_naissance', 'date_embauche', 'date_expiration_permis'];
-        
-        foreach ($date_fields as $field) {
-            if (isset($data[$field]) && !empty($data[$field])) {
-                // Conversion HTML5 datetime-local vers MySQL datetime si nécessaire
-                if (strpos($data[$field], 'T') !== false) {
-                    $data[$field] = str_replace('T', ' ', $data[$field]);
-                }
-            }
-        }
-        
-        return $data;
     }
 }

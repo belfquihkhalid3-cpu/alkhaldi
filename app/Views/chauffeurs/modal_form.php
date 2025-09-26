@@ -11,9 +11,10 @@
                     <i data-feather="user" class="icon-16"></i> Informations Personnelles
                 </h6>
                 
+                <!-- NOM -->
                 <div class="form-group">
                     <div class="row">
-                        <label for="nom" class="col-3 col-form-label"><?php echo app_lang('nom'); ?> <span class="text-danger">*</span></label>
+                        <label for="nom" class="col-3 col-form-label">Nom <span class="text-danger">*</span></label>
                         <div class="col-9">
                             <?php
                             echo form_input(array(
@@ -21,19 +22,37 @@
                                 "name" => "nom",
                                 "value" => $model_info->nom ?? "",
                                 "class" => "form-control",
-                                "placeholder" => app_lang('prenom'),
-                                "required" => true,
-                                "data-rule-required" => true,
-                                "data-msg-required" => app_lang("field_required"),
+                                "placeholder" => "Nom",
+                                "required" => true
                             ));
                             ?>
                         </div>
                     </div>
                 </div>
 
+                <!-- PRENOM -->
                 <div class="form-group">
                     <div class="row">
-                        <label for="cnie" class="col-3 col-form-label"><?php echo app_lang('cnie'); ?></label>
+                        <label for="prenom" class="col-3 col-form-label">Prénom <span class="text-danger">*</span></label>
+                        <div class="col-9">
+                            <?php
+                            echo form_input(array(
+                                "id" => "prenom",
+                                "name" => "prenom",
+                                "value" => $model_info->prenom ?? "",
+                                "class" => "form-control",
+                                "placeholder" => "Prénom",
+                                "required" => true
+                            ));
+                            ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CNIE -->
+                <div class="form-group">
+                    <div class="row">
+                        <label for="cnie" class="col-3 col-form-label">CNIE</label>
                         <div class="col-9">
                             <?php
                             echo form_input(array(
@@ -41,17 +60,17 @@
                                 "name" => "cnie",
                                 "value" => $model_info->cnie ?? "",
                                 "class" => "form-control",
-                                "placeholder" => "AB123456",
-                                "maxlength" => "8"
+                                "placeholder" => "AB123456"
                             ));
                             ?>
                         </div>
                     </div>
                 </div>
 
+                <!-- TELEPHONE -->
                 <div class="form-group">
                     <div class="row">
-                        <label for="telephone" class="col-3 col-form-label"><?php echo app_lang('telephone'); ?> <span class="text-danger">*</span></label>
+                        <label for="telephone" class="col-3 col-form-label">Téléphone <span class="text-danger">*</span></label>
                         <div class="col-9">
                             <?php
                             echo form_input(array(
@@ -59,19 +78,18 @@
                                 "name" => "telephone",
                                 "value" => $model_info->telephone ?? "",
                                 "class" => "form-control",
-                                "placeholder" => "+212 6 XX XX XX XX",
-                                "required" => true,
-                                "data-rule-required" => true,
-                                "data-msg-required" => app_lang("field_required"),
+                                "placeholder" => "+212 6XX XXXXXX",
+                                "required" => true
                             ));
                             ?>
                         </div>
                     </div>
                 </div>
 
+                <!-- TELEPHONE URGENCE -->
                 <div class="form-group">
                     <div class="row">
-                        <label for="telephone_urgence" class="col-3 col-form-label"><?php echo app_lang('telephone_urgence'); ?></label>
+                        <label for="telephone_urgence" class="col-3 col-form-label">Tél. Urgence</label>
                         <div class="col-9">
                             <?php
                             echo form_input(array(
@@ -79,16 +97,17 @@
                                 "name" => "telephone_urgence",
                                 "value" => $model_info->telephone_urgence ?? "",
                                 "class" => "form-control",
-                                "placeholder" => "+212 6 XX XX XX XX"
+                                "placeholder" => "+212 6XX XXXXXX"
                             ));
                             ?>
                         </div>
                     </div>
                 </div>
 
+                <!-- EMAIL -->
                 <div class="form-group">
                     <div class="row">
-                        <label for="email" class="col-3 col-form-label"><?php echo app_lang('email'); ?></label>
+                        <label for="email" class="col-3 col-form-label">Email</label>
                         <div class="col-9">
                             <?php
                             echo form_input(array(
@@ -96,17 +115,18 @@
                                 "name" => "email",
                                 "value" => $model_info->email ?? "",
                                 "class" => "form-control",
-                                "placeholder" => "email@exemple.com",
-                                "type" => "email"
+                                "type" => "email",
+                                "placeholder" => "email@exemple.com"
                             ));
                             ?>
                         </div>
                     </div>
                 </div>
 
+                <!-- ADRESSE -->
                 <div class="form-group">
                     <div class="row">
-                        <label for="adresse" class="col-3 col-form-label"><?php echo app_lang('adresse'); ?></label>
+                        <label for="adresse" class="col-3 col-form-label">Adresse</label>
                         <div class="col-9">
                             <?php
                             echo form_textarea(array(
@@ -114,8 +134,8 @@
                                 "name" => "adresse",
                                 "value" => $model_info->adresse ?? "",
                                 "class" => "form-control",
-                                "placeholder" => app_lang('adresse'),
-                                "rows" => 3
+                                "rows" => 3,
+                                "placeholder" => "Adresse complète"
                             ));
                             ?>
                         </div>
@@ -129,9 +149,10 @@
                     <i data-feather="briefcase" class="icon-16"></i> Informations Professionnelles
                 </h6>
 
+                <!-- DATE NAISSANCE -->
                 <div class="form-group">
                     <div class="row">
-                        <label for="date_naissance" class="col-3 col-form-label"><?php echo app_lang('date_naissance'); ?></label>
+                        <label for="date_naissance" class="col-3 col-form-label">Date Naissance</label>
                         <div class="col-9">
                             <?php
                             echo form_input(array(
@@ -146,9 +167,10 @@
                     </div>
                 </div>
 
+                <!-- DATE EMBAUCHE -->
                 <div class="form-group">
                     <div class="row">
-                        <label for="date_embauche" class="col-3 col-form-label"><?php echo app_lang('date_embauche'); ?></label>
+                        <label for="date_embauche" class="col-3 col-form-label">Date Embauche</label>
                         <div class="col-9">
                             <?php
                             echo form_input(array(
@@ -163,9 +185,10 @@
                     </div>
                 </div>
 
+                <!-- NUMERO PERMIS -->
                 <div class="form-group">
                     <div class="row">
-                        <label for="numero_permis" class="col-3 col-form-label"><?php echo app_lang('numero_permis'); ?></label>
+                        <label for="numero_permis" class="col-3 col-form-label">N° Permis</label>
                         <div class="col-9">
                             <?php
                             echo form_input(array(
@@ -180,9 +203,10 @@
                     </div>
                 </div>
 
+                <!-- DATE EXPIRATION PERMIS -->
                 <div class="form-group">
                     <div class="row">
-                        <label for="date_expiration_permis" class="col-3 col-form-label"><?php echo app_lang('date_expiration_permis'); ?></label>
+                        <label for="date_expiration_permis" class="col-3 col-form-label">Expiration Permis</label>
                         <div class="col-9">
                             <?php
                             echo form_input(array(
@@ -197,20 +221,22 @@
                     </div>
                 </div>
 
+                <!-- CATEGORIE PERMIS -->
                 <div class="form-group">
                     <div class="row">
-                        <label for="categorie_permis" class="col-3 col-form-label"><?php echo app_lang('categorie_permis'); ?></label>
+                        <label for="categorie_permis" class="col-3 col-form-label">Catégorie Permis</label>
                         <div class="col-9">
                             <?php
                             echo form_dropdown(
                                 "categorie_permis",
                                 array(
+                                    "" => "- Sélectionner -",
                                     "D" => "D - Transport de personnes",
                                     "B" => "B - Véhicules légers",
                                     "C" => "C - Poids lourds",
                                     "E" => "E - Avec remorque"
                                 ),
-                                $model_info->categorie_permis ?? "D",
+                                $model_info->categorie_permis ?? "",
                                 "class='form-control'"
                             );
                             ?>
@@ -218,9 +244,10 @@
                     </div>
                 </div>
 
+                <!-- SALAIRE BASE -->
                 <div class="form-group">
                     <div class="row">
-                        <label for="salaire_base" class="col-3 col-form-label"><?php echo app_lang('salaire_base'); ?></label>
+                        <label for="salaire_base" class="col-3 col-form-label">Salaire Base</label>
                         <div class="col-9">
                             <div class="input-group">
                                 <?php
@@ -229,9 +256,9 @@
                                     "name" => "salaire_base",
                                     "value" => $model_info->salaire_base ?? "",
                                     "class" => "form-control",
-                                    "placeholder" => "3000",
                                     "type" => "number",
-                                    "step" => "0.01"
+                                    "step" => "0.01",
+                                    "placeholder" => "3000"
                                 ));
                                 ?>
                                 <span class="input-group-text">MAD</span>
@@ -240,9 +267,10 @@
                     </div>
                 </div>
 
+                <!-- STATUT -->
                 <div class="form-group">
                     <div class="row">
-                        <label for="statut" class="col-3 col-form-label"><?php echo app_lang('statut'); ?></label>
+                        <label for="statut" class="col-3 col-form-label">Statut</label>
                         <div class="col-9">
                             <?php
                             echo form_dropdown(
@@ -260,9 +288,10 @@
                     </div>
                 </div>
 
+                <!-- OBSERVATIONS -->
                 <div class="form-group">
                     <div class="row">
-                        <label for="observations" class="col-3 col-form-label"><?php echo app_lang('observations'); ?></label>
+                        <label for="observations" class="col-3 col-form-label">Observations</label>
                         <div class="col-9">
                             <?php
                             echo form_textarea(array(
@@ -270,8 +299,8 @@
                                 "name" => "observations",
                                 "value" => $model_info->observations ?? "",
                                 "class" => "form-control",
-                                "placeholder" => app_lang('observations'),
-                                "rows" => 3
+                                "rows" => 3,
+                                "placeholder" => "Remarques ou notes..."
                             ));
                             ?>
                         </div>
@@ -284,10 +313,10 @@
 
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-bs-dismiss="modal">
-        <span data-feather="x" class="icon-16"></span> <?php echo app_lang('close'); ?>
+        <span data-feather="x" class="icon-16"></span> Annuler
     </button>
     <button type="submit" class="btn btn-primary">
-        <span data-feather="check-circle" class="icon-16"></span> <?php echo app_lang('save'); ?>
+        <span data-feather="check-circle" class="icon-16"></span> Enregistrer
     </button>
 </div>
 
@@ -297,8 +326,10 @@
     $(document).ready(function () {
         $("#chauffeur-form").appForm({
             onSuccess: function (result) {
-                $("#chauffeur-table").appTable({newData: result.data, dataId: result.id});
-                appAlert.success(result.message, {duration: 10000});
+                appAlert.success(result.message, {duration: 3000});
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
             }
         });
         

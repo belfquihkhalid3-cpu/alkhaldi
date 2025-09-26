@@ -70,7 +70,7 @@
                 <?php
                 echo modal_anchor(get_uri("transferts/modal_add"), 
                     "<i data-feather='plus-circle' class='icon-16'></i> Nouveau Transfert", 
-                    ["class" => "btn btn-primary", "title" => "Créer un nouveau transfert"]);
+                    ["class" => "btn btn-primary", "title" => "Crï¿½er un nouveau transfert"]);
                 ?>
             </div>
         </div>
@@ -95,7 +95,7 @@
                 <div class="col-md-4">
                     <label for="search_filter"><i data-feather="search" class="icon-16"></i> Recherche :</label>
                     <input type="text" class="form-control" id="search_filter" 
-                           placeholder="Nom client, n° vol, lieu...">
+                           placeholder="Nom client, nï¿½ vol, lieu...">
                 </div>
                 <div class="col-md-2">
                     <label>&nbsp;</label>
@@ -117,7 +117,7 @@
                         <th><i data-feather="arrow-right" class="icon-16"></i> Type</th>
                         <th><i data-feather="user" class="icon-16"></i> Client</th>
                         <th><i data-feather="plane" class="icon-16"></i> Vol</th>
-                        <th><i data-feather="map-pin" class="icon-16"></i> Itinéraire</th>
+                        <th><i data-feather="map-pin" class="icon-16"></i> Itinï¿½raire</th>
                         <th><i data-feather="users" class="icon-16"></i> Assignation</th>
                         <th><i data-feather="dollar-sign" class="icon-16"></i> Prix</th>
                         <th><i data-feather="info" class="icon-16"></i> Statut</th>
@@ -166,16 +166,16 @@
         
         // Debug des statistiques
         <?php if (isset($statistics)): ?>
-            console.log('Statistiques chargées:', <?php echo json_encode($statistics); ?>);
+            console.log('Statistiques chargï¿½es:', <?php echo json_encode($statistics); ?>);
         <?php else: ?>
-            console.error('Statistiques non chargées!');
+            console.error('Statistiques non chargï¿½es!');
         <?php endif; ?>
 
         // Debug des dropdowns
         <?php if (isset($statuts_dropdown)): ?>
             console.log('Statuts dropdown:', <?php echo json_encode($statuts_dropdown); ?>);
         <?php else: ?>
-            console.error('Statuts dropdown non défini!');
+            console.error('Statuts dropdown non dï¿½fini!');
         <?php endif; ?>
 
         var table = $("#transferts-table").appTable({
@@ -187,7 +187,7 @@
                 {title: 'Type', "class": "text-center"},
                 {title: 'Client'},
                 {title: 'Vol', "class": "text-center"},
-                {title: 'Itinéraire'},
+                {title: 'Itinï¿½raire'},
                 {title: 'Assignation', "class": "text-center"},
                 {title: 'Prix', "class": "text-end"},
                 {title: 'Statut', "class": "text-center"},
@@ -198,21 +198,21 @@
                 $(row).attr('data-id', data[0]);
             },
             onInitComplete: function () {
-                console.log('Table initialisée, activation des icônes Feather...');
+                console.log('Table initialisï¿½e, activation des icï¿½nes Feather...');
                 feather.replace();
             },
             onReloadComplete: function () {
                 feather.replace();
             },
             drawCallback: function() {
-                // ? Appelé à chaque redraw du tableau (comme dans Jawaz)
+                // ? Appelï¿½ ï¿½ chaque redraw du tableau (comme dans Jawaz)
                 feather.replace();
             }
         });
 
         // Gestion des filtres
         $('#statut_filter, #type_filter').on('change', function() {
-            console.log('Filtre changé:', $(this).attr('id'), '=', $(this).val());
+            console.log('Filtre changï¿½:', $(this).attr('id'), '=', $(this).val());
             updateTable();
         });
         
@@ -248,7 +248,7 @@
                     {title: 'Type', "class": "text-center"},
                     {title: 'Client'},
                     {title: 'Vol', "class": "text-center"},
-                    {title: 'Itinéraire'},
+                    {title: 'Itinï¿½raire'},
                     {title: 'Assignation', "class": "text-center"},
                     {title: 'Prix', "class": "text-end"},
                     {title: 'Statut', "class": "text-center"},
@@ -271,7 +271,7 @@
             var id = $(this).data('id');
             var statut = $(this).data('statut');
             
-            console.log('Changement statut demandé:', id, '->', statut);
+            console.log('Changement statut demandï¿½:', id, '->', statut);
             
             $('#transfert_id').val(id);
             $('#nouveau_statut').val(statut);
@@ -280,7 +280,7 @@
             // Afficher le modal avec titre dynamique
             var titres = {
                 'confirme': 'Confirmer le transfert',
-                'en_cours': 'Démarrer le transfert', 
+                'en_cours': 'Dï¿½marrer le transfert', 
                 'termine': 'Terminer le transfert',
                 'annule': 'Annuler le transfert'
             };
@@ -288,7 +288,7 @@
             $('.modal-title').html('<i data-feather="edit-3" class="icon-16"></i> ' + (titres[statut] || 'Changer le statut'));
             $('#statutModal').modal('show');
             
-            // Réactiver les icônes dans le modal
+            // Rï¿½activer les icï¿½nes dans le modal
             setTimeout(function() {
                 feather.replace();
             }, 100);
@@ -301,7 +301,7 @@
             
             console.log('Confirmation changement statut:', {id, statut, commentaire});
             
-            // Désactiver le bouton pendant le traitement
+            // Dï¿½sactiver le bouton pendant le traitement
             $(this).prop('disabled', true).html('<i data-feather="loader" class="icon-16 me-1"></i>Traitement...');
             feather.replace();
             
@@ -316,7 +316,7 @@
                 success: function(result) {
                     try {
                         result = JSON.parse(result);
-                        console.log('Réponse serveur:', result);
+                        console.log('Rï¿½ponse serveur:', result);
                         
                         if (result.success) {
                             $("#transferts-table").appTable({newData: result.data, dataId: result.id});
@@ -344,7 +344,7 @@
                     alert('Erreur de connexion au serveur');
                 },
                 complete: function() {
-                    // Réactiver le bouton
+                    // Rï¿½activer le bouton
                     $('#confirm_statut').prop('disabled', false).html('<i data-feather="check" class="icon-16"></i> Confirmer');
                     feather.replace();
                 }
@@ -372,9 +372,13 @@
             });
         }
         
-        console.log('Module transferts complètement initialisé - SANS Feather replace');
+        console.log('Module transferts complï¿½tement initialisï¿½ - SANS Feather replace');
         
-        // PAS d'observer - Feather est cassé
-        console.log('Emojis utilisés à la place des icônes Feather cassées');
+        // PAS d'observer - Feather est cassï¿½
+        console.log('Emojis utilisï¿½s ï¿½ la place des icï¿½nes Feather cassï¿½es');
+       // Forcer le remplacement des icÃ´nes toutes les secondes
+setInterval(function() {
+    feather.replace();
+}, 1000);
     });
 </script>

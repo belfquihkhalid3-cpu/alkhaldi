@@ -1,0 +1,357 @@
+ERROR - 2025-09-25 11:30:13 --> mysqli_sql_exception: Unknown column 'c.first_name' in 'field list' in L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php(327): mysqli->query('\n            SE...', 0)
+#1 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('\n            SE...')
+#2 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('\n            SE...')
+#3 L:\xamp\htdocs\khalidi\app\Controllers\Chauffeurs.php(120): CodeIgniter\Database\BaseConnection->query('\n            SE...', Array)
+#4 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(933): App\Controllers\Chauffeurs->view('5')
+#5 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Chauffeurs))
+#6 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 L:\xamp\htdocs\khalidi\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#8 L:\xamp\htdocs\khalidi\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 L:\xamp\htdocs\khalidi\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+CRITICAL - 2025-09-25 11:30:13 --> Error: Call to a member function getResult() on bool
+[Method: GET, Route: chauffeurs/view/5]
+in APPPATH\Controllers\Chauffeurs.php on line 128.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Chauffeurs->view('5')
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Chauffeurs))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-25 12:22:22 --> TypeError: CodeIgniter\Model::__construct(): Argument #1 ($db) must be of type ?CodeIgniter\Database\ConnectionInterface, string given, called in L:\xamp\htdocs\khalidi\app\Models\Chauffeurs_model.php on line 100
+[Method: GET, Route: chauffeurs]
+in SYSTEMPATH\Model.php on line 150.
+ 1 APPPATH\Models\Chauffeurs_model.php(100): CodeIgniter\Model->__construct('rise_chauffeurs')
+ 2 SYSTEMPATH\Config\Factories.php(236): App\Models\Chauffeurs_model->__construct(null)
+ 3 SYSTEMPATH\Config\Factories.php(170): CodeIgniter\Config\Factories::createInstance('models', 'App\\Models\\Chauffeurs_model', [...])
+ 4 SYSTEMPATH\Common.php(804): CodeIgniter\Config\Factories::__callStatic('models', [...])
+ 5 APPPATH\Controllers\App_Controller.php(113): model('App\\Models\\Chauffeurs_model')
+ 6 APPPATH\Controllers\Security_Controller.php(21): App\Controllers\App_Controller->__construct()
+ 7 APPPATH\Controllers\Chauffeurs.php(16): App\Controllers\Security_Controller->__construct()
+ 8 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\Chauffeurs->__construct()
+ 9 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-25 12:22:22 --> TypeError: CodeIgniter\Model::__construct(): Argument #1 ($db) must be of type ?CodeIgniter\Database\ConnectionInterface, string given, called in L:\xamp\htdocs\khalidi\app\Models\Chauffeurs_model.php on line 100
+[Method: POST, Route: messages/count_notifications]
+in SYSTEMPATH\Model.php on line 150.
+ 1 APPPATH\Models\Chauffeurs_model.php(100): CodeIgniter\Model->__construct('rise_chauffeurs')
+ 2 SYSTEMPATH\Config\Factories.php(236): App\Models\Chauffeurs_model->__construct(null)
+ 3 SYSTEMPATH\Config\Factories.php(170): CodeIgniter\Config\Factories::createInstance('models', 'App\\Models\\Chauffeurs_model', [...])
+ 4 SYSTEMPATH\Common.php(804): CodeIgniter\Config\Factories::__callStatic('models', [...])
+ 5 APPPATH\Controllers\App_Controller.php(113): model('App\\Models\\Chauffeurs_model')
+ 6 APPPATH\Controllers\Security_Controller.php(21): App\Controllers\App_Controller->__construct()
+ 7 APPPATH\Controllers\Messages.php(8): App\Controllers\Security_Controller->__construct()
+ 8 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\Messages->__construct()
+ 9 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-25 12:22:25 --> TypeError: CodeIgniter\Model::__construct(): Argument #1 ($db) must be of type ?CodeIgniter\Database\ConnectionInterface, string given, called in L:\xamp\htdocs\khalidi\app\Models\Chauffeurs_model.php on line 100
+[Method: GET, Route: chauffeurs]
+in SYSTEMPATH\Model.php on line 150.
+ 1 APPPATH\Models\Chauffeurs_model.php(100): CodeIgniter\Model->__construct('rise_chauffeurs')
+ 2 SYSTEMPATH\Config\Factories.php(236): App\Models\Chauffeurs_model->__construct(null)
+ 3 SYSTEMPATH\Config\Factories.php(170): CodeIgniter\Config\Factories::createInstance('models', 'App\\Models\\Chauffeurs_model', [...])
+ 4 SYSTEMPATH\Common.php(804): CodeIgniter\Config\Factories::__callStatic('models', [...])
+ 5 APPPATH\Controllers\App_Controller.php(113): model('App\\Models\\Chauffeurs_model')
+ 6 APPPATH\Controllers\Security_Controller.php(21): App\Controllers\App_Controller->__construct()
+ 7 APPPATH\Controllers\Chauffeurs.php(16): App\Controllers\Security_Controller->__construct()
+ 8 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\Chauffeurs->__construct()
+ 9 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-25 12:22:26 --> TypeError: CodeIgniter\Model::__construct(): Argument #1 ($db) must be of type ?CodeIgniter\Database\ConnectionInterface, string given, called in L:\xamp\htdocs\khalidi\app\Models\Chauffeurs_model.php on line 100
+[Method: GET, Route: chauffeurs]
+in SYSTEMPATH\Model.php on line 150.
+ 1 APPPATH\Models\Chauffeurs_model.php(100): CodeIgniter\Model->__construct('rise_chauffeurs')
+ 2 SYSTEMPATH\Config\Factories.php(236): App\Models\Chauffeurs_model->__construct(null)
+ 3 SYSTEMPATH\Config\Factories.php(170): CodeIgniter\Config\Factories::createInstance('models', 'App\\Models\\Chauffeurs_model', [...])
+ 4 SYSTEMPATH\Common.php(804): CodeIgniter\Config\Factories::__callStatic('models', [...])
+ 5 APPPATH\Controllers\App_Controller.php(113): model('App\\Models\\Chauffeurs_model')
+ 6 APPPATH\Controllers\Security_Controller.php(21): App\Controllers\App_Controller->__construct()
+ 7 APPPATH\Controllers\Chauffeurs.php(16): App\Controllers\Security_Controller->__construct()
+ 8 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\Chauffeurs->__construct()
+ 9 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-25 12:22:26 --> TypeError: CodeIgniter\Model::__construct(): Argument #1 ($db) must be of type ?CodeIgniter\Database\ConnectionInterface, string given, called in L:\xamp\htdocs\khalidi\app\Models\Chauffeurs_model.php on line 100
+[Method: GET, Route: chauffeurs]
+in SYSTEMPATH\Model.php on line 150.
+ 1 APPPATH\Models\Chauffeurs_model.php(100): CodeIgniter\Model->__construct('rise_chauffeurs')
+ 2 SYSTEMPATH\Config\Factories.php(236): App\Models\Chauffeurs_model->__construct(null)
+ 3 SYSTEMPATH\Config\Factories.php(170): CodeIgniter\Config\Factories::createInstance('models', 'App\\Models\\Chauffeurs_model', [...])
+ 4 SYSTEMPATH\Common.php(804): CodeIgniter\Config\Factories::__callStatic('models', [...])
+ 5 APPPATH\Controllers\App_Controller.php(113): model('App\\Models\\Chauffeurs_model')
+ 6 APPPATH\Controllers\Security_Controller.php(21): App\Controllers\App_Controller->__construct()
+ 7 APPPATH\Controllers\Chauffeurs.php(16): App\Controllers\Security_Controller->__construct()
+ 8 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\Chauffeurs->__construct()
+ 9 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-25 12:22:26 --> TypeError: CodeIgniter\Model::__construct(): Argument #1 ($db) must be of type ?CodeIgniter\Database\ConnectionInterface, string given, called in L:\xamp\htdocs\khalidi\app\Models\Chauffeurs_model.php on line 100
+[Method: GET, Route: chauffeurs]
+in SYSTEMPATH\Model.php on line 150.
+ 1 APPPATH\Models\Chauffeurs_model.php(100): CodeIgniter\Model->__construct('rise_chauffeurs')
+ 2 SYSTEMPATH\Config\Factories.php(236): App\Models\Chauffeurs_model->__construct(null)
+ 3 SYSTEMPATH\Config\Factories.php(170): CodeIgniter\Config\Factories::createInstance('models', 'App\\Models\\Chauffeurs_model', [...])
+ 4 SYSTEMPATH\Common.php(804): CodeIgniter\Config\Factories::__callStatic('models', [...])
+ 5 APPPATH\Controllers\App_Controller.php(113): model('App\\Models\\Chauffeurs_model')
+ 6 APPPATH\Controllers\Security_Controller.php(21): App\Controllers\App_Controller->__construct()
+ 7 APPPATH\Controllers\Chauffeurs.php(16): App\Controllers\Security_Controller->__construct()
+ 8 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\Chauffeurs->__construct()
+ 9 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-25 12:22:30 --> TypeError: CodeIgniter\Model::__construct(): Argument #1 ($db) must be of type ?CodeIgniter\Database\ConnectionInterface, string given, called in L:\xamp\htdocs\khalidi\app\Models\Chauffeurs_model.php on line 100
+[Method: GET, Route: /]
+in SYSTEMPATH\Model.php on line 150.
+ 1 APPPATH\Models\Chauffeurs_model.php(100): CodeIgniter\Model->__construct('rise_chauffeurs')
+ 2 SYSTEMPATH\Config\Factories.php(236): App\Models\Chauffeurs_model->__construct(null)
+ 3 SYSTEMPATH\Config\Factories.php(170): CodeIgniter\Config\Factories::createInstance('models', 'App\\Models\\Chauffeurs_model', [...])
+ 4 SYSTEMPATH\Common.php(804): CodeIgniter\Config\Factories::__callStatic('models', [...])
+ 5 APPPATH\Controllers\App_Controller.php(113): model('App\\Models\\Chauffeurs_model')
+ 6 APPPATH\Controllers\Security_Controller.php(21): App\Controllers\App_Controller->__construct()
+ 7 APPPATH\Controllers\Dashboard.php(11): App\Controllers\Security_Controller->__construct()
+ 8 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\Dashboard->__construct()
+ 9 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-25 12:22:36 --> TypeError: CodeIgniter\Model::__construct(): Argument #1 ($db) must be of type ?CodeIgniter\Database\ConnectionInterface, string given, called in L:\xamp\htdocs\khalidi\app\Models\Chauffeurs_model.php on line 100
+[Method: POST, Route: notifications/count_notifications]
+in SYSTEMPATH\Model.php on line 150.
+ 1 APPPATH\Models\Chauffeurs_model.php(100): CodeIgniter\Model->__construct('rise_chauffeurs')
+ 2 SYSTEMPATH\Config\Factories.php(236): App\Models\Chauffeurs_model->__construct(null)
+ 3 SYSTEMPATH\Config\Factories.php(170): CodeIgniter\Config\Factories::createInstance('models', 'App\\Models\\Chauffeurs_model', [...])
+ 4 SYSTEMPATH\Common.php(804): CodeIgniter\Config\Factories::__callStatic('models', [...])
+ 5 APPPATH\Controllers\App_Controller.php(113): model('App\\Models\\Chauffeurs_model')
+ 6 APPPATH\Controllers\Security_Controller.php(21): App\Controllers\App_Controller->__construct()
+ 7 APPPATH\Controllers\Notifications.php(8): App\Controllers\Security_Controller->__construct()
+ 8 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\Notifications->__construct()
+ 9 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-25 12:22:41 --> TypeError: CodeIgniter\Model::__construct(): Argument #1 ($db) must be of type ?CodeIgniter\Database\ConnectionInterface, string given, called in L:\xamp\htdocs\khalidi\app\Models\Chauffeurs_model.php on line 100
+[Method: GET, Route: dashboard/location]
+in SYSTEMPATH\Model.php on line 150.
+ 1 APPPATH\Models\Chauffeurs_model.php(100): CodeIgniter\Model->__construct('rise_chauffeurs')
+ 2 SYSTEMPATH\Config\Factories.php(236): App\Models\Chauffeurs_model->__construct(null)
+ 3 SYSTEMPATH\Config\Factories.php(170): CodeIgniter\Config\Factories::createInstance('models', 'App\\Models\\Chauffeurs_model', [...])
+ 4 SYSTEMPATH\Common.php(804): CodeIgniter\Config\Factories::__callStatic('models', [...])
+ 5 APPPATH\Controllers\App_Controller.php(113): model('App\\Models\\Chauffeurs_model')
+ 6 APPPATH\Controllers\Security_Controller.php(21): App\Controllers\App_Controller->__construct()
+ 7 APPPATH\Controllers\Dashboard.php(11): App\Controllers\Security_Controller->__construct()
+ 8 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\Dashboard->__construct()
+ 9 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-25 12:22:45 --> TypeError: CodeIgniter\Model::__construct(): Argument #1 ($db) must be of type ?CodeIgniter\Database\ConnectionInterface, string given, called in L:\xamp\htdocs\khalidi\app\Models\Chauffeurs_model.php on line 100
+[Method: GET, Route: /]
+in SYSTEMPATH\Model.php on line 150.
+ 1 APPPATH\Models\Chauffeurs_model.php(100): CodeIgniter\Model->__construct('rise_chauffeurs')
+ 2 SYSTEMPATH\Config\Factories.php(236): App\Models\Chauffeurs_model->__construct(null)
+ 3 SYSTEMPATH\Config\Factories.php(170): CodeIgniter\Config\Factories::createInstance('models', 'App\\Models\\Chauffeurs_model', [...])
+ 4 SYSTEMPATH\Common.php(804): CodeIgniter\Config\Factories::__callStatic('models', [...])
+ 5 APPPATH\Controllers\App_Controller.php(113): model('App\\Models\\Chauffeurs_model')
+ 6 APPPATH\Controllers\Security_Controller.php(21): App\Controllers\App_Controller->__construct()
+ 7 APPPATH\Controllers\Dashboard.php(11): App\Controllers\Security_Controller->__construct()
+ 8 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\Dashboard->__construct()
+ 9 SYSTEMPATH\CodeIgniter.php(498): CodeIgniter\CodeIgniter->createController()
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-25 12:36:51 --> ErrorException: Access level to App\Controllers\Chauffeurs::$Chauffeurs_model must be public (as in class App\Controllers\App_Controller)
+[Method: GET, Route: chauffeurs]
+in APPPATH\Controllers\Chauffeurs.php on line 8.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+WARNING - 2025-09-25 12:37:34 --> [DEPRECATED] trim(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\Chauffeurs.php on line 97.
+ 1 APPPATH\Controllers\Chauffeurs.php(97): trim(null)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Chauffeurs->save()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Chauffeurs))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-09-25 12:37:34 --> Chauffeurs save error: Nom, prénom et téléphone sont obligatoires
+WARNING - 2025-09-25 12:37:48 --> [DEPRECATED] trim(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\Chauffeurs.php on line 97.
+ 1 APPPATH\Controllers\Chauffeurs.php(97): trim(null)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Chauffeurs->save()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Chauffeurs))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-09-25 12:37:48 --> Chauffeurs save error: Nom, prénom et téléphone sont obligatoires
+WARNING - 2025-09-25 12:39:22 --> [DEPRECATED] trim(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\Chauffeurs.php on line 98.
+ 1 APPPATH\Controllers\Chauffeurs.php(98): trim(null)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Chauffeurs->save()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Chauffeurs))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-25 12:46:57 --> ErrorException: Access level to App\Controllers\Chauffeurs::$Chauffeurs_model must be public (as in class App\Controllers\App_Controller)
+[Method: GET, Route: chauffeurs]
+in APPPATH\Controllers\Chauffeurs.php on line 8.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2025-09-25 12:46:59 --> ErrorException: Access level to App\Controllers\Chauffeurs::$Chauffeurs_model must be public (as in class App\Controllers\App_Controller)
+[Method: GET, Route: chauffeurs]
+in APPPATH\Controllers\Chauffeurs.php on line 8.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2025-09-25 12:47:19 --> Chauffeurs view error: Undefined property: stdClass::$age
+CRITICAL - 2025-09-25 12:47:19 --> Error: Call to undefined function App\Controllers\show_error()
+[Method: GET, Route: chauffeurs/view/1]
+in APPPATH\Controllers\Chauffeurs.php on line 253.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Chauffeurs->view('1')
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Chauffeurs))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-09-25 12:47:40 --> mysqli_sql_exception: Column 'cnie' cannot be null in L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ri...', 0)
+#1 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 L:\xamp\htdocs\khalidi\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 L:\xamp\htdocs\khalidi\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 L:\xamp\htdocs\khalidi\system\BaseModel.php(843): CodeIgniter\Model->doInsert(Array)
+#6 L:\xamp\htdocs\khalidi\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 L:\xamp\htdocs\khalidi\app\Models\Chauffeurs_model.php(232): CodeIgniter\Model->insert(Array, true)
+#8 L:\xamp\htdocs\khalidi\app\Controllers\Chauffeurs.php(134): App\Models\Chauffeurs_model->insert(Array)
+#9 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(933): App\Controllers\Chauffeurs->save()
+#10 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Chauffeurs))
+#11 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 L:\xamp\htdocs\khalidi\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 L:\xamp\htdocs\khalidi\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 L:\xamp\htdocs\khalidi\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 {main}
+ERROR - 2025-09-25 12:47:40 --> Chauffeurs save error: Erreur lors de l'ajout
+ERROR - 2025-09-25 12:48:13 --> mysqli_sql_exception: Duplicate entry 'P987654321' for key 'numero_permis' in L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ri...', 0)
+#1 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 L:\xamp\htdocs\khalidi\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 L:\xamp\htdocs\khalidi\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 L:\xamp\htdocs\khalidi\system\BaseModel.php(843): CodeIgniter\Model->doInsert(Array)
+#6 L:\xamp\htdocs\khalidi\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 L:\xamp\htdocs\khalidi\app\Models\Chauffeurs_model.php(232): CodeIgniter\Model->insert(Array, true)
+#8 L:\xamp\htdocs\khalidi\app\Controllers\Chauffeurs.php(134): App\Models\Chauffeurs_model->insert(Array)
+#9 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(933): App\Controllers\Chauffeurs->save()
+#10 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Chauffeurs))
+#11 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 L:\xamp\htdocs\khalidi\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 L:\xamp\htdocs\khalidi\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 L:\xamp\htdocs\khalidi\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 {main}
+ERROR - 2025-09-25 12:48:13 --> Chauffeurs save error: Erreur lors de l'ajout
+ERROR - 2025-09-25 12:51:24 --> mysqli_sql_exception: Duplicate entry 'P987654321' for key 'numero_permis' in L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ri...', 0)
+#1 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 L:\xamp\htdocs\khalidi\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 L:\xamp\htdocs\khalidi\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 L:\xamp\htdocs\khalidi\system\BaseModel.php(843): CodeIgniter\Model->doInsert(Array)
+#6 L:\xamp\htdocs\khalidi\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 L:\xamp\htdocs\khalidi\app\Models\Chauffeurs_model.php(232): CodeIgniter\Model->insert(Array, true)
+#8 L:\xamp\htdocs\khalidi\app\Controllers\Chauffeurs.php(134): App\Models\Chauffeurs_model->insert(Array)
+#9 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(933): App\Controllers\Chauffeurs->save()
+#10 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Chauffeurs))
+#11 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 L:\xamp\htdocs\khalidi\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 L:\xamp\htdocs\khalidi\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 L:\xamp\htdocs\khalidi\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 {main}
+ERROR - 2025-09-25 12:51:24 --> Chauffeurs save error: Erreur lors de l'ajout
+ERROR - 2025-09-25 12:51:59 --> mysqli_sql_exception: Duplicate entry 'P987654321' for key 'numero_permis' in L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ri...', 0)
+#1 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 L:\xamp\htdocs\khalidi\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 L:\xamp\htdocs\khalidi\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 L:\xamp\htdocs\khalidi\system\BaseModel.php(843): CodeIgniter\Model->doInsert(Array)
+#6 L:\xamp\htdocs\khalidi\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 L:\xamp\htdocs\khalidi\app\Models\Chauffeurs_model.php(232): CodeIgniter\Model->insert(Array, true)
+#8 L:\xamp\htdocs\khalidi\app\Controllers\Chauffeurs.php(134): App\Models\Chauffeurs_model->insert(Array)
+#9 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(933): App\Controllers\Chauffeurs->save()
+#10 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Chauffeurs))
+#11 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 L:\xamp\htdocs\khalidi\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 L:\xamp\htdocs\khalidi\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 L:\xamp\htdocs\khalidi\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 {main}
+ERROR - 2025-09-25 12:51:59 --> Chauffeurs save error: Erreur lors de l'ajout
+ERROR - 2025-09-25 12:52:47 --> mysqli_sql_exception: Duplicate entry 'P987654321' for key 'numero_permis' in L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ri...', 0)
+#1 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 L:\xamp\htdocs\khalidi\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 L:\xamp\htdocs\khalidi\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 L:\xamp\htdocs\khalidi\system\BaseModel.php(843): CodeIgniter\Model->doInsert(Array)
+#6 L:\xamp\htdocs\khalidi\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 L:\xamp\htdocs\khalidi\app\Models\Chauffeurs_model.php(232): CodeIgniter\Model->insert(Array, true)
+#8 L:\xamp\htdocs\khalidi\app\Controllers\Chauffeurs.php(134): App\Models\Chauffeurs_model->insert(Array)
+#9 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(933): App\Controllers\Chauffeurs->save()
+#10 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Chauffeurs))
+#11 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 L:\xamp\htdocs\khalidi\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 L:\xamp\htdocs\khalidi\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 L:\xamp\htdocs\khalidi\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 {main}
+ERROR - 2025-09-25 12:52:47 --> Chauffeurs save error: Erreur lors de l'ajout
+ERROR - 2025-09-25 12:54:36 --> mysqli_sql_exception: Duplicate entry 'P987654321' for key 'numero_permis' in L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ri...', 0)
+#1 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 L:\xamp\htdocs\khalidi\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 L:\xamp\htdocs\khalidi\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 L:\xamp\htdocs\khalidi\system\BaseModel.php(843): CodeIgniter\Model->doInsert(Array)
+#6 L:\xamp\htdocs\khalidi\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 L:\xamp\htdocs\khalidi\app\Models\Chauffeurs_model.php(232): CodeIgniter\Model->insert(Array, true)
+#8 L:\xamp\htdocs\khalidi\app\Controllers\Chauffeurs.php(134): App\Models\Chauffeurs_model->insert(Array)
+#9 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(933): App\Controllers\Chauffeurs->save()
+#10 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Chauffeurs))
+#11 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 L:\xamp\htdocs\khalidi\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 L:\xamp\htdocs\khalidi\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 L:\xamp\htdocs\khalidi\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 {main}
+ERROR - 2025-09-25 12:54:36 --> DB Error: {"code":1062,"message":"Duplicate entry 'P987654321' for key 'numero_permis'"}
+ERROR - 2025-09-25 12:54:36 --> Insert exception: Erreur DB: Duplicate entry 'P987654321' for key 'numero_permis'
+ERROR - 2025-09-25 12:54:36 --> Chauffeurs save error: Erreur lors de l'ajout: Erreur DB: Duplicate entry 'P987654321' for key 'numero_permis'
+ERROR - 2025-09-25 12:56:57 --> Chauffeurs view error: Undefined property: stdClass::$age
+CRITICAL - 2025-09-25 14:35:51 --> CodeIgniter\Exceptions\BadMethodCallException: Call to undefined method App\Models\Chauffeurs_model::get_active_chauffeurs
+[Method: GET, Route: fuel_cards]
+in SYSTEMPATH\Model.php on line 930.
+ 1 APPPATH\Controllers\Fuel_cards.php(48): CodeIgniter\Model->__call('get_active_chauffeurs', [])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Fuel_cards->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Fuel_cards))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

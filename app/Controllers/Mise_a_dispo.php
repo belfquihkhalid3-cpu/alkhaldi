@@ -721,45 +721,45 @@ public function delete()
         
         // Voir détails
         $options .= anchor(get_uri("mise_a_dispo/view/" . $data->id), 
-            "👁️ Voir", 
+            "👁️", 
             ["class" => "btn btn-outline-info btn-sm", "title" => "Voir détails"]);
         
         // Modifier
         $options .= modal_anchor(get_uri("mise_a_dispo/modal_form"), 
-            "✏️ Mod", 
+            "✏️", 
             ["class" => "btn btn-outline-primary btn-sm ms-1", "title" => "Modifier", "data-post-id" => $data->id]);
         
         // Actions de statut
         if ($data->statut === 'demande') {
             $options .= modal_anchor(get_uri("mise_a_dispo/modal_confirmer"), 
-                "✅ Conf", 
+                "✅", 
                 ["class" => "btn btn-outline-primary btn-sm ms-1", "title" => "Confirmer", "data-post-id" => $data->id]);
         } 
         elseif ($data->statut === 'confirme') {
             $options .= modal_anchor(get_uri("mise_a_dispo/modal_demarrer"), 
-                "▶️ Start", 
+                "▶️", 
                 ["class" => "btn btn-outline-info btn-sm ms-1", "title" => "Démarrer", "data-post-id" => $data->id]);
         }
         elseif ($data->statut === 'en_cours') {
             $options .= modal_anchor(get_uri("mise_a_dispo/modal_terminer"), 
-                "🏁 Fin", 
+                "🏁 ", 
                 ["class" => "btn btn-outline-success btn-sm ms-1", "title" => "Terminer", "data-post-id" => $data->id]);
         }
         elseif ($data->statut === 'termine') {
             $options .= modal_anchor(get_uri("mise_a_dispo/modal_facturer"), 
-                "💳 Fact", 
+                "💳", 
                 ["class" => "btn btn-outline-success btn-sm ms-1", "title" => "Facturer", "data-post-id" => $data->id]);
         }
         
         // Annuler (sauf si déjà facturé ou annulé)
         if (!in_array($data->statut, ['facture', 'annule'])) {
             $options .= modal_anchor(get_uri("mise_a_dispo/modal_annuler"), 
-                "❌ Ann", 
+                "❌", 
                 ["class" => "btn btn-outline-danger btn-sm ms-1", "title" => "Annuler", "data-post-id" => $data->id]);
         }
         
         // Supprimer
-    $options .= js_anchor("🗑️ Sup", [
+    $options .= js_anchor("🗑️", [
     'title' => "Supprimer", 
     "class" => "btn btn-outline-danger btn-sm ms-1", 
     'data-id' => $data->id, 

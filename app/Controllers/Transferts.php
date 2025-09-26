@@ -600,47 +600,44 @@ class Transferts extends Security_Controller
             $class = $periode_class[$data->periode_relative] ?? 'text-primary';
             $date_display .= "<br><small class='$class'>{$data->periode_relative}</small>";
         }
+// Actions avec icônes Unicode (toujours visibles)
+$options = "";
 
-        // Actions selon le statut avec icônes Feather
-        $options = "";
-        
-        // Voir détails
-        $options .= anchor(get_uri("transferts/view/" . $data->id), 
-            "<i data-feather='eye' class='icon-16'></i>", 
-            ["class" => "btn btn-outline-info btn-sm", "title" => "Voir détails"]);
-        
-        // Modifier
-        $options .= modal_anchor(get_uri("transferts/modal_form"), 
-            "<i data-feather='edit' class='icon-16'></i>", 
-            ["class" => "btn btn-outline-primary btn-sm ms-1", "title" => "Modifier", "data-post-id" => $data->id]);
-        
-        // Actions de statut avec icônes Feather
-        if ($data->statut === 'reserve') {
-            $options .= "<button type='button' class='btn btn-outline-success btn-sm ms-1 change-statut' 
-                         data-id='{$data->id}' data-statut='confirme' title='Confirmer'>
-                         <i data-feather='check' class='icon-16'></i></button>";
-        } elseif ($data->statut === 'confirme') {
-            $options .= "<button type='button' class='btn btn-outline-warning btn-sm ms-1 change-statut' 
-                         data-id='{$data->id}' data-statut='en_cours' title='Démarrer'>
-                         <i data-feather='play' class='icon-16'></i></button>";
-        } elseif ($data->statut === 'en_cours') {
-            $options .= "<button type='button' class='btn btn-outline-success btn-sm ms-1 change-statut' 
-                         data-id='{$data->id}' data-statut='termine' title='Terminer'>
-                         <i data-feather='check-circle' class='icon-16'></i></button>";
-        }
-        
-        // Annuler (sauf si déjà terminé)
-        if (!in_array($data->statut, ['termine', 'annule'])) {
-            $options .= "<button type='button' class='btn btn-outline-danger btn-sm ms-1 change-statut' 
-                         data-id='{$data->id}' data-statut='annule' title='Annuler'>
-                         <i data-feather='x' class='icon-16'></i></button>";
-        }
-        
-        // Supprimer
-        $options .= js_anchor("<i data-feather='trash-2' class='icon-16'></i>", 
-            ['title' => "Supprimer", "class" => "btn btn-outline-danger btn-sm ms-1", 
-             "data-id" => $data->id, "data-action-url" => get_uri("transferts/delete"), 
-             "data-action" => "delete-confirmation"]);
+// Voir détails
+$options .= anchor(get_uri("transferts/view/" . $data->id), 
+    "👁️", 
+    ["class" => "btn btn-outline-info btn-sm", "title" => "Voir détails"]);
+
+// Modifier  
+$options .= modal_anchor(get_uri("transferts/modal_form"), 
+    "✏️", 
+    ["class" => "btn btn-outline-primary btn-sm ms-1", "title" => "Modifier", "data-post-id" => $data->id]);
+
+// Actions de statut avec icônes Unicode
+if ($data->statut === 'reserve') {
+    $options .= "<button type='button' class='btn btn-outline-success btn-sm ms-1 change-statut' 
+                 data-id='{$data->id}' data-statut='confirme' title='Confirmer'>
+                 ✅</button>";
+} elseif ($data->statut === 'confirme') {
+    $options .= "<button type='button' class='btn btn-outline-warning btn-sm ms-1 change-statut' 
+                 data-id='{$data->id}' data-statut='en_cours' title='Démarrer'>
+                 ▶️</button>";
+} elseif ($data->statut === 'en_cours') {
+    $options .= "<button type='button' class='btn btn-outline-success btn-sm ms-1 change-statut' 
+                 data-id='{$data->id}' data-statut='termine' title='Terminer'>
+                 🏁</button>";
+}
+
+// Annuler 
+if (!in_array($data->statut, ['termine', 'annule'])) {
+    $options .= "<button type='button' class='btn btn-outline-danger btn-sm ms-1 change-statut' 
+                 data-id='{$data->id}' data-statut='annule' title='Annuler'>
+                 ❌</button>";
+}
+
+// Supprimer
+$options .= "<button type='button' class='btn btn-outline-danger btn-sm ms-1' onclick=\"deleteTransfer({$data->id})\" title='Supprimer'>
+             🗑️</button>";
 
         return [
             $data->id,

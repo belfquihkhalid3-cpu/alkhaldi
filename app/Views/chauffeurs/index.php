@@ -279,21 +279,39 @@
     }
 
     // Fonction pour changer le statut
-    function changeStatut(id, newStatut) {
-        if (!newStatut) return;
-        
-        $.post('<?php echo get_uri("chauffeurs/change_status") ?>', {
+// Fonction pour changer le statut
+function changeStatut(id, newStatut) {
+    if (!newStatut) return;
+    
+    appLoader.show();
+    
+    $.ajax({
+        url: '<?php echo get_uri("chauffeurs/change_status") ?>',
+        type: 'POST',
+        data: {
             id: id, 
             statut: newStatut
-        }, function(result) {
+        },
+        dataType: 'json',
+        success: function(result) {
+            appLoader.hide();
             if(result.success) {
                 appAlert.success(result.message);
-                location.reload();
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
             } else {
                 appAlert.error(result.message);
             }
-        });
-    }
+        },
+        error: function(xhr, status, error) {
+            appLoader.hide();
+            console.log('Erreur AJAX:', error);
+            console.log('Response:', xhr.responseText);
+            appAlert.error('Erreur lors du changement de statut');
+        }
+    });
+}
 </script>
 
 <style>

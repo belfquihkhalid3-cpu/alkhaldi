@@ -1,407 +1,319 @@
+<?php
+/**
+ * Vue détaillée d'un chauffeur
+ * app/Views/chauffeurs/view.php
+ */
+?>
 
+<div id="page-content" class="page-wrapper clearfix">
+    <div class="row">
+      
 
-<div class="page-content">
-    <div class="container-fluid">
-        
-        <!-- Page Header -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">
-                <i class="fas fa-user-tie text-primary"></i> 
-                <?= esc($chauffeur->prenom . ' ' . $chauffeur->nom) ?>
-            </h1>
-            <div>
-                <a href="<?= site_url('chauffeurs') ?>" class="btn btn-secondary btn-sm">
-                    <i class="fas fa-arrow-left"></i> Retour ï¿½ la liste
-                </a>
-                <a href="<?= site_url('chauffeurs/edit/' . $chauffeur->id) ?>" class="btn btn-warning btn-sm">
-                    <i class="fas fa-edit"></i> Modifier
-                </a>
-                <a href="<?= site_url('chauffeurs/delete/' . $chauffeur->id) ?>" 
-                   class="btn btn-danger btn-sm"
-                   onclick="return confirm('ï¿½tes-vous sï¿½r de vouloir supprimer ce chauffeur ?')">
-                    <i class="fas fa-trash"></i> Supprimer
-                </a>
+        <div class="col-sm-9 col-lg-12">
+            <!-- En-tête -->
+            <div class="page-title clearfix">
+                <h4>
+                    <i data-feather="user" class="icon-24"></i>
+                    <?= esc($chauffeur->prenom . ' ' . $chauffeur->nom) ?>
+                </h4>
+                <div class="title-button-group">
+                    <a href="<?= get_uri('chauffeurs') ?>" class="btn btn-default">
+                        <i data-feather="arrow-left" class="icon-16"></i> Retour
+                    </a>
+                    <?php echo modal_anchor(get_uri("chauffeurs/modal_form"), "<i data-feather='edit-2' class='icon-16'></i> Modifier", array("class" => "btn btn-info", "data-post-id" => $chauffeur->id)); ?>
+                    <button onclick="deleteChauffeur(<?= $chauffeur->id ?>)" class="btn btn-danger">
+                        <i data-feather="trash-2" class="icon-16"></i> Supprimer
+                    </button>
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <!-- Informations principales -->
-            <div class="col-lg-8">
-                <!-- Informations personnelles -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">
-                            <i class="fas fa-user"></i> Informations Personnelles
-                        </h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <table class="table table-borderless">
-                                    <tr>
-                                        <td><strong>Nom complet :</strong></td>
-                                        <td><?= esc($chauffeur->prenom . ' ' . $chauffeur->nom) ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>CNIE :</strong></td>
-                                        <td><?= esc($chauffeur->cnie) ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Date de naissance :</strong></td>
-                                        <td>
-                                            <?= date('d/m/Y', strtotime($chauffeur->date_naissance)) ?>
-                                            <span class="text-muted">(<?= $chauffeur->age ?> ans)</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Tï¿½lï¿½phone :</strong></td>
-                                        <td>
-                                            <a href="tel:<?= esc($chauffeur->telephone) ?>" class="text-decoration-none">
-                                                <i class="fas fa-phone text-success"></i> <?= esc($chauffeur->telephone) ?>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <?php if ($chauffeur->telephone_urgence): ?>
-                                    <tr>
-                                        <td><strong>Tï¿½l. urgence :</strong></td>
-                                        <td>
-                                            <a href="tel:<?= esc($chauffeur->telephone_urgence) ?>" class="text-decoration-none">
-                                                <i class="fas fa-phone text-warning"></i> <?= esc($chauffeur->telephone_urgence) ?>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <?php endif; ?>
-                                    <?php if ($chauffeur->email): ?>
-                                    <tr>
-                                        <td><strong>Email :</strong></td>
-                                        <td>
-                                            <a href="mailto:<?= esc($chauffeur->email) ?>" class="text-decoration-none">
-                                                <i class="fas fa-envelope text-info"></i> <?= esc($chauffeur->email) ?>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <?php endif; ?>
-                                </table>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <table class="table table-borderless">
-                                    <tr>
-                                        <td><strong>Date d'embauche :</strong></td>
-                                        <td>
-                                            <?= date('d/m/Y', strtotime($chauffeur->date_embauche)) ?>
-                                            <div class="text-muted small">
-                                                Anciennetï¿½: <?= $chauffeur->anciennete['years'] ?> an(s), <?= $chauffeur->anciennete['months'] ?> mois
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <?php if ($chauffeur->salaire_base): ?>
-                                    <tr>
-                                        <td><strong>Salaire de base :</strong></td>
-                                        <td>
-                                            <span class="h6 text-success">
-                                                <?= number_format($chauffeur->salaire_base, 0, ',', ' ') ?> DH/mois
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <?php endif; ?>
-                                    <tr>
-                                        <td><strong>Statut :</strong></td>
-                                        <td>
-                                            <span class="badge badge-<?= $chauffeur->statut == 'actif' ? 'success' : ($chauffeur->statut == 'suspendu' ? 'danger' : 'secondary') ?> badge-lg">
-                                                <?= ucfirst($chauffeur->statut) ?>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <?php if ($chauffeur->adresse): ?>
-                                    <tr>
-                                        <td><strong>Adresse :</strong></td>
-                                        <td><?= nl2br(esc($chauffeur->adresse)) ?></td>
-                                    </tr>
-                                    <?php endif; ?>
-                                </table>
-                            </div>
+            <div class="row">
+                <!-- Colonne gauche - Informations personnelles -->
+                <div class="col-lg-8">
+                    <!-- Informations personnelles -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i data-feather="user" class="icon-20"></i>
+                                Informations Personnelles
+                            </h5>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Informations permis -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">
-                            <i class="fas fa-id-card"></i> Informations Permis de Conduire
-                        </h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <table class="table table-borderless">
-                                    <tr>
-                                        <td><strong>Numï¿½ro de permis :</strong></td>
-                                        <td><?= esc($chauffeur->numero_permis) ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Catï¿½gorie :</strong></td>
-                                        <td>
-                                            <span class="badge badge-info badge-lg">
-                                                Catï¿½gorie <?= esc($chauffeur->categorie_permis) ?>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col-md-6">
-                                <table class="table table-borderless">
-                                    <tr>
-                                        <td><strong>Date d'expiration :</strong></td>
-                                        <td>
-                                            <?php 
-                                            $expiration_date = strtotime($chauffeur->date_expiration_permis);
-                                            $today = strtotime(date('Y-m-d'));
-                                            $days_left = ceil(($expiration_date - $today) / (60*60*24));
-                                            ?>
-                                            <?= date('d/m/Y', $expiration_date) ?>
-                                            
-                                            <?php if ($days_left < 0): ?>
-                                                <span class="badge badge-danger ml-2">EXPIRï¿½</span>
-                                            <?php elseif ($days_left <= 30): ?>
-                                                <span class="badge badge-warning ml-2">Expire dans <?= $days_left ?> jour(s)</span>
-                                            <?php else: ?>
-                                                <span class="badge badge-success ml-2">Valide (<?= $days_left ?> jours)</span>
-                                            <?php endif; ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Statut permis :</strong></td>
-                                        <td>
-                                            <?php if ($chauffeur->permis_valide): ?>
-                                                <span class="text-success">
-                                                    <i class="fas fa-check-circle"></i> Valide
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <td class="fw-bold">Nom complet :</td>
+                                            <td><?= esc($chauffeur->prenom . ' ' . $chauffeur->nom) ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold">CNIE :</td>
+                                            <td><?= esc($chauffeur->cnie ?: 'Non renseigné') ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold">Téléphone :</td>
+                                            <td>
+                                                <?php if ($chauffeur->telephone): ?>
+                                                    <a href="tel:<?= $chauffeur->telephone ?>"><?= esc($chauffeur->telephone) ?></a>
+                                                <?php else: ?>
+                                                    Non renseigné
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold">Téléphone urgence :</td>
+                                            <td>
+                                                <?php if ($chauffeur->telephone_urgence): ?>
+                                                    <a href="tel:<?= $chauffeur->telephone_urgence ?>"><?= esc($chauffeur->telephone_urgence) ?></a>
+                                                <?php else: ?>
+                                                    Non renseigné
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold">Email :</td>
+                                            <td>
+                                                <?php if ($chauffeur->email): ?>
+                                                    <a href="mailto:<?= $chauffeur->email ?>"><?= esc($chauffeur->email) ?></a>
+                                                <?php else: ?>
+                                                    Non renseigné
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <td class="fw-bold">Date de naissance :</td>
+                                            <td>
+                                                <?php if ($chauffeur->date_naissance): ?>
+                                                    <?= date('d/m/Y', strtotime($chauffeur->date_naissance)) ?>
+                                                    <small class="text-muted">(<?= date_diff(date_create($chauffeur->date_naissance), date_create('today'))->y ?> ans)</small>
+                                                <?php else: ?>
+                                                    Non renseigné
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold">Date d'embauche :</td>
+                                            <td>
+                                                <?php if ($chauffeur->date_embauche): ?>
+                                                    <?= date('d/m/Y', strtotime($chauffeur->date_embauche)) ?>
+                                                    <small class="text-muted">(<?= date_diff(date_create($chauffeur->date_embauche), date_create('today'))->y ?> ans d'ancienneté)</small>
+                                                <?php else: ?>
+                                                    Non renseigné
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold">Statut :</td>
+                                            <td>
+                                                <span class="status-badge status-<?= $chauffeur->statut ?>">
+                                                    <?= ucfirst($chauffeur->statut) ?>
                                                 </span>
-                                            <?php else: ?>
-                                                <span class="text-danger">
-                                                    <i class="fas fa-times-circle"></i> Expirï¿½
-                                                </span>
-                                            <?php endif; ?>
-                                        </td>
-                                    </tr>
-                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold">Salaire base :</td>
+                                            <td>
+                                                <?php if ($chauffeur->salaire_base): ?>
+                                                    <?= number_format($chauffeur->salaire_base, 2) ?> MAD
+                                                <?php else: ?>
+                                                    Non renseigné
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Observations -->
-                <?php if ($chauffeur->observations): ?>
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">
-                            <i class="fas fa-sticky-note"></i> Observations
-                        </h6>
-                    </div>
-                    <div class="card-body">
-                        <p class="mb-0"><?= nl2br(esc($chauffeur->observations)) ?></p>
-                    </div>
-                </div>
-                <?php endif; ?>
-
-                <!-- Documents du chauffeur -->
-                <?php if (!empty($chauffeur->documents)): ?>
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">
-                            <i class="fas fa-folder"></i> Documents
-                        </h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <?php foreach ($chauffeur->documents as $document): ?>
-                                <div class="col-md-6 mb-3">
-                                    <div class="card border">
-                                        <div class="card-body p-3">
-                                            <h6 class="card-title">
-                                                <i class="fas fa-file-alt"></i> 
-                                                <?= ucfirst($document->type_document) ?>
-                                            </h6>
-                                            <p class="card-text small text-muted mb-2">
-                                                <?= esc($document->nom_fichier) ?>
-                                            </p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <small class="text-muted">
-                                                    <?= date('d/m/Y', strtotime($document->date_upload)) ?>
-                                                </small>
-                                                <a href="<?= base_url($document->chemin_fichier) ?>" 
-                                                   class="btn btn-sm btn-outline-primary" target="_blank">
-                                                    <i class="fas fa-download"></i> Tï¿½lï¿½charger
-                                                </a>
-                                            </div>
+                            <?php if ($chauffeur->adresse): ?>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="fw-bold">Adresse :</label>
+                                            <p class="text-muted"><?= nl2br(esc($chauffeur->adresse)) ?></p>
                                         </div>
                                     </div>
                                 </div>
-                            <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                     </div>
-                </div>
-                <?php endif; ?>
 
-                <!-- Locations rï¿½centes -->
-                <?php if (!empty($chauffeur->locations_recentes)): ?>
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">
-                            <i class="fas fa-route"></i> Locations Rï¿½centes
-                        </h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Titre</th>
-                                        <th>Client</th>
-                                        <th>Statut</th>
-                                        <th>Prix</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($chauffeur->locations_recentes as $location): ?>
+                    <!-- Informations permis -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i data-feather="credit-card" class="icon-20"></i>
+                                Permis de Conduire
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <table class="table table-borderless">
                                         <tr>
-                                            <td><?= date('d/m/Y', strtotime($location->date_debut)) ?></td>
-                                            <td><?= esc($location->titre) ?></td>
-                                            <td>
-                                                <?php 
-                                                // Rï¿½cupï¿½rer le nom du client
-                                                $clientModel = model('App\Models\Clients_model');
-                                                $client = $clientModel->find($location->client_id);
-                                                echo $client ? esc($client->company_name ?? $client->contact_firstname . ' ' . $client->contact_lastname) : 'N/A';
-                                                ?>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-<?= $location->statut == 'terminee' ? 'success' : ($location->statut == 'en_cours' ? 'primary' : 'warning') ?>">
-                                                    <?= ucfirst(str_replace('_', ' ', $location->statut)) ?>
-                                                </span>
-                                            </td>
-                                            <td><?= number_format($location->prix_total, 2, ',', ' ') ?> DH</td>
+                                            <td class="fw-bold">Numéro de permis :</td>
+                                            <td><?= esc($chauffeur->numero_permis ?: 'Non renseigné') ?></td>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <?php endif; ?>
-            </div>
-
-            <!-- Sidebar -->
-            <div class="col-lg-4">
-                <!-- Photo du chauffeur -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">
-                            <i class="fas fa-camera"></i> Photo
-                        </h6>
-                    </div>
-                    <div class="card-body text-center">
-                        <?php if ($chauffeur->photo): ?>
-                            <img src="<?= base_url('writable/uploads/chauffeurs/' . $chauffeur->photo) ?>" 
-                                 class="img-fluid rounded-circle mb-3" alt="Photo de <?= esc($chauffeur->prenom) ?>"
-                                 style="max-width: 200px; max-height: 200px; object-fit: cover;">
-                        <?php else: ?>
-                            <div class="placeholder-avatar mb-3">
-                                <i class="fas fa-user-circle fa-5x text-gray-300"></i>
-                            </div>
-                            <p class="text-muted">Aucune photo</p>
-                        <?php endif; ?>
-                    </div>
-                </div>
-
-                <!-- Actions rapides -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">
-                            <i class="fas fa-tools"></i> Actions Rapides
-                        </h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-grid gap-2">
-                            <a href="<?= site_url('locations/add?chauffeur_id=' . $chauffeur->id) ?>" 
-                               class="btn btn-success btn-sm">
-                                <i class="fas fa-plus"></i> Nouvelle Location
-                            </a>
-                            
-                            <a href="<?= site_url('chauffeur_payments/add?chauffeur_id=' . $chauffeur->id) ?>" 
-                               class="btn btn-info btn-sm">
-                                <i class="fas fa-money-bill"></i> Ajouter Paiement
-                            </a>
-                            
-                            <a href="<?= site_url('chauffeur_documents/add?chauffeur_id=' . $chauffeur->id) ?>" 
-                               class="btn btn-warning btn-sm">
-                                <i class="fas fa-file-upload"></i> Ajouter Document
-                            </a>
-
-                            <?php if ($chauffeur->telephone): ?>
-                            <a href="tel:<?= esc($chauffeur->telephone) ?>" class="btn btn-outline-success btn-sm">
-                                <i class="fas fa-phone"></i> Appeler
-                            </a>
-                            <?php endif; ?>
-
-                            <?php if ($chauffeur->email): ?>
-                            <a href="mailto:<?= esc($chauffeur->email) ?>" class="btn btn-outline-info btn-sm">
-                                <i class="fas fa-envelope"></i> Envoyer Email
-                            </a>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Statistiques personnelles -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">
-                            <i class="fas fa-chart-pie"></i> Statistiques
-                        </h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="row text-center">
-                            <div class="col-6">
-                                <div class="border-right">
-                                    <h4 class="text-primary"><?= count($chauffeur->locations_recentes) ?></h4>
-                                    <small class="text-muted">Locations rï¿½centes</small>
+                                        <tr>
+                                            <td class="fw-bold">Catégorie :</td>
+                                            <td>
+                                                <?php if ($chauffeur->categorie_permis): ?>
+                                                    <span class="badge bg-info"><?= esc($chauffeur->categorie_permis) ?></span>
+                                                <?php else: ?>
+                                                    Non renseigné
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <td class="fw-bold">Date d'expiration :</td>
+                                            <td>
+                                                <?php if ($chauffeur->date_expiration_permis): ?>
+                                                    <?php
+                                                    $expiration = strtotime($chauffeur->date_expiration_permis);
+                                                    $aujourdhui = time();
+                                                    $jours_restants = floor(($expiration - $aujourdhui) / 86400);
+                                                    ?>
+                                                    <?= date('d/m/Y', $expiration) ?>
+                                                    <?php if ($jours_restants < 0): ?>
+                                                        <span class="badge bg-danger">Expiré</span>
+                                                    <?php elseif ($jours_restants < 30): ?>
+                                                        <span class="badge bg-warning">Expire dans <?= $jours_restants ?> jours</span>
+                                                    <?php else: ?>
+                                                        <span class="badge bg-success">Valide</span>
+                                                    <?php endif; ?>
+                                                <?php else: ?>
+                                                    Non renseigné
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <h4 class="text-success"><?= count($chauffeur->documents) ?></h4>
-                                <small class="text-muted">Documents</small>
-                            </div>
-                        </div>
-                        
-                        <hr>
-                        
-                        <div class="row text-center">
-                            <div class="col-12">
-                                <h5 class="text-info"><?= $chauffeur->age ?> ans</h5>
-                                <small class="text-muted">ï¿½ge du chauffeur</small>
-                            </div>
                         </div>
                     </div>
+
+                    <!-- Observations -->
+                    <?php if ($chauffeur->observations): ?>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i data-feather="message-square" class="icon-20"></i>
+                                    Observations
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted"><?= nl2br(esc($chauffeur->observations)) ?></p>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
-                <!-- Informations systï¿½me -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-secondary">
-                            <i class="fas fa-info"></i> Informations Systï¿½me
-                        </h6>
-                    </div>
-                    <div class="card-body">
-                        <small class="text-muted">
-                            <strong>ID :</strong> #<?= $chauffeur->id ?><br>
-                            <strong>Crï¿½ï¿½ le :</strong> <?= date('d/m/Y H:i', strtotime($chauffeur->created_at)) ?><br>
-                            <?php if ($chauffeur->updated_at): ?>
-                            <strong>Modifiï¿½ le :</strong> <?= date('d/m/Y H:i', strtotime($chauffeur->updated_at)) ?><br>
+                <!-- Colonne droite - Statistiques et actions -->
+                <div class="col-lg-4">
+                    <!-- Statistiques -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i data-feather="bar-chart-2" class="icon-20"></i>
+                                Statistiques
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <?php if (isset($performance)): ?>
+                                <div class="row text-center">
+                                    <div class="col-6 mb-3">
+                                        <div class="stat-item">
+                                            <h3 class="text-primary mb-1"><?= $performance->total_locations ?? 0 ?></h3>
+                                            <small class="text-muted">Total Locations</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <div class="stat-item">
+                                            <h3 class="text-success mb-1"><?= $performance->locations_terminees ?? 0 ?></h3>
+                                            <small class="text-muted">Terminées</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <div class="stat-item">
+                                            <h3 class="text-info mb-1"><?= $performance->locations_actives ?? 0 ?></h3>
+                                            <small class="text-muted">En cours</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <div class="stat-item">
+                                            <h3 class="text-warning mb-1"><?= number_format($performance->revenus_generes ?? 0, 0) ?></h3>
+                                            <small class="text-muted">MAD Générés</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php else: ?>
+                                <p class="text-muted text-center">Aucune statistique disponible</p>
                             <?php endif; ?>
-                        </small>
+                        </div>
+                    </div>
+
+                    <!-- Actions rapides -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i data-feather="settings" class="icon-20"></i>
+                                Actions Rapides
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <select class="form-select" onchange="changeStatut(<?= $chauffeur->id ?>, this.value)">
+                                    <option value="">Changer le statut...</option>
+                                    <option value="actif" <?= $chauffeur->statut == 'actif' ? 'disabled' : '' ?>>Actif</option>
+                                    <option value="inactif" <?= $chauffeur->statut == 'inactif' ? 'disabled' : '' ?>>Inactif</option>
+                                    <option value="suspendu" <?= $chauffeur->statut == 'suspendu' ? 'disabled' : '' ?>>Suspendu</option>
+                                </select>
+                                
+                                <a href="<?= get_uri('locations?chauffeur_id=' . $chauffeur->id) ?>" class="btn btn-outline-primary">
+                                    <i data-feather="map-pin" class="icon-16"></i>
+                                    Voir les locations
+                                </a>
+                                
+                                <button class="btn btn-outline-info" onclick="printChauffeur()">
+                                    <i data-feather="printer" class="icon-16"></i>
+                                    Imprimer la fiche
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Informations système -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i data-feather="info" class="icon-20"></i>
+                                Informations Système
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <small class="text-muted">
+                                <div class="mb-2">
+                                    <strong>ID:</strong> <?= $chauffeur->id ?>
+                                </div>
+                                <?php if (isset($chauffeur->created_at)): ?>
+                                    <div class="mb-2">
+                                        <strong>Créé le:</strong> <?= date('d/m/Y H:i', strtotime($chauffeur->created_at)) ?>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if (isset($chauffeur->updated_at) && $chauffeur->updated_at): ?>
+                                    <div class="mb-2">
+                                        <strong>Modifié le:</strong> <?= date('d/m/Y H:i', strtotime($chauffeur->updated_at)) ?>
+                                    </div>
+                                <?php endif; ?>
+                            </small>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -409,32 +321,126 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Initialiser les icônes Feather
+        feather.replace();
+    });
+
+    // Fonction pour supprimer le chauffeur
+    function deleteChauffeur(id) {
+        appAlert.confirm("Êtes-vous sûr de vouloir supprimer ce chauffeur ?", function() {
+            appLoader.show();
+            $.post('<?= get_uri("chauffeurs/delete") ?>', {id: id}, function(result) {
+                if(result.success) {
+                    appAlert.success(result.message);
+                    setTimeout(function() {
+                        window.location.href = '<?= get_uri("chauffeurs") ?>';
+                    }, 1000);
+                } else {
+                    appAlert.error(result.message);
+                }
+                appLoader.hide();
+            });
+        });
+    }
+
+    // Fonction pour changer le statut
+    function changeStatut(id, newStatut) {
+    if (!newStatut) return;
+    
+    appLoader.show();
+    
+    $.ajax({
+        url: '<?php echo get_uri("chauffeurs/change_status") ?>',
+        type: 'POST',
+        data: {
+            id: id, 
+            statut: newStatut
+        },
+        dataType: 'json',
+        success: function(result) {
+            appLoader.hide();
+            if(result.success) {
+                appAlert.success(result.message);
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
+            } else {
+                appAlert.error(result.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            appLoader.hide();
+            console.log('Erreur AJAX:', error);
+            console.log('Response:', xhr.responseText);
+            appAlert.error('Erreur lors du changement de statut');
+        }
+    });
+}
+
+    // Fonction pour imprimer la fiche
+    function printChauffeur() {
+        window.print();
+    }
+</script>
+
 <style>
-.badge-lg {
-    font-size: 0.9em;
-    padding: 0.5em 0.8em;
-}
-
-.placeholder-avatar {
-    color: #6c757d;
-}
-
-.border-right {
-    border-right: 1px solid #dee2e6;
-}
-
-.table-borderless td {
-    border: none;
-    padding: 0.5rem 0.75rem;
-}
-
-.table-borderless td:first-child {
+/* Styles pour les badges de statut */
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
     font-weight: 500;
-    color: #495057;
-    width: 40%;
+    text-transform: uppercase;
 }
 
+.status-actif {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-inactif {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.status-suspendu {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+/* Styles pour les statistiques */
+.stat-item h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* Styles pour l'impression */
+@media print {
+    .title-button-group,
+    .card:last-child {
+        display: none !important;
+    }
+    
+    .card {
+        border: 1px solid #ddd !important;
+        break-inside: avoid;
+    }
+}
+
+/* Animation pour les cartes */
 .card {
-    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    transition: transform 0.2s ease-in-out;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 </style>
