@@ -52,35 +52,70 @@ class Fuel_cards extends App_Controller
 
         return $this->template->rander("fuel_cards/index", $view_data);
     }
+public function modal_form() {
+    $id = $this->request->getPost('id');
+    $view_data['model_info'] = $this->Fuel_cards_model->get_one($id);
+    
+    // Préparer dropdowns comme mise_a_dispo
+    $view_data['vehicles_dropdown'] = $this->_make_dropdown_vehicles();
+    $view_data['chauffeurs_dropdown'] = $this->_make_dropdown_chauffeurs();
+    
+    return $this->template->view('fuel_cards/modal_add', $view_data);
+}
 
-    /**
-     * Formulaire d'ajout de carte carburant
-     */
-    public function add()
-    {
-        $view_data = [
-            'page_title' => 'Ajouter une Carte Carburant',
-            'fuel_card' => (object) [
-                'numero_serie' => '',
-                'type_carte' => 'easyone',
-                'vehicle_id' => '',
-                'chauffeur_id' => '',
-                'solde_dotation' => '',
-                'prix_litre' => '',
-                'statut' => 'active',
-                'date_creation' => date('Y-m-d'),
-                'date_expiration' => ''
-            ],
-            'vehicles' => $this->Vehicles_model->get_available_vehicles(),
-            'chauffeurs' => $this->Chauffeurs_model->get_active_chauffeurs()
-        ];
-
-        if ($this->request->getMethod() === 'POST') {
-            return $this->_process_fuel_card_form();
-        }
-
-        return $this->template->rander("fuel_cards/add", $view_data);
+private function _make_dropdown_vehicles() {
+    $vehicles = $this->Vehicles_model->get_available_vehicles();
+    $dropdown = ['' => '-'];
+    foreach($vehicles as $v) {
+        $dropdown[$v->id] = $v->numero_matricule ?? $v->marque;
     }
+    return $dropdown;
+}
+
+private function _make_dropdown_chauffeurs() {
+    $chauffeurs = $this->Chauffeurs_model->get_available_chauffeurs();
+    $dropdown = ['' => '-'];
+    foreach($chauffeurs as $c) {
+        $dropdown[$c->id] = $c->prenom . ' ' . $c->nom;
+    }
+    return $dropdown;
+}
+   public function add() {
+    $vehicles_list = $this->Vehicles_model->get_available_vehicles();
+    $vehicles_array = [];
+    foreach($vehicles_list as $v) {
+        $vehicles_array[] = $v;
+    }
+    
+    $chauffeurs_list = $this->Chauffeurs_model->get_available_chauffeurs();
+    $chauffeurs_array = [];
+    foreach($chauffeurs_list as $c) {
+        $chauffeurs_array[] = $c;
+    }
+    
+    $view_data = [
+        'page_title' => 'Ajouter une Carte Carburant',
+        'fuel_card' => (object) [
+            'numero_serie' => '',
+            'type_carte' => 'easyone',
+            'vehicle_id' => '',
+            'chauffeur_id' => '',
+            'solde_dotation' => '',
+            'prix_litre' => '',
+            'statut' => 'active',
+            'date_creation' => date('Y-m-d'),
+            'date_expiration' => ''
+        ],
+        'vehicles' => $vehicles_array,
+        'chauffeurs' => $chauffeurs_array
+    ];
+
+    if ($this->request->getMethod() === 'POST') {
+        return $this->_process_fuel_card_form();
+    }
+
+    return $this->template->rander("fuel_cards/add", $view_data);
+}
 
     /**
      * Formulaire de modification de carte carburant

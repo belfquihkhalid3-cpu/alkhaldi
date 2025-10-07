@@ -58,7 +58,11 @@ $routes->get('locations/edit/(:segment)', 'Locations::edit/$1');
 // Route générale (la plus générale à la fin)
 $routes->get('locations', 'Locations::index');
 $routes->get('locations/(:any)', 'Locations::$1');
-
+// Routes fuel_cards (avant foreach)
+$routes->get('fuel_cards/modal_form', 'Fuel_cards::modal_form');
+$routes->post('fuel_cards/modal_form', 'Fuel_cards::modal_form');
+$routes->post('fuel_cards/save', 'Fuel_cards::save');
+$routes->get('fuel_cards', 'Fuel_cards::index');
 
 
 // Routes spécifiques pour chauffeurs (avant les routes génériques)

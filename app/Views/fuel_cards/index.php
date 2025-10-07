@@ -178,9 +178,11 @@
                         <i class="fas fa-credit-card fa-3x text-gray-300 mb-3"></i>
                         <h5 class="text-gray-500">Aucune carte carburant trouvée</h5>
                         <p class="text-gray-400">Commencez par ajouter votre première carte</p>
-                        <a href="<?= site_url('fuel_cards/add') ?>" class="btn btn-primary">
-                            <i class="fas fa-plus"></i> Ajouter une carte
-                        </a>
+                       <a href="javascript:;" data-act="ajax-modal" 
+   data-action-url="<?= get_uri("fuel_cards/modal_form") ?>" 
+   class="btn btn-primary btn-sm">
+    <i class="fas fa-plus"></i> Ajouter une carte
+</a>
                     </div>
                 <?php else: ?>
                     <div class="row">

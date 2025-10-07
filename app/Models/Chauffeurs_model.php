@@ -231,7 +231,9 @@ class Chauffeurs_model extends Crud_model {
         
         return parent::insert($data, $returnID);
     }
-
+public function get_active_chauffeurs() {
+    return $this->get_details(['statut' => 'actif'])->getResult();
+}
     /**
      * Override de la méthode update pour formater les dates
      */
