@@ -11,11 +11,11 @@ class Fuel_cards_model extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = [
-        'numero_serie', 'type_carte', 'vehicle_id', 'chauffeur_id', 
-        'solde_dotation', 'prix_litre', 'statut', 'created_at', 
-        'date_expiration'
-    ];
+protected $allowedFields    = [
+    'numero_serie', 'type_carte', 'vehicle_id', 'chauffeur_id', 
+    'solde_dotation', 'prix_litre', 'statut', 'date_creation', 
+    'date_expiration'
+];
 
     // Dates
     protected $useTimestamps = false;  // Pas de updated_at dans votre table

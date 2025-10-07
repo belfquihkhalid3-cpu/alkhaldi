@@ -80,22 +80,37 @@ private function _make_dropdown_chauffeurs() {
     }
     return $dropdown;
 }
-   public function add() {
-    $vehicles_list = $this->Vehicles_model->get_available_vehicles();
-    $vehicles_array = [];
-    foreach($vehicles_list as $v) {
-        $vehicles_array[] = $v;
-    }
+public function save() {
+    $id = $this->request->getPost('id');
     
-    $chauffeurs_list = $this->Chauffeurs_model->get_available_chauffeurs();
-    $chauffeurs_array = [];
-    foreach($chauffeurs_list as $c) {
-        $chauffeurs_array[] = $c;
+    $data = [
+        'numero_serie' => $this->request->getPost('numero_serie'),
+        'type_carte' => $this->request->getPost('type_carte'),
+        'vehicle_id' => $this->request->getPost('vehicle_id') ?: null,
+        'chauffeur_id' => $this->request->getPost('chauffeur_id') ?: null,
+        'solde_dotation' => $this->request->getPost('solde_dotation') ?: 0,
+        'prix_litre' => $this->request->getPost('prix_litre') ?: 0,
+        'statut' => $this->request->getPost('statut'),
+        'date_creation' => $this->request->getPost('date_creation'),
+        'date_expiration' => $this->request->getPost('date_expiration')
+    ];
+
+    try {
+        if ($id) {
+            $this->Fuel_cards_model->update($id, $data);
+        } else {
+            $id = $this->Fuel_cards_model->insert($data);
+        }
+        
+        echo json_encode(['success' => true, 'id' => $id]);
+    } catch (\Exception $e) {
+        echo json_encode(['success' => false, 'message' => $e->getMessage()]);
     }
-    
+}
+ public function add() {
     $view_data = [
         'page_title' => 'Ajouter une Carte Carburant',
-        'fuel_card' => (object) [
+        'model_info' => (object) [
             'numero_serie' => '',
             'type_carte' => 'easyone',
             'vehicle_id' => '',
@@ -106,8 +121,8 @@ private function _make_dropdown_chauffeurs() {
             'date_creation' => date('Y-m-d'),
             'date_expiration' => ''
         ],
-        'vehicles' => $vehicles_array,
-        'chauffeurs' => $chauffeurs_array
+        'vehicles_dropdown' => $this->_make_dropdown_vehicles(),
+        'chauffeurs_dropdown' => $this->_make_dropdown_chauffeurs()
     ];
 
     if ($this->request->getMethod() === 'POST') {

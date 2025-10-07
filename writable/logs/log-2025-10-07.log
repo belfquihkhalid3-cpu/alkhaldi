@@ -82,3 +82,128 @@ in APPPATH\Views\fuel_cards\add.php on line 2.
 16 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
 17 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
 18 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-10-07 11:44:00 --> CodeIgniter\Exceptions\BadMethodCallException: Call to undefined method App\Models\Fuel_cards_model::ci_save
+[Method: POST, Route: fuel_cards/save]
+in SYSTEMPATH\Model.php on line 930.
+ 1 APPPATH\Controllers\Fuel_cards.php(101): CodeIgniter\Model->__call('ci_save', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Fuel_cards->save()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Fuel_cards))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-10-07 11:44:26 --> CodeIgniter\Exceptions\BadMethodCallException: Call to undefined method App\Models\Fuel_cards_model::ci_save
+[Method: POST, Route: fuel_cards/save]
+in SYSTEMPATH\Model.php on line 930.
+ 1 APPPATH\Controllers\Fuel_cards.php(101): CodeIgniter\Model->__call('ci_save', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Fuel_cards->save()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Fuel_cards))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-10-07 11:49:19 --> CodeIgniter\Exceptions\BadMethodCallException: Call to undefined method App\Models\Fuel_cards_model::ci_save
+[Method: POST, Route: fuel_cards/save]
+in SYSTEMPATH\Model.php on line 930.
+ 1 APPPATH\Controllers\Fuel_cards.php(98): CodeIgniter\Model->__call('ci_save', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Fuel_cards->save()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Fuel_cards))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-10-07 11:49:45 --> CodeIgniter\Exceptions\BadMethodCallException: Call to undefined method App\Models\Fuel_cards_model::ci_save
+[Method: POST, Route: fuel_cards/save]
+in SYSTEMPATH\Model.php on line 930.
+ 1 APPPATH\Controllers\Fuel_cards.php(98): CodeIgniter\Model->__call('ci_save', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Fuel_cards->save()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Fuel_cards))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-10-07 11:51:39 --> mysqli_sql_exception: Unknown column 'date_creation' in 'field list' in L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ri...', 0)
+#1 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 L:\xamp\htdocs\khalidi\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 L:\xamp\htdocs\khalidi\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 L:\xamp\htdocs\khalidi\system\BaseModel.php(843): CodeIgniter\Model->doInsert(Array)
+#6 L:\xamp\htdocs\khalidi\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 L:\xamp\htdocs\khalidi\app\Controllers\Fuel_cards.php(102): CodeIgniter\Model->insert(Array)
+#8 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(933): App\Controllers\Fuel_cards->save()
+#9 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Fuel_cards))
+#10 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 L:\xamp\htdocs\khalidi\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 L:\xamp\htdocs\khalidi\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 L:\xamp\htdocs\khalidi\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+ERROR - 2025-10-07 11:51:57 --> mysqli_sql_exception: Unknown column 'date_creation' in 'field list' in L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ri...', 0)
+#1 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 L:\xamp\htdocs\khalidi\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 L:\xamp\htdocs\khalidi\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 L:\xamp\htdocs\khalidi\system\BaseModel.php(843): CodeIgniter\Model->doInsert(Array)
+#6 L:\xamp\htdocs\khalidi\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 L:\xamp\htdocs\khalidi\app\Controllers\Fuel_cards.php(102): CodeIgniter\Model->insert(Array)
+#8 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(933): App\Controllers\Fuel_cards->save()
+#9 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Fuel_cards))
+#10 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 L:\xamp\htdocs\khalidi\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 L:\xamp\htdocs\khalidi\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 L:\xamp\htdocs\khalidi\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+ERROR - 2025-10-07 11:52:30 --> mysqli_sql_exception: Unknown column 'date_creation' in 'field list' in L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ri...', 0)
+#1 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 L:\xamp\htdocs\khalidi\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 L:\xamp\htdocs\khalidi\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 L:\xamp\htdocs\khalidi\system\BaseModel.php(843): CodeIgniter\Model->doInsert(Array)
+#6 L:\xamp\htdocs\khalidi\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 L:\xamp\htdocs\khalidi\app\Controllers\Fuel_cards.php(102): CodeIgniter\Model->insert(Array)
+#8 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(933): App\Controllers\Fuel_cards->save()
+#9 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Fuel_cards))
+#10 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 L:\xamp\htdocs\khalidi\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 L:\xamp\htdocs\khalidi\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 L:\xamp\htdocs\khalidi\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+ERROR - 2025-10-07 11:57:16 --> mysqli_sql_exception: Unknown column 'date_creation' in 'field list' in L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ri...', 0)
+#1 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 L:\xamp\htdocs\khalidi\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 L:\xamp\htdocs\khalidi\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 L:\xamp\htdocs\khalidi\system\BaseModel.php(843): CodeIgniter\Model->doInsert(Array)
+#6 L:\xamp\htdocs\khalidi\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 L:\xamp\htdocs\khalidi\app\Controllers\Fuel_cards.php(102): CodeIgniter\Model->insert(Array)
+#8 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(933): App\Controllers\Fuel_cards->save()
+#9 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Fuel_cards))
+#10 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 L:\xamp\htdocs\khalidi\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 L:\xamp\htdocs\khalidi\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 L:\xamp\htdocs\khalidi\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+ERROR - 2025-10-07 12:00:47 --> mysqli_sql_exception: Unknown column 'date_creation' in 'field list' in L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 L:\xamp\htdocs\khalidi\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ri...', 0)
+#1 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 L:\xamp\htdocs\khalidi\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 L:\xamp\htdocs\khalidi\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 L:\xamp\htdocs\khalidi\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 L:\xamp\htdocs\khalidi\system\BaseModel.php(843): CodeIgniter\Model->doInsert(Array)
+#6 L:\xamp\htdocs\khalidi\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 L:\xamp\htdocs\khalidi\app\Controllers\Fuel_cards.php(102): CodeIgniter\Model->insert(Array)
+#8 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(933): App\Controllers\Fuel_cards->save()
+#9 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Fuel_cards))
+#10 L:\xamp\htdocs\khalidi\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 L:\xamp\htdocs\khalidi\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 L:\xamp\htdocs\khalidi\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 L:\xamp\htdocs\khalidi\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
