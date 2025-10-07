@@ -12,9 +12,7 @@
                 <i class="fas fa-credit-card text-primary"></i> Gestion des Cartes Carburant
             </h1>
             <div>
-                <a href="<?= site_url('fuel_cards/add') ?>" class="btn btn-primary btn-sm">
-                    <i class="fas fa-plus"></i> Ajouter une carte
-                </a>
+                <?php echo modal_anchor(get_uri("fuel_cards/modal_form"), "<i class='fas fa-plus'></i> Ajouter une carte", ["class" => "btn btn-primary btn-sm", "title" => "Ajouter"]); ?>
                 <a href="<?= site_url('fuel_cards/expiring_cards') ?>" class="btn btn-warning btn-sm">
                     <i class="fas fa-exclamation-triangle"></i> Cartes expirant (<?= count($expiring_cards) ?>)
                 </a>
@@ -178,11 +176,7 @@
                         <i class="fas fa-credit-card fa-3x text-gray-300 mb-3"></i>
                         <h5 class="text-gray-500">Aucune carte carburant trouvée</h5>
                         <p class="text-gray-400">Commencez par ajouter votre première carte</p>
-                       <a href="javascript:;" data-act="ajax-modal" 
-   data-action-url="<?= get_uri("fuel_cards/modal_form") ?>" 
-   class="btn btn-primary btn-sm">
-    <i class="fas fa-plus"></i> Ajouter une carte
-</a>
+                        <?php echo modal_anchor(get_uri("fuel_cards/modal_form"), "<i class='fas fa-plus'></i> Ajouter une carte", ["class" => "btn btn-primary btn-sm", "title" => "Ajouter"]); ?>
                     </div>
                 <?php else: ?>
                     <div class="row">
@@ -279,10 +273,7 @@
                                                class="btn btn-outline-primary btn-sm">
                                                 <i class="fas fa-eye"></i> Voir
                                             </a>
-                                            <a href="<?= site_url('fuel_cards/edit/' . $card->id) ?>" 
-                                               class="btn btn-outline-warning btn-sm">
-                                                <i class="fas fa-edit"></i> Modifier
-                                            </a>
+                                            <?php echo modal_anchor(get_uri("fuel_cards/modal_form"), "<i class='fas fa-edit'></i> Modifier", ["class" => "btn btn-outline-warning btn-sm", "title" => "Modifier", "data-post-id" => $card->id]); ?>
                                             <button type="button" class="btn btn-outline-info btn-sm" 
                                                     data-bs-toggle="modal" data-bs-target="#assignModal<?= $card->id ?>">
                                                 <i class="fas fa-link"></i> Assigner
@@ -301,11 +292,7 @@
                                                 <span></span>
                                             <?php endif; ?>
 
-                                            <a href="<?= site_url('fuel_cards/delete/' . $card->id) ?>" 
-                                               class="btn btn-outline-danger btn-sm"
-                                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette carte ?')">
-                                                <i class="fas fa-trash"></i>Supprimer
-                                            </a>
+                                            <?php echo js_anchor("<i class='fas fa-trash'></i> Supprimer", ['class' => 'btn btn-outline-danger btn-sm', 'title' => 'Supprimer', "data-id" => $card->id, "data-action-url" => get_uri("fuel_cards/delete"), "data-action" => "delete-confirmation"]); ?>
                                         </div>
                                     </div>
                                 </div>

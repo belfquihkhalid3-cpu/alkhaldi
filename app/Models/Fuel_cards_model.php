@@ -16,6 +16,10 @@ protected $allowedFields    = [
     'solde_dotation', 'prix_litre', 'statut', 'date_creation', 
     'date_expiration'
 ];
+   public function __construct() {
+        parent::__construct();
+        $this->table = 'rise_fuel_cards';
+    }
 
     // Dates
     protected $useTimestamps = false;  // Pas de updated_at dans votre table
@@ -78,7 +82,14 @@ protected $allowedFields    = [
         $rules = $this->validationRules;
         return $rules;
     }
+public function get_details($options = []) {
+    return $this->where('deleted', 0)->orderBy('id', 'DESC');
+}
 
+public function get_one($id) {
+    if(!$id) return (object)['id' => '', 'numero_serie' => '', 'type_carte' => 'easyone', 'vehicle_id' => '', 'chauffeur_id' => '', 'solde_dotation' => 0, 'prix_litre' => 0, 'statut' => 'active', 'date_creation' => date('Y-m-d'), 'date_expiration' => ''];
+    return $this->find($id);
+}
     /**
      * Validation personnalisée avec règles dynamiques
      */
@@ -124,6 +135,27 @@ protected $allowedFields    = [
         return $isValid;
     }
     
+
+    public function get_statistics() {
+    $sql = "SELECT 
+                COUNT(*) as total,
+                COUNT(CASE WHEN statut = 'active' THEN 1 END) as active,
+                COUNT(CASE WHEN statut = 'inactive' THEN 1 END) as inactive,
+                COUNT(CASE WHEN vehicle_id IS NULL AND chauffeur_id IS NULL AND statut = 'active' THEN 1 END) as available,
+                COALESCE(SUM(solde_dotation), 0) as total_dotation
+            FROM {$this->table}
+            WHERE deleted = 0";
+    
+    $result = $this->db->query($sql)->getRow();
+    
+    return [
+        'total' => $result->total ?? 0,
+        'active' => $result->active ?? 0,
+        'inactive' => $result->inactive ?? 0,
+        'available' => $result->available ?? 0,
+        'total_dotation' => $result->total_dotation ?? 0
+    ];
+}
     /**
      * Récupérer les erreurs de validation personnalisées
      */
@@ -235,39 +267,7 @@ protected $allowedFields    = [
     /**
      * Statistiques des cartes carburant
      */
-    public function get_statistics()
-    {
-        $total = $this->countAllResults();
-        $active = $this->where('statut', 'active')->countAllResults();
-        $inactive = $this->where('statut', 'inactive')->countAllResults();
-        $bloquee = $this->where('statut', 'bloquee')->countAllResults();
-        
-        // Cartes assignées
-        $assigned_to_vehicles = $this->where('vehicle_id IS NOT NULL')->countAllResults();
-        $assigned_to_chauffeurs = $this->where('chauffeur_id IS NOT NULL')->countAllResults();
-        $available = $this->where('vehicle_id IS NULL')->where('chauffeur_id IS NULL')->countAllResults();
-        
-        // Solde total des dotations
-        $total_dotation = $this->selectSum('solde_dotation')->first();
-        
-        // Cartes expirant bientôt
-        $expire_soon = $this->where('date_expiration <=', date('Y-m-d', strtotime('+30 days')))
-                           ->where('date_expiration >=', date('Y-m-d'))
-                           ->where('statut', 'active')
-                           ->countAllResults();
-        
-        return [
-            'total' => $total,
-            'active' => $active,
-            'inactive' => $inactive,
-            'bloquee' => $bloquee,
-            'assigned_to_vehicles' => $assigned_to_vehicles,
-            'assigned_to_chauffeurs' => $assigned_to_chauffeurs,
-            'available' => $available,
-            'total_dotation' => $total_dotation->solde_dotation ?? 0,
-            'expire_soon' => $expire_soon,
-        ];
-    }
+ 
 
     /**
      * Récupérer les cartes avec date d'expiration proche

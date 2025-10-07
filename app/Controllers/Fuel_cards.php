@@ -54,9 +54,25 @@ class Fuel_cards extends App_Controller
     }
 public function modal_form() {
     $id = $this->request->getPost('id');
-    $view_data['model_info'] = $this->Fuel_cards_model->get_one($id);
     
-    // Préparer dropdowns comme mise_a_dispo
+    if ($id) {
+        $model_info = $this->Fuel_cards_model->find($id);
+    } else {
+        $model_info = (object)[
+            'id' => '',
+            'numero_serie' => '',
+            'type_carte' => 'easyone',
+            'vehicle_id' => '',
+            'chauffeur_id' => '',
+            'solde_dotation' => 0,
+            'prix_litre' => 0,
+            'statut' => 'active',
+            'created_at' => date('Y-m-d'),
+            'date_expiration' => ''
+        ];
+    }
+    
+    $view_data['model_info'] = $model_info;
     $view_data['vehicles_dropdown'] = $this->_make_dropdown_vehicles();
     $view_data['chauffeurs_dropdown'] = $this->_make_dropdown_chauffeurs();
     
@@ -90,8 +106,7 @@ public function save() {
         'chauffeur_id' => $this->request->getPost('chauffeur_id') ?: null,
         'solde_dotation' => $this->request->getPost('solde_dotation') ?: 0,
         'prix_litre' => $this->request->getPost('prix_litre') ?: 0,
-        'statut' => $this->request->getPost('statut'),
-        'date_creation' => $this->request->getPost('date_creation'),
+        'statut' => $this->request->getPost('statut') ?: 'active',
         'date_expiration' => $this->request->getPost('date_expiration')
     ];
 
@@ -99,14 +114,40 @@ public function save() {
         if ($id) {
             $this->Fuel_cards_model->update($id, $data);
         } else {
+            $data['created_at'] = date('Y-m-d H:i:s');
             $id = $this->Fuel_cards_model->insert($data);
         }
         
-        echo json_encode(['success' => true, 'id' => $id]);
+        echo json_encode(['success' => true, 'id' => $id, 'message' => 'Sauvegardé']);
     } catch (\Exception $e) {
         echo json_encode(['success' => false, 'message' => $e->getMessage()]);
     }
 }
+
+public function list_data() {
+    $list_data = $this->Fuel_cards_model->get_details()->getResult();
+    $result = [];
+    foreach ($list_data as $data) {
+        $result[] = $this->_make_row($data);
+    }
+    echo json_encode(["data" => $result]);
+}
+
+private function _make_row($data) {
+    $edit = modal_anchor(get_uri("fuel_cards/modal_form"), "<i data-feather='edit' class='icon-16'></i>", ["class" => "edit", "title" => "Modifier", "data-post-id" => $data->id]);
+    $delete = js_anchor("<i data-feather='x' class='icon-16'></i>", ['title' => 'Supprimer', "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("fuel_cards/delete"), "data-action" => "delete-confirmation"]);
+    
+    return [
+        $data->numero_serie,
+        $data->type_carte,
+        $data->vehicle_id ? "V-" . $data->vehicle_id : "-",
+        $data->chauffeur_id ? "C-" . $data->chauffeur_id : "-",
+        number_format($data->solde_dotation, 2),
+        "<span class='badge bg-" . ($data->statut == 'active' ? 'success' : 'danger') . "'>" . $data->statut . "</span>",
+        $edit . $delete
+    ];
+}
+
  public function add() {
     $view_data = [
         'page_title' => 'Ajouter une Carte Carburant',

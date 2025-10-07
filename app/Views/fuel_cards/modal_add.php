@@ -54,16 +54,17 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="date_creation">Date de création</label>
-                            <?php
-                            echo form_input(array(
-                                "id" => "date_creation",
-                                "name" => "date_creation",
-                                "value" => $model_info->date_creation ?? date('Y-m-d'),
-                                "class" => "form-control",
-                                "type" => "date"
-                            ));
-                            ?>
+                            <label for="created_at">Date de création</label>
+                           <?php
+echo form_input(array(
+    "id" => "created_at",
+    "name" => "created_at",
+    "value" => isset($model_info->created_at) ? date('Y-m-d', strtotime($model_info->created_at)) : date('Y-m-d'),
+    "class" => "form-control",
+    "type" => "date",
+    "readonly" => "readonly"
+));
+?>
                         </div>
                     </div>
 

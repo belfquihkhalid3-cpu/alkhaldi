@@ -63,6 +63,9 @@ $routes->get('fuel_cards/modal_form', 'Fuel_cards::modal_form');
 $routes->post('fuel_cards/modal_form', 'Fuel_cards::modal_form');
 $routes->post('fuel_cards/save', 'Fuel_cards::save');
 $routes->get('fuel_cards', 'Fuel_cards::index');
+$routes->get('fuel_cards/list_data', 'Fuel_cards::list_data');
+$routes->post('fuel_cards/list_data', 'Fuel_cards::list_data');
+$routes->post('fuel_cards/delete', 'Fuel_cards::delete');
 
 
 // Routes spécifiques pour chauffeurs (avant les routes génériques)
