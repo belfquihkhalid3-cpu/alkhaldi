@@ -53,30 +53,46 @@ class Fuel_cards extends App_Controller
         return $this->template->rander("fuel_cards/index", $view_data);
     }
 public function modal_form() {
-    $id = $this->request->getPost('id');
+    $id = $this->request->getPost('id') ?: $this->request->getGet('id');
+    
+    log_message('debug', '=== MODAL_FORM DEBUG ===');
+    log_message('debug', 'ID reçu: ' . ($id ?: 'NULL'));
+    log_message('debug', 'POST data: ' . json_encode($this->request->getPost()));
+    log_message('debug', 'GET data: ' . json_encode($this->request->getGet()));
     
     if ($id) {
         $model_info = $this->Fuel_cards_model->find($id);
+        log_message('debug', 'Model info trouvé: ' . json_encode($model_info));
+        if (!$model_info) {
+            $model_info = $this->_get_empty_model();
+        }
     } else {
-        $model_info = (object)[
-            'id' => '',
-            'numero_serie' => '',
-            'type_carte' => 'easyone',
-            'vehicle_id' => '',
-            'chauffeur_id' => '',
-            'solde_dotation' => 0,
-            'prix_litre' => 0,
-            'statut' => 'active',
-            'created_at' => date('Y-m-d'),
-            'date_expiration' => ''
-        ];
+        $model_info = $this->_get_empty_model();
+        log_message('debug', 'Nouveau modèle vide créé');
     }
     
     $view_data['model_info'] = $model_info;
     $view_data['vehicles_dropdown'] = $this->_make_dropdown_vehicles();
     $view_data['chauffeurs_dropdown'] = $this->_make_dropdown_chauffeurs();
     
+    log_message('debug', 'View data model_info: ' . json_encode($view_data['model_info']));
+    
     return $this->template->view('fuel_cards/modal_add', $view_data);
+}
+
+private function _get_empty_model() {
+    return (object)[
+        'id' => '',
+        'numero_serie' => '',
+        'type_carte' => 'easyone',
+        'vehicle_id' => '',
+        'chauffeur_id' => '',
+        'solde_dotation' => 0,
+        'prix_litre' => 0,
+        'statut' => 'active',
+        'created_at' => date('Y-m-d'),
+        'date_expiration' => ''
+    ];
 }
 
 private function _make_dropdown_vehicles() {

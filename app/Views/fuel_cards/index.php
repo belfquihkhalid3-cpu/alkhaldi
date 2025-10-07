@@ -273,7 +273,13 @@
                                                class="btn btn-outline-primary btn-sm">
                                                 <i class="fas fa-eye"></i> Voir
                                             </a>
-                                            <?php echo modal_anchor(get_uri("fuel_cards/modal_form"), "<i class='fas fa-edit'></i> Modifier", ["class" => "btn btn-outline-warning btn-sm", "title" => "Modifier", "data-post-id" => $card->id]); ?>
+<a href="#" class="btn btn-outline-warning btn-sm" 
+   data-act="ajax-modal" 
+   data-action-url="<?= get_uri("fuel_cards/modal_form") ?>" 
+   data-post-id="<?= $card->id ?>"
+   title="Modifier">
+    <i class="fas fa-edit"></i> Modifier
+</a>
                                             <button type="button" class="btn btn-outline-info btn-sm" 
                                                     data-bs-toggle="modal" data-bs-target="#assignModal<?= $card->id ?>">
                                                 <i class="fas fa-link"></i> Assigner

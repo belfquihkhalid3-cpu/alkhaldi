@@ -1,5 +1,11 @@
 <?php echo form_open(get_uri("fuel_cards/save"), array("id" => "fuel-card-form", "class" => "general-form", "role" => "form")); ?>
+<?php
+echo "<!-- DEBUG: ID = " . ($model_info->id ?? 'VIDE') . " -->";
+echo "<!-- DEBUG: Numero = " . ($model_info->numero_serie ?? 'VIDE') . " -->";
+echo "<!-- DEBUG: Type = " . ($model_info->type_carte ?? 'VIDE') . " -->";
+?>
 
+<?php echo form_open(get_uri("fuel_cards/save"), array("id" => "fuel-card-form", "class" => "general-form", "role" => "form")); ?>
 <div class="modal-body clearfix">
     <div class="container-fluid">
         
@@ -11,18 +17,17 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="numero_serie">Numéro de série <span class="text-danger">*</span></label>
-                    <?php
-                    echo form_input(array(
-                        "id" => "numero_serie",
-                        "name" => "numero_serie",
-                        "value" => $model_info->numero_serie ?? '',
-                        "class" => "form-control",
-                        "placeholder" => "ex: EASY123456",
-                        "autofocus" => true,
-                        "data-rule-required" => true,
-                        "data-msg-required" => "Ce champ est requis"
-                    ));
-                    ?>
+                <?php
+echo form_input(array(
+    "id" => "numero_serie",
+    "name" => "numero_serie",
+    "value" => $model_info->numero_serie ?? '',
+    "class" => "form-control",
+    "placeholder" => "Numéro de série",
+    "data-rule-required" => true,
+    "data-msg-required" => "Numéro requis"
+));
+?>
                 </div>
 
                 <div class="row">
