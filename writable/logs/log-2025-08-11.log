@@ -1,0 +1,30 @@
+CRITICAL - 2025-08-11 10:48:21 --> ErrorException: Access level to App\Controllers\Voitures_contrat::$Voitures_contrat_model must be public (as in class App\Controllers\App_Controller)
+[Method: GET, Route: voitures_contrat]
+in APPPATH/Controllers/Voitures_contrat.php on line 7.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2025-08-11 10:59:35 --> ErrorException: Access level to App\Controllers\Contrats::$Voitures_contrat_model must be public (as in class App\Controllers\App_Controller)
+[Method: GET, Route: contrats]
+in APPPATH/Controllers/Contrats.php on line 10.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2025-08-11 11:00:43 --> ErrorException: Access level to App\Controllers\Contrats::$Voitures_contrat_model must be public (as in class App\Controllers\App_Controller)
+[Method: GET, Route: contrats]
+in APPPATH/Controllers/Contrats.php on line 10.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2025-08-11 14:23:51 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "fuel_cards/expiring_cards.php"
+[Method: GET, Route: fuel_cards/expiring_cards]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('fuel_cards/expiring_cards.php')
+ 2 SYSTEMPATH/Common.php(1173): CodeIgniter\View\View->render('fuel_cards/expiring_cards', [], true)
+ 3 APPPATH/Views/layout/index.php(78): view('fuel_cards/expiring_cards')
+ 4 SYSTEMPATH/View/View.php(224): include('/htdocs/location/app/Views/layout/index.php')
+ 5 SYSTEMPATH/View/View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH/Common.php(1173): CodeIgniter\View\View->render('layout/index', [], true)
+ 7 APPPATH/Libraries/Template.php(38): view('layout/index', [...])
+ 8 APPPATH/Libraries/Template.php(22): App\Libraries\Template->view('layout/index', [...])
+ 9 APPPATH/Controllers/Fuel_cards.php(378): App\Libraries\Template->rander('fuel_cards/expiring_cards', [...])
+10 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Fuel_cards->expiring_cards()
+11 SYSTEMPATH/CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Fuel_cards))
+12 SYSTEMPATH/CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH/index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

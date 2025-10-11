@@ -197,10 +197,10 @@ private function _make_row($data)
     // â¼â¼â¼ DÉBUT DE LA CORRECTION DES ICÔNES â¼â¼â¼
 
     // L'icône "Modifier" de Feather s'appelle 'edit'
-    $edit_button = "<i data-feather='edit' class='icon-16'></i>";
+    $edit_button = "<i data-feather='edit' class='icon-16' style='color: green;'></i>";
     
     // L'icône "Supprimer" de Feather s'appelle 'x'
-    $delete_button = "<i data-feather='x' class='icon-16'></i>";
+    $delete_button = "<i data-feather='x' class='icon-16'style='color: red;'></i>";
 
     // On utilise les nouvelles icônes dans nos helpers
     $options = modal_anchor(get_uri("maintenance/modal_form"), $edit_button, ["class" => "edit", "title" => lang('edit_maintenance'), "data-post-id" => $data->id]);

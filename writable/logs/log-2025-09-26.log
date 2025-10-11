@@ -1,0 +1,50 @@
+CRITICAL - 2025-09-26 11:02:34 --> CodeIgniter\Exceptions\BadMethodCallException: Call to undefined method App\Models\Chauffeurs_model::get_active_chauffeurs
+[Method: GET, Route: fuel_cards]
+in SYSTEMPATH\Model.php on line 930.
+ 1 APPPATH\Controllers\Fuel_cards.php(48): CodeIgniter\Model->__call('get_active_chauffeurs', [])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Fuel_cards->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Fuel_cards))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-26 11:26:05 --> ErrorException: Undefined array key "valeur_totale"
+[Method: GET, Route: vehicles]
+in APPPATH\Views\vehicles\index.php on line 56.
+ 1 APPPATH\Views\vehicles\index.php(56): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "valeur_totale"', 'L:\\xamp\\htdocs\\khalidi\\app\\Views\\vehicles\\index.php', 56)
+ 2 SYSTEMPATH\View\View.php(224): include('L:\\xamp\\htdocs\\khalidi\\app\\Views\\vehicles\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('vehicles/index', [], true)
+ 5 APPPATH\Views\layout\index.php(78): view('vehicles/index')
+ 6 SYSTEMPATH\View\View.php(224): include('L:\\xamp\\htdocs\\khalidi\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(22): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Vehicles.php(44): App\Libraries\Template->rander('vehicles/index', [...])
+12 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Vehicles->index()
+13 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Vehicles))
+14 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+16 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+17 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-26 11:31:19 --> ErrorException: Undefined array key "valeur_totale"
+[Method: GET, Route: vehicles]
+in APPPATH\Views\vehicles\index.php on line 54.
+ 1 APPPATH\Views\vehicles\index.php(54): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "valeur_totale"', 'L:\\xamp\\htdocs\\khalidi\\app\\Views\\vehicles\\index.php', 54)
+ 2 SYSTEMPATH\View\View.php(224): include('L:\\xamp\\htdocs\\khalidi\\app\\Views\\vehicles\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('vehicles/index', [], true)
+ 5 APPPATH\Views\layout\index.php(78): view('vehicles/index')
+ 6 SYSTEMPATH\View\View.php(224): include('L:\\xamp\\htdocs\\khalidi\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(22): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Vehicles.php(44): App\Libraries\Template->rander('vehicles/index', [...])
+12 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Vehicles->index()
+13 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Vehicles))
+14 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+16 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+17 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

@@ -10,20 +10,19 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">
                 <i class="fas fa-<?= isset($edit_mode) ? 'edit' : 'plus' ?> text-primary"></i> 
-                <?= isset($edit_mode) ? 'Modifier' : 'Ajouter' ?> un v�hicule
+                <?= isset($edit_mode) ? 'Modifier' : 'Ajouter' ?> un véhicule
             </h1>
             <a href="<?= site_url('vehicles') ?>" class="btn btn-secondary btn-sm">
-                <i class="fas fa-arrow-left"></i> Retour � la liste
+                <i class="fas fa-arrow-left"></i> Retour à la liste
             </a>
         </div>
 
         <div class="row justify-content-center">
             <div class="col-xl-8">
-                <div class="card shadow">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">
-                            Informations du v�hicule
-                        </h6>
+                <!-- Informations Véhicule -->
+                <div class="card mb-3">
+                    <div class="card-header bg-primary text-white">
+                        <h6 class="mb-0 font-weight-bold">🚗 Informations du véhicule</h6>
                     </div>
                     <div class="card-body">
                         
@@ -43,126 +42,158 @@
                         <?= form_open_multipart(isset($edit_mode) ? 'vehicles/edit/' . $vehicle->id : 'vehicles/add', 
                                                ['class' => 'needs-validation', 'novalidate' => '']) ?>
                         
-                        <div class="row">
-                            <!-- Marque -->
-                            <div class="col-md-6 mb-3">
-                                <label for="marque" class="form-label">Marque <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="marque" name="marque" 
-                                       value="<?= old('marque', $vehicle->marque ?? '') ?>" required>
-                                <div class="invalid-feedback">Veuillez saisir la marque du v�hicule.</div>
-                            </div>
-
-                            <!-- Mod�le -->
-                            <div class="col-md-6 mb-3">
-                                <label for="modele" class="form-label">Mod�le <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="modele" name="modele" 
-                                       value="<?= old('modele', $vehicle->modele ?? '') ?>" required>
-                                <div class="invalid-feedback">Veuillez saisir le mod�le du v�hicule.</div>
+                        <!-- Marque -->
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="marque" class="col-md-3 col-form-label">
+                                    🏷 Marque <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="marque" name="marque" 
+                                           value="<?= old('marque', $vehicle->marque ?? '') ?>" 
+                                           placeholder="Ex: Toyota, BMW..." required>
+                                    <div class="invalid-feedback">Veuillez saisir la marque du véhicule.</div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="row">
-                            <!-- Ann�e -->
-                            <div class="col-md-4 mb-3">
-                                <label for="annee" class="form-label">Ann�e <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="annee" name="annee" 
-                                       value="<?= old('annee', $vehicle->annee ?? date('Y')) ?>" 
-                                       min="1900" max="<?= date('Y') + 1 ?>" required>
-                                <div class="invalid-feedback">Veuillez saisir une ann�e valide.</div>
+                            <!-- Modèle -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="modele" class="form-label">🎯 Modèle <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="modele" name="modele" 
+                                           value="<?= old('modele', $vehicle->modele ?? '') ?>" 
+                                           placeholder="Ex: Corolla, X5..." required>
+                                    <div class="invalid-feedback">Veuillez saisir le modèle du véhicule.</div>
+                                </div>
                             </div>
 
+                            <!-- Année -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="annee" class="form-label">📅 Année <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="annee" name="annee" 
+                                           value="<?= old('annee', $vehicle->annee ?? date('Y')) ?>" 
+                                           min="1900" max="<?= date('Y') + 1 ?>" required>
+                                    <div class="invalid-feedback">Veuillez saisir une année valide.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
                             <!-- Prix -->
-                            <div class="col-md-4 mb-3">
-                                <label for="prix" class="form-label">Prix (EUR) <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="prix" name="prix" 
-                                       value="<?= old('prix', $vehicle->prix ?? '') ?>" 
-                                       min="0" step="0.01" required>
-                                <div class="invalid-feedback">Veuillez saisir un prix valide.</div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="prix" class="form-label">💰 Prix (EUR) <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="prix" name="prix" 
+                                           value="<?= old('prix', $vehicle->prix ?? '') ?>" 
+                                           min="0" step="0.01" required>
+                                    <div class="invalid-feedback">Veuillez saisir un prix valide.</div>
+                                </div>
                             </div>
 
-                            <!-- Kilom�trage -->
-                            <div class="col-md-4 mb-3">
-                                <label for="kilometrage" class="form-label">Kilom�trage <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="kilometrage" name="kilometrage" 
-                                       value="<?= old('kilometrage', $vehicle->kilometrage ?? '0') ?>" 
-                                       min="0" required>
-                                <div class="invalid-feedback">Veuillez saisir le kilom�trage.</div>
+                            <!-- Kilométrage -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="kilometrage" class="form-label">🛣 Kilométrage <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="kilometrage" name="kilometrage" 
+                                           value="<?= old('kilometrage', $vehicle->kilometrage ?? '0') ?>" 
+                                           min="0" required>
+                                    <div class="invalid-feedback">Veuillez saisir le kilométrage.</div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="row">
                             <!-- Carburant -->
-                            <div class="col-md-4 mb-3">
-                                <label for="carburant" class="form-label">Carburant <span class="text-danger">*</span></label>
-                                <select class="form-select" id="carburant" name="carburant" required>
-                                    <option value="essence" <?= old('carburant', $vehicle->carburant ?? '') == 'essence' ? 'selected' : '' ?>>? Essence</option>
-                                    <option value="diesel" <?= old('carburant', $vehicle->carburant ?? '') == 'diesel' ? 'selected' : '' ?>>? Diesel</option>
-                                    <option value="hybride" <?= old('carburant', $vehicle->carburant ?? '') == 'hybride' ? 'selected' : '' ?>>? Hybride</option>
-                                    <option value="electrique" <?= old('carburant', $vehicle->carburant ?? '') == 'electrique' ? 'selected' : '' ?>>? �lectrique</option>
-                                </select>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="carburant" class="form-label">⛽ Carburant <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="carburant" name="carburant" required>
+                                        <option value="">- Sélectionner -</option>
+                                        <option value="essence" <?= old('carburant', $vehicle->carburant ?? '') == 'essence' ? 'selected' : '' ?>>⛽ Essence</option>
+                                        <option value="diesel" <?= old('carburant', $vehicle->carburant ?? '') == 'diesel' ? 'selected' : '' ?>>🛢️ Diesel</option>
+                                        <option value="hybride" <?= old('carburant', $vehicle->carburant ?? '') == 'hybride' ? 'selected' : '' ?>>🔋 Hybride</option>
+                                        <option value="electrique" <?= old('carburant', $vehicle->carburant ?? '') == 'electrique' ? 'selected' : '' ?>>⚡ Électrique</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <!-- Transmission -->
-                            <div class="col-md-4 mb-3">
-                                <label for="transmission" class="form-label">Transmission <span class="text-danger">*</span></label>
-                                <select class="form-select" id="transmission" name="transmission" required>
-                                    <option value="manuelle" <?= old('transmission', $vehicle->transmission ?? '') == 'manuelle' ? 'selected' : '' ?>>? Manuelle</option>
-                                    <option value="automatique" <?= old('transmission', $vehicle->transmission ?? '') == 'automatique' ? 'selected' : '' ?>>? Automatique</option>
-                                </select>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="transmission" class="form-label">⚙️ Transmission <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="transmission" name="transmission" required>
+                                        <option value="">- Sélectionner -</option>
+                                        <option value="manuelle" <?= old('transmission', $vehicle->transmission ?? '') == 'manuelle' ? 'selected' : '' ?>>🔧 Manuelle</option>
+                                        <option value="automatique" <?= old('transmission', $vehicle->transmission ?? '') == 'automatique' ? 'selected' : '' ?>>🤖 Automatique</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <!-- Couleur -->
-                            <div class="col-md-4 mb-3">
-                                <label for="couleur" class="form-label">Couleur <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="couleur" name="couleur" 
-                                       value="<?= old('couleur', $vehicle->couleur ?? '') ?>" required>
-                                <div class="invalid-feedback">Veuillez saisir la couleur du v�hicule.</div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="couleur" class="form-label">🎨 Couleur <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="couleur" name="couleur" 
+                                           value="<?= old('couleur', $vehicle->couleur ?? '') ?>" 
+                                           placeholder="Ex: Blanc, Noir..." required>
+                                    <div class="invalid-feedback">Veuillez saisir la couleur du véhicule.</div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="row">
                             <!-- Statut -->
-                            <div class="col-md-6 mb-3">
-                                <label for="statut" class="form-label">Statut</label>
-                                <select class="form-select" id="statut" name="statut">
-                                    <option value="disponible" <?= old('statut', $vehicle->statut ?? '') == 'disponible' ? 'selected' : '' ?>>? Disponible</option>
-                                    <option value="reserve" <?= old('statut', $vehicle->statut ?? '') == 'reserve' ? 'selected' : '' ?>>? R�serv�</option>
-                                    <option value="vendu" <?= old('statut', $vehicle->statut ?? '') == 'vendu' ? 'selected' : '' ?>>? Vendu</option>
-                                </select>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="statut" class="form-label">📊 Statut</label>
+                                    <select class="form-select" id="statut" name="statut">
+                                        <option value="disponible" <?= old('statut', $vehicle->statut ?? '') == 'disponible' ? 'selected' : '' ?>>✅ Disponible</option>
+                                        <option value="reserve" <?= old('statut', $vehicle->statut ?? '') == 'reserve' ? 'selected' : '' ?>>⏳ Réservé</option>
+                                        <option value="vendu" <?= old('statut', $vehicle->statut ?? '') == 'vendu' ? 'selected' : '' ?>>✔️ Vendu</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <!-- Image -->
-                            <div class="col-md-6 mb-3">
-                                <label for="image" class="form-label">Image du v�hicule</label>
-                                <input type="file" class="form-control" id="image" name="image" accept="image/*">
-                                <div class="form-text">Formats accept�s : JPG, PNG, GIF (max 2MB)</div>
-                                
-                                <?php if (isset($vehicle->image) && $vehicle->image): ?>
-                                    <div class="mt-2">
-                                        <img src="<?= base_url('writable/uploads/vehicles/' . $vehicle->image) ?>" 
-                                             class="img-thumbnail" style="max-width: 150px;" alt="Image actuelle">
-                                        <small class="text-muted d-block">Image actuelle</small>
-                                    </div>
-                                <?php endif; ?>
-                                
-                                <div id="imagePreview" class="mt-2"></div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="image" class="form-label">📷 Image du véhicule</label>
+                                    <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                                    <div class="form-text">Formats acceptés : JPG, PNG, GIF (max 2MB)</div>
+                                    
+                                    <?php if (isset($vehicle->image) && $vehicle->image): ?>
+                                        <div class="mt-2">
+                                            <img src="<?= base_url('writable/uploads/vehicles/' . $vehicle->image) ?>" 
+                                                 class="img-thumbnail" style="max-width: 150px;" alt="Image actuelle">
+                                            <small class="text-muted d-block">Image actuelle</small>
+                                        </div>
+                                    <?php endif; ?>
+                                    
+                                    <div id="imagePreview" class="mt-2"></div>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Description -->
-                        <div class="mb-4">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="4" 
-                                      placeholder="D�crivez les caract�ristiques du v�hicule..."><?= old('description', $vehicle->description ?? '') ?></textarea>
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="description" class="col-md-3 col-form-label">📝 Description</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="description" name="description" rows="4" 
+                                              placeholder="Décrivez les caractéristiques du véhicule..."><?= old('description', $vehicle->description ?? '') ?></textarea>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
                             <a href="<?= site_url('vehicles') ?>" class="btn btn-secondary me-md-2">
-                                <i class="fas fa-times"></i> Annuler
+                                ❌ Annuler
                             </a>
                             <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> 
-                                <?= isset($edit_mode) ? 'Mettre � jour' : 'Enregistrer' ?> le v�hicule
+                                💾 <?= isset($edit_mode) ? 'Mettre à jour' : 'Enregistrer' ?> le véhicule
                             </button>
                         </div>
 
@@ -192,7 +223,7 @@
     }, false);
 })();
 
-// Pr�visualisation d'image
+// Prévisualisation d'image
 document.getElementById('image').addEventListener('change', function(e) {
     const preview = document.getElementById('imagePreview');
     preview.innerHTML = '';
@@ -207,7 +238,7 @@ document.getElementById('image').addEventListener('change', function(e) {
             
             const caption = document.createElement('small');
             caption.className = 'text-muted d-block';
-            caption.textContent = 'Aper�u de la nouvelle image';
+            caption.textContent = 'Aperçu de la nouvelle image';
             
             preview.appendChild(img);
             preview.appendChild(caption);

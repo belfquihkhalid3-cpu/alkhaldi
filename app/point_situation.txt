@@ -45,19 +45,7 @@
 - **Format des dates** ✅ Conversion HTML5 datetime-local vers MySQL datetime
 - **Feather Icons** ✅ Toutes les vues adaptées
 
-### 🆕 **NOUVEAU : Module Voitures Contrat (TERMINÉ)** :
-- **Table** ✅ `rise_voitures_contrat` avec gestion des statuts
-- **CRUD complet** ✅ Avec statistiques en temps réel
-- **Filtres avancés** ✅ Par marque, statut, recherche globale
-- **Actions rapides** ✅ Changement de statut direct
-- **Interface moderne** ✅ Avec Feather Icons et design responsive
 
-### 🆕 **NOUVEAU : Module Clients Contrat (TERMINÉ)** :
-- **Table** ✅ `rise_clients_contrat` avec documents d'identité
-- **CRUD complet** ✅ Gestion CIN, Passeport, Permis
-- **Statistiques** ✅ Documents disponibles par type
-- **Vue détaillée** ✅ Avec impression de fiche client
-- **Adresses multiples** ✅ Maroc et étranger
 
 ### Modules Restants à Développer :
 - **Carburant** (Gestion des cartes et des consommations)
@@ -296,28 +284,3 @@ function delete()
 
 ---
 
-## 8. 📋 **Template de Développement Module (MISE À JOUR)** 
-
-### **Ordre de développement recommandé :**
-1. **Créer le modèle** avec get_details(), formatDates() et SANS validation ID
-2. **Créer le contrôleur** avec chargement manuel du modèle et toutes les méthodes
-3. **Créer les routes** dans Routes.php
-4. **Créer les vues** (index → modal_form → view → add)
-5. **Tester CRUD complet** (ajout, modification, suppression)
-6. **Ajouter fonctionnalités avancées** (PDF, export, etc.)
-
----
-
-## 9. ✅ **Modules de Référence Complets**
-
-### **Module Locations :** Référence pour les modules avec dates et relations
-### **Module Voitures Contrat :** Référence pour les modules avec statuts et actions rapides  
-### **Module Clients Contrat :** Référence pour les modules avec documents multiples et vues détaillées
-
-Tous ces modules respectent **100%** les conventions établies et peuvent servir de base pour les nouveaux développements.
-
----
-
-**🎯 PROCHAINE ÉTAPE :** Développement du module **Carburant** en appliquant tous les points ci-dessus pour éviter les erreurs rencontrées.
-
-**📊 TAUX DE RÉUSSITE :** Avec ces conventions, les nouveaux modules se développent sans erreurs majeures et respectent l'architecture établie.

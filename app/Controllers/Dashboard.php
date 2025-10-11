@@ -1446,59 +1446,16 @@ public function location()
 }
 private function getLocationMainStats()
 {
-    // Initialiser la connexion DB
     $db = \Config\Database::connect();
     
-    $sql = "SELECT 
-        (SELECT COUNT(*) FROM rise_locations WHERE statut IN ('confirmee', 'en_cours') AND deleted = 0) as locations_actives,
-        (SELECT COUNT(*) FROM rise_vehicules WHERE statut = 'disponible' AND deleted = 0) as vehicules_disponibles,
-        (SELECT COUNT(*) FROM rise_chauffeurs WHERE statut = 'actif' AND deleted = 0) as chauffeurs_actifs,
-        (SELECT COALESCE(SUM(prix_total), 0) FROM rise_locations 
-         WHERE MONTH(created_at) = MONTH(CURRENT_DATE) 
-         AND YEAR(created_at) = YEAR(CURRENT_DATE)
-         AND statut IN ('confirmee', 'terminee') AND deleted = 0) as revenus_mois_actuel,
-        (SELECT COALESCE(SUM(prix_total), 0) FROM rise_locations 
-         WHERE MONTH(created_at) = MONTH(DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH))
-         AND YEAR(created_at) = YEAR(DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH))
-         AND statut IN ('confirmee', 'terminee') AND deleted = 0) as revenus_mois_precedent,
-        ROUND((SELECT COUNT(*) FROM rise_vehicules WHERE statut = 'en_service' AND deleted = 0) * 100.0 / 
-              NULLIF((SELECT COUNT(*) FROM rise_vehicules WHERE deleted = 0), 0), 2) as taux_occupation";
+    $result = $db->query("SELECT COUNT(*) as total FROM rise_locations WHERE deleted = 0")->getRow();
     
-    $query = $db->query($sql);
-    $result = $query->getRow();
-    
-    if (!$result) {
-        return [
-            'locations_actives' => 0,
-            'vehicules_disponibles' => 0,
-            'chauffeurs_actifs' => 0,
-            'revenus_mois_actuel' => 0,
-            'revenus_mois_precedent' => 0,
-            'taux_occupation' => 0,
-            'evolution_revenus' => 0
-        ];
-    }
-    
-    $stats = [
-        'locations_actives' => intval($result->locations_actives ?? 0),
-        'vehicules_disponibles' => intval($result->vehicules_disponibles ?? 0),
-        'chauffeurs_actifs' => intval($result->chauffeurs_actifs ?? 0),
-        'revenus_mois_actuel' => floatval($result->revenus_mois_actuel ?? 0),
-        'revenus_mois_precedent' => floatval($result->revenus_mois_precedent ?? 0),
-        'taux_occupation' => floatval($result->taux_occupation ?? 0)
+    return [
+        'locations_actives' => $result->total ?? 0,
+        'vehicules_disponibles' => 0,
+        'chauffeurs_actifs' => 0,
+        'revenus_mois_actuel' => 0
     ];
-    
-    // Calcul évolution revenus
-    if ($stats['revenus_mois_precedent'] > 0) {
-        $stats['evolution_revenus'] = round(
-            (($stats['revenus_mois_actuel'] - $stats['revenus_mois_precedent']) / $stats['revenus_mois_precedent']) * 100, 
-            2
-        );
-    } else {
-        $stats['evolution_revenus'] = $stats['revenus_mois_actuel'] > 0 ? 100 : 0;
-    }
-    
-    return $stats;
 }
 
 private function getLocationRevenueData()

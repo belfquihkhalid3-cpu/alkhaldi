@@ -1,0 +1,30 @@
+CRITICAL - 2025-10-11 12:54:22 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "chauffeur_payments/soldes_generaux.php"
+[Method: GET, Route: chauffeur_payments/solde_avances]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('chauffeur_payments/soldes_generaux.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('chauffeur_payments/soldes_generaux', [], true)
+ 3 APPPATH\Views\layout\index.php(78): view('chauffeur_payments/soldes_generaux')
+ 4 SYSTEMPATH\View\View.php(224): include('I:\\xamp\\htdocs\\khalidi\\app\\Views\\layout\\index.php')
+ 5 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('layout/index', [], true)
+ 7 APPPATH\Libraries\Template.php(38): view('layout/index', [...])
+ 8 APPPATH\Libraries\Template.php(22): App\Libraries\Template->view('layout/index', [...])
+ 9 APPPATH\Controllers\Chauffeur_payments.php(321): App\Libraries\Template->rander('chauffeur_payments/soldes_generaux', [...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Chauffeur_payments->solde_avances()
+11 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Chauffeur_payments))
+12 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-10-11 12:55:13 --> CodeIgniter\Exceptions\InvalidArgumentException: update(): argument #1 ($id) should not be boolean.
+[Method: POST, Route: chauffeur_payments/save]
+in SYSTEMPATH\BaseModel.php on line 993.
+ 1 SYSTEMPATH\Model.php(863): CodeIgniter\BaseModel->update(true, [...])
+ 2 APPPATH\Models\Chauffeur_payments_model.php(157): CodeIgniter\Model->update(true, [...])
+ 3 APPPATH\Controllers\Chauffeur_payments.php(180): App\Models\Chauffeur_payments_model->deduire_avances_automatiquement('1', '1500', true)
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Chauffeur_payments->save()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Chauffeur_payments))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(77): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
