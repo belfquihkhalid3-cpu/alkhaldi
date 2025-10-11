@@ -1,11 +1,7 @@
-<?php echo form_open(get_uri("fuel_cards/save"), array("id" => "fuel-card-form", "class" => "general-form", "role" => "form")); ?>
-<?php
-echo "<!-- DEBUG: ID = " . ($model_info->id ?? 'VIDE') . " -->";
-echo "<!-- DEBUG: Numero = " . ($model_info->numero_serie ?? 'VIDE') . " -->";
-echo "<!-- DEBUG: Type = " . ($model_info->type_carte ?? 'VIDE') . " -->";
-?>
+
 
 <?php echo form_open(get_uri("fuel_cards/save"), array("id" => "fuel-card-form", "class" => "general-form", "role" => "form")); ?>
+
 <div class="modal-body clearfix">
     <div class="container-fluid">
         
